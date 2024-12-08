@@ -1,2 +1,3 @@
 <?php
-    require 'views/logout/logout.view.php';
+    session_start();
+    require 'LoginRegisterNew/logout.php';

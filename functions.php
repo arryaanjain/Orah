@@ -8,11 +8,9 @@ function dd($value): void
 
 function sessionChk(): void
 {
-    session_start();
     if (!isset($_SESSION['username'])) {
         header('location: LoginRegisterNew/login.php');
         exit();
 
     }
-    require 'index.php';
 }

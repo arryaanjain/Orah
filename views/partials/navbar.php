@@ -28,9 +28,9 @@
                     <a class="nav-link" href="records.php">Records</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome, </a>
-<!--                    --><?php //=$_SESSION['username']?>
+                    <a class="nav-link" href="#">Welcome</a>
                 </li>
+<!--                --><?php //=$username?>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>
