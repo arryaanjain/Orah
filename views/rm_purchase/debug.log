@@ -279,3 +279,163 @@ company_name: Kresco, term: kg, type: unit
 Switched to database: Kresco
 SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%kg%'
 Results: ["kg"]
+Connected to MySQL successfully
+company_name: t3, term: la, type: material
+Switched to database: t3
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%la%'
+Results: ["latex","flavour"]
+Connected to MySQL successfully
+company_name: t3, term: li, type: unit
+Switched to database: t3
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%li%'
+Results: ["litre"]
+Connected to MySQL successfully
+company_name: KIPL, term: pr, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%pr%'
+Results: ["printed pouch Rs.10"]
+Connected to MySQL successfully
+company_name: KIPL, term: pi, type: unit
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%pi%'
+Results: ["pieces"]
+Connected to MySQL successfully
+company_name: KIPL, term: he, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%he%'
+Results: ["heart shape jelly","heart stand","heart sticker"]
+Connected to MySQL successfully
+company_name: KIPL, term: hea, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%hea%'
+Results: ["heart shape jelly","heart stand","heart sticker"]
+Connected to MySQL successfully
+company_name: KIPL, term: gr, type: unit
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%gr%'
+Results: ["grams"]
+Connected to MySQL successfully
+company_name: KIPL, term: wo, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%wo%'
+No results found for: wo
+Connected to MySQL successfully
+company_name: KIPL, term: wod, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%wod%'
+No results found for: wod
+Connected to MySQL successfully
+company_name: KIPL, term: wode, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%wode%'
+No results found for: wode
+Connected to MySQL successfully
+company_name: KIPL, term: wode==, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%wode==%'
+No results found for: wode==
+Connected to MySQL successfully
+company_name: KIPL, term: st, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%st%'
+Results: ["8 inch stick","heart stand","heart sticker","mrp 400 sticker"]
+Connected to MySQL successfully
+company_name: KIPL, term: pie, type: unit
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%pie%'
+Results: ["pieces"]
+Connected to MySQL successfully
+company_name: KIPL, term: pie, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%pie%'
+No results found for: pie
+Connected to MySQL successfully
+company_name: KIPL, term: pi, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%pi%'
+No results found for: pi
+Connected to MySQL successfully
+company_name: KIPL, term: krf, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%krf%'
+No results found for: krf
+Connected to MySQL successfully
+company_name: KIPL, term: je, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%je%'
+Results: ["heart shape jelly"]
+Connected to MySQL successfully
+company_name: KIPL, term: rs, type: material
+Switched to database: KIPL
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%rs%'
+Results: ["printed pouch Rs.10"]
+Connected to MySQL successfully
+company_name: t1, term: t1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t1%'
+Results: ["t1"]
+Connected to MySQL successfully
+company_name: t1, term: u1, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u1%'
+Results: ["u1"]
+Connected to MySQL successfully
+company_name: t1, term: t1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t1%'
+Results: ["t1"]
+Connected to MySQL successfully
+company_name: t1, term: t1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t1%'
+Results: ["t1"]
+Connected to MySQL successfully
+company_name: t1, term: u1, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u1%'
+Results: ["u1"]
+Connected to MySQL successfully
+company_name: t1, term: t2, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t2%'
+Results: ["t2"]
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
+Connected to MySQL successfully
+company_name: t1, term: fw, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%fw%'
+No results found for: fw
+Connected to MySQL successfully
+company_name: t1, term: u1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%u1%'
+No results found for: u1
+Connected to MySQL successfully
+company_name: t1, term: t1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t1%'
+Results: ["t1"]
+Connected to MySQL successfully
+company_name: t1, term: t1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t1%'
+Results: ["t1"]
+Connected to MySQL successfully
+company_name: t1, term: u1, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u1%'
+Results: ["u1"]
+Connected to MySQL successfully
+company_name: t1, term: t2, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t2%'
+Results: ["t2"]
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]

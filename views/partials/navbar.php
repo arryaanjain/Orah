@@ -27,10 +27,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="records.php">Records</a>
                 </li>
+                <!-- Dropdown for Records, now clickable -->
+                <li class="nav-item dropdown" style="margin-left: -15px;">
+                    <a class="nav-link dropdown-toggle" href="records.php" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- Optional text or icon for Records dropdown -->
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -2px;">
+                        <li><a class="dropdown-item" href="my_orders.php">My Orders</a></li>
+                        <li><a class="dropdown-item" href="my_sales.php">My Sales</a></li>
+                        <li><a class="dropdown-item" href="inserted_materials.php">Inserted Materials</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Welcome</a>
                 </li>
-<!--                --><?php //=$username?>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>

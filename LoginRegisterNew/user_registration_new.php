@@ -73,12 +73,13 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
         $create_rm_purchase_table_query = "
             CREATE TABLE IF NOT EXISTS `rm_purchase` (
                 id INT(11) AUTO_INCREMENT PRIMARY KEY,
+                purchase_date DATE NOT NULL,
                 material VARCHAR(255) NOT NULL,
                 qty BIGINT NOT NULL,
                 unit VARCHAR(255) NOT NULL
             )
         ";
-
+    
         if (
             $company_con->query($create_users_table_query) &&
             $company_con->query($create_rm_master_table_query) &&

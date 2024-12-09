@@ -1,3 +1,4 @@
+/* 🟢 Table Layout */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -10,24 +11,30 @@ table td {
     text-align: left;
 }
 
-.autocomplete {
+table td input[type="text"],
+table td input[type="number"],
+table td input[type="date"] {
     width: 100%;
-    border: none;
+    padding: 8px;
+    box-sizing: border-box; /* Ensures input fills the entire space */
 }
 
+/* 🟢 Button Style */
 #addRowBtn {
     margin-top: 10px;
 }
 
-.autocomplete {
+/* 🟢 Autocomplete and Dropdown */
+.autocomplete-container {
     position: relative;
     display: inline-block;
 }
 
-#myInput {
+.autocomplete-input {
+    width: 100%;
     border: 1px solid #ccc;
-    width: 300px;
-    padding: 10px;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 .dropdown-content {
