@@ -439,3 +439,53 @@ company_name: t1, term: u2, type: unit
 Switched to database: t1
 SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
 Results: ["u2"]
+Connected to MySQL successfully
+company_name: t1, term: t4, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t4%'
+Results: ["t4"]
+Connected to MySQL successfully
+company_name: t1, term: t4, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t4%'
+Results: ["t4"]
+Connected to MySQL successfully
+company_name: t1, term: u1, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u1%'
+No results found for: u1
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
+Connected to MySQL successfully
+company_name: t1, term: t2, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t2%'
+Results: ["t2"]
+Connected to MySQL successfully
+company_name: t1, term: u4, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u4%'
+Results: ["u4"]
+Connected to MySQL successfully
+company_name: t1, term: t3, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t3%'
+No results found for: t3
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
+Connected to MySQL successfully
+company_name: t1, term: t4, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t4%'
+Results: ["t4"]
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
