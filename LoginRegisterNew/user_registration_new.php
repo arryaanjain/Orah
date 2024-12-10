@@ -91,6 +91,32 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for the last update
             )
         ";
+        //create order_book
+        $create_order_book = "
+            CREATE TABLE `order_book` (
+                `id` INT AUTO_INCREMENT PRIMARY KEY,
+                `order_date` DATE NOT NULL,
+                `product_name` VARCHAR(255) NOT NULL,
+                `qty` DECIMAL(10, 2) NOT NULL,
+                `customer_id` INT NOT NULL,
+                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`)
+            );
+        ";
+        //create billing_name, place
+        $create_customers = "
+            CREATE TABLE `customers` (
+                `id` INT AUTO_INCREMENT PRIMARY KEY,           -- Unique identifier for each customer
+                `billing_name` VARCHAR(255) NOT NULL,         -- Name of the person or company being billed
+                `place` VARCHAR(255) NOT NULL,                -- Location of the customer (city, town, etc.)
+                `gst_number` VARCHAR(20) DEFAULT NULL,       -- Optional GST number for the customer
+                `email` VARCHAR(255) DEFAULT NULL,            -- Optional email of the customer
+                `phone` VARCHAR(15) DEFAULT NULL,             -- Optional phone number of the customer
+                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp when the customer was created
+                `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for when the customer record was last updated
+            );
+        ";
 
     
         if (
@@ -98,7 +124,9 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
             $company_con->query($create_rm_master_table_query) &&
             $company_con->query($create_rm_master_units_table_query) &&
             $company_con->query($create_rm_purchase_table_query) &&
-            $company_con->query($create_finished_products_table_query)
+            $company_con->query($create_finished_products_table_query) &&
+            $company_con->query($create_customers) &&
+            $company_con->query($create_order_book)
         ) {
             // Insert user details into the `users` table
             $insert_user_query = "

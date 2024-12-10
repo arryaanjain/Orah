@@ -1,0 +1,12 @@
+[2024-12-10 23:30:47] Database connection successful.
+[2024-12-10 23:30:47] Error: Unknown column 'name' in 'field list'
+[2024-12-10 23:32:23] Database connection successful.
+[2024-12-10 23:32:23] Inserted material: m1
+[2024-12-10 23:32:23] Inserted unit: u1
+[2024-12-10 23:32:37] Database connection successful.
+[2024-12-10 23:32:37] Inserted material: m1
+[2024-12-10 23:32:37] Inserted unit: u1
+[2024-12-10 23:32:37] Inserted customer: wecqw
+[2024-12-10 23:33:56] Database connection successful.
+[2024-12-10 23:33:56] Inserted material: m2
+[2024-12-10 23:33:56] Inserted unit: u2

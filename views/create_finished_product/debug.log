@@ -178,3 +178,24 @@ Switched to database: t2
 SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
 Results: ["u2"]
 Table `test2` created successfully
+Connected to MySQL successfully
+company_name: t1, term: m1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%m1%'
+Results: ["m1"]
+Connected to MySQL successfully
+company_name: t1, term: u1, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u1%'
+Results: ["u1"]
+Connected to MySQL successfully
+company_name: t1, term: m2, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%m2%'
+Results: ["m2"]
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
+Table `temp` created successfully

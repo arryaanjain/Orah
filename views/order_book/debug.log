@@ -1,0 +1,5 @@
+Connected to MySQL successfully
+company_name: t1, term: te, type: product
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `product_name` FROM `finished_products` WHERE `product_name` LIKE '%te%'
+Results: ["temp"]

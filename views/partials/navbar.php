@@ -13,10 +13,10 @@
                     <a class="nav-link" href="create_finished_product.php">Add New Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="order.php">Order Book</a>
+                    <a class="nav-link" href="order_book.php">Order Book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="sales.php">Sales Book</a>
+                    <a class="nav-link" href="sales_book.php">Sales Book</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="rm_purchase.php">Raw Material Purchase</a>
