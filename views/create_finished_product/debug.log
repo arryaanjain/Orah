@@ -1,0 +1,97 @@
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: u2, type: unit
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: u2u3, type: unit
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4tyty, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: u2, type: unit
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: u2, type: unit
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t45, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t4, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: , term: t456, type: material
+Missing input parameters
+Connected to MySQL successfully
+company_name: test, term: t4, type: material
+DB Connection failed: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'test'
+Connected to MySQL successfully
+company_name: t1, term: t4, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t4%'
+Results: ["t4"]
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
+Table `test` created successfully
+Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.finished_products' doesn't exist
+Connected to MySQL successfully
+company_name: t1, term: u4, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%u4%'
+No results found for: u4
+Connected to MySQL successfully
+company_name: t1, term: t4, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%t4%'
+Results: ["t4"]
+Connected to MySQL successfully
+company_name: t1, term: u2, type: unit
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u2%'
+Results: ["u2"]
+Table `test` created successfully
+Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.finished_products' doesn't exist
+Connected to MySQL successfully
+company_name: t2, term: m1, type: material
+Switched to database: t2
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%m1%'
+Results: ["m1"]
+Connected to MySQL successfully
+company_name: t2, term: u1, type: unit
+Switched to database: t2
+SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%u1%'
+Results: ["u1"]
+Table `test` created successfully

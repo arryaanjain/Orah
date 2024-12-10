@@ -10,7 +10,7 @@
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="add.php">Add New Product</a>
+                    <a class="nav-link" href="create_finished_product.php">Add New Product</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="order.php">Order Book</a>

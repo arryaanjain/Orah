@@ -79,12 +79,26 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
                 unit VARCHAR(255) NOT NULL
             )
         ";
+        //create finished product
+        $create_finished_products_table_query = "
+            CREATE TABLE IF NOT EXISTS `finished_products` (
+                id INT(11) AUTO_INCREMENT PRIMARY KEY, -- Unique identifier for the product
+                product_name VARCHAR(255) NOT NULL,    -- Name of the finished product
+                creation_date DATE DEFAULT CURRENT_DATE, -- Date the product was created
+                status ENUM('active', 'inactive') DEFAULT 'active', -- Status of the product
+                description TEXT,                      -- Optional description of the finished product
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp for when the row was created
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for the last update
+            )
+        ";
+
     
         if (
             $company_con->query($create_users_table_query) &&
             $company_con->query($create_rm_master_table_query) &&
             $company_con->query($create_rm_master_units_table_query) &&
-            $company_con->query($create_rm_purchase_table_query)
+            $company_con->query($create_rm_purchase_table_query) &&
+            $company_con->query($create_finished_products_table_query)
         ) {
             // Insert user details into the `users` table
             $insert_user_query = "
