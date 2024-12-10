@@ -1,0 +1,227 @@
+Connected to MySQL successfully
+product_id: 2
+Missing company_name session or parameter
+Connected to MySQL successfully
+product_id: 1
+Missing company_name session or parameter
+Connected to MySQL successfully
+product_id: 1
+Missing company_name session or parameter
+Connected to MySQL successfully
+product_id: 2
+Missing company_name session or parameter
+Connected to MySQL successfully
+product_id: 1
+Switched to database: t2
+DB Connection failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't2.1' doesn't exist
+Connected to MySQL successfully
+product_id: 
+Missing product_id parameter
+Connected to MySQL successfully
+product_name: test
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"1000.00","unit":"u1"},{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test23
+Switched to database: t2
+DB Connection failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't2.test23' doesn't exist
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"1000.00","unit":"u1"},{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test23
+Switched to database: t2
+DB Connection failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't2.test23' doesn't exist
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"1000.00","unit":"u1"},{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"1000.00","unit":"u1"},{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m1","qty":"1000.00","unit":"u1"},{"material":"m1","qty":"10.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test3
+Switched to database: t2
+DB Connection failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't2.test3' doesn't exist
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m3","qty":"100.00","unit":"u3"},{"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m3","qty":"100.00","unit":"u3"},{"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m3","qty":"100.00","unit":"u3"},{"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"material":"m3","qty":"100.00","unit":"u3"},{"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"material":"m2","qty":"10.00","unit":"u2"},{"material":"m1","qty":"100.00","unit":"u1"}]
+Request started: 2024-12-10 21:57:44
+Received data: company_name: t2, product_name: test1, material_id: undefined, material: m3, qty: 1010.00, unit: u3
+Connected to database: t2
+Prepared statement for update query: UPDATE `test1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: undefined
+Database connection closed
+Request ended: 2024-12-10 21:57:44
+
+Request started: 2024-12-10 21:57:50
+Received data: company_name: t2, product_name: test1, material_id: undefined, material: m3, qty: 1010.00, unit: u3
+Connected to database: t2
+Prepared statement for update query: UPDATE `test1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: undefined
+Database connection closed
+Request ended: 2024-12-10 21:57:50
+
+Request started: 2024-12-10 21:57:52
+Received data: company_name: t2, product_name: test1, material_id: undefined, material: m3, qty: 1010.00, unit: u3
+Connected to database: t2
+Prepared statement for update query: UPDATE `test1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: undefined
+Database connection closed
+Request ended: 2024-12-10 21:57:52
+
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m2","qty":"10.00","unit":"u2"},{"id":2,"material":"m1","qty":"100.00","unit":"u1"}]
+Request started: 2024-12-10 22:08:58
+Received data: company_name: t2, product_name: test1, material_id: 1, material: m4, qty: 110.00, unit: u4
+Connected to database: t2
+Prepared statement for update query: UPDATE `test1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: 1
+Database connection closed
+Request ended: 2024-12-10 22:08:58
+
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m3","qty":"100.00","unit":"u3"},{"id":2,"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m4","qty":"110.00","unit":"u4"},{"id":2,"material":"m1","qty":"100.00","unit":"u1"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m3","qty":"100.00","unit":"u3"},{"id":2,"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m4","qty":"110.00","unit":"u4"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m4","qty":"110.00","unit":"u4"}]
+Request started: 2024-12-10 22:15:37
+Missing required fields in the request
+Request ended: 2024-12-10 22:15:37
+
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m4","qty":"110.00","unit":"u4"}]
+Request started: 2024-12-10 22:17:28
+Missing required fields in the request
+Request ended: 2024-12-10 22:17:28
+
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m4","qty":"110.00","unit":"u4"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m3","qty":"100.00","unit":"u3"},{"id":2,"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m4","qty":"110.00","unit":"u4"}]
+Request started: 2024-12-10 22:19:05
+Received data: company_name: t2, product_name: test1, material_id: 1, material: m2, qty: 1110.00, unit: u2
+Connected to database: t2
+Prepared statement for update query: UPDATE `test1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: 1
+Database connection closed
+Request ended: 2024-12-10 22:19:05
+
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m3","qty":"100.00","unit":"u3"},{"id":2,"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m2","qty":"1110.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m2","qty":"1110.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m2","qty":"1110.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test2
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m3","qty":"100.00","unit":"u3"},{"id":2,"material":"m2","qty":"123.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: test1
+Switched to database: t2
+Materials fetched: [{"id":1,"material":"m2","qty":"1110.00","unit":"u2"}]

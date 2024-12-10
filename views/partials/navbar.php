@@ -35,8 +35,9 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -2px;">
                         <li><a class="dropdown-item" href="my_orders.php">My Orders</a></li>
                         <li><a class="dropdown-item" href="my_sales.php">My Sales</a></li>
-                        <li><a class="dropdown-item" href="inserted_materials.php">Inserted Materials</a>
-                        <li><a class="dropdown-item" href="my_rm_purchase.php">Material Purchase</a></li></li>
+                        <li><a class="dropdown-item" href="inserted_materials.php">Inserted Materials</a></li>
+                        <li><a class="dropdown-item" href="my_rm_purchase.php">Material Purchase</a></li>
+                        <li><a class="dropdown-item" href="product_portfolio.php">Product Portfolio</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

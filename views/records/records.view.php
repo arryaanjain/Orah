@@ -46,6 +46,15 @@ require('views/partials/banner.php');
                 </div>
             </div>
         </div>
+        <!--Fifth: Product Portfolio -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5>Product Portfolio</h5>
+                    <a href="product_portfolio.php" class="btn btn-warning w-100">Product Portfolio</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
