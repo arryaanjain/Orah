@@ -1,0 +1,50 @@
+[2024-12-11 04:57:38] Page loaded: Order Book Details
+[2024-12-11 04:57:38] Connected to the database and selected company database: t1
+[2024-12-11 04:57:38] Fetched and displayed order book entries
+[2024-12-11 04:57:38] Fetched distinct product names: temp
+[2024-12-11 04:57:38] Calculated total quantities for products
+[2024-12-11 04:57:38] Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.total_summary' doesn't exist
+[2024-12-11 04:59:30] Page loaded: Order Book Details
+[2024-12-11 04:59:30] Connected to the database and selected company database: t1
+[2024-12-11 04:59:30] Fetched and displayed order book entries
+[2024-12-11 04:59:30] Fetched distinct product names: temp
+[2024-12-11 04:59:30] Calculated total quantities for products
+[2024-12-11 04:59:30] Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.total_summary' doesn't exist
+[2024-12-11 04:59:34] Page loaded: Order Book Details
+[2024-12-11 04:59:34] Connected to the database and selected company database: t1
+[2024-12-11 04:59:34] Fetched and displayed order book entries
+[2024-12-11 04:59:34] Fetched distinct product names: temp
+[2024-12-11 04:59:34] Calculated total quantities for products
+[2024-12-11 04:59:34] Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.total_summary' doesn't exist
+[2024-12-11 05:02:09] Page loaded: Order Book Details
+[2024-12-11 05:02:09] Connected to the database and selected company database: t1
+[2024-12-11 05:02:09] Fetched and displayed order book entries
+[2024-12-11 05:02:09] Fetched distinct product names: temp
+[2024-12-11 05:02:09] Calculated total quantities for products
+[2024-12-11 05:02:09] Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.total_summary' doesn't exist
+[2024-12-11 05:03:29] Page loaded: Order Book Details
+[2024-12-11 05:03:29] Connected to the database and selected company database: t1
+[2024-12-11 05:03:29] Fetched and displayed order book entries
+[2024-12-11 05:03:29] Fetched distinct product names: temp
+[2024-12-11 05:03:29] Calculated total quantities for products
+[2024-12-11 05:04:23] Page loaded: Order Book Details
+[2024-12-11 05:04:23] Connected to the database and selected company database: t1
+[2024-12-11 05:04:23] Fetched and displayed order book entries
+[2024-12-11 05:04:23] Fetched distinct product names: temp
+[2024-12-11 05:04:23] Calculated total quantities for products
+[2024-12-11 05:04:46] Page loaded: Order Book Details
+[2024-12-11 05:04:46] Connected to the database and selected company database: t1
+[2024-12-11 05:04:46] Fetched and displayed order book entries
+[2024-12-11 05:04:46] Fetched distinct product names: temp, temp2
+[2024-12-11 05:04:46] Calculated total quantities for products
+[2024-12-11 05:05:53] Page loaded: Order Book Details
+[2024-12-11 05:05:53] Connected to the database and selected company database: t1
+[2024-12-11 05:05:53] Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'billing_name' in 'field list'
+[2024-12-11 05:06:00] Page loaded: Order Book Details
+[2024-12-11 05:06:00] Connected to the database and selected company database: t1
+[2024-12-11 05:06:00] Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'billing_name' in 'field list'
+[2024-12-11 05:07:20] Page loaded: Order Book Details
+[2024-12-11 05:07:20] Connected to the database and selected company database: t1
+[2024-12-11 05:07:20] Fetched and displayed order book entries
+[2024-12-11 05:07:20] Fetched distinct product names: temp, temp2
+[2024-12-11 05:07:20] Calculated total quantities for products

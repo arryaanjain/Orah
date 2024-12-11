@@ -26,7 +26,7 @@ try {
     // Prepare the statement to get customer_id based on billing_name
     $stmt = $pdo->prepare("SELECT id FROM customers WHERE billing_name = ? LIMIT 1");
 
-    // Prepare the insert query
+    // Prepare the insert query for order_book
     $insertStmt = $pdo->prepare("INSERT INTO order_book (order_date, product_name, qty, customer_id) VALUES (?, ?, ?, ?)");
 
     // Insert each row into the order_book table
@@ -40,15 +40,15 @@ try {
             exit;
         }
 
-        // Insert the order
+        // Insert the order into the order_book
         $insertStmt->execute([$order_dates[$i], $products[$i], $quantities[$i], $customer_id]);
     }
 
-    // Redirect back to the form with a success message
-    echo '<div class="alert alert-success" role="alert">
-            Order book has been successfully updated.
-          </div><br>
-          <a href="/PIMS/order_book.php" class="btn btn-primary">Go to Order Book Form</a>';
+    // // Include the file to calculate totalQuantity
+    // require 'calculate.php';
+    
+    // Display success message
+    echo '<div class="alert alert-success" role="alert">Order book has been successfully updated.</div><br><a href="/PIMS/order_book.php" class="btn btn-primary">Go to Order Book Form</a>';
     exit;
 
 } catch (PDOException $e) {
