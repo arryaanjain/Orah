@@ -32,7 +32,7 @@ require('views/order_book/calculate.php');
                             <td><input type="date" class="orderDate" name="order_date[]" required></td>
                             <td><input type="text" class="autocomplete product" name="column1[]" required></td>
                             <td><input type="number" class="quantity" name="column2[]" required></td>
-                            <td><input type="text" class="billingName" name="billing_name[]" required></td>
+                            <td><input type="text" class="autocomplete billingName" name="billing_name[]" required></td>
                             <td><button type="button" class="deleteRowBtn">Delete</button></td>
                         </tr>
                     </tbody>
@@ -95,13 +95,17 @@ require('views/order_book/calculate.php');
             // Calculate and display total material, qty, and unit
             $productStmt = $pdo->query("SELECT DISTINCT product_name FROM order_book");
             $products = $productStmt->fetchAll(PDO::FETCH_COLUMN);
-
+            //debugging: check if all products returned 
+            // foreach ($products as $prod) {
+            //     echo $prod;
+            // }
+            
             // Call the calculateTotalQuantity function if products are available
             if (!empty($products)) {
-                foreach ($products as $product) {
-                    calculateTotalQuantity($pdo, [$product]);  // Pass product to calculate for each product
-                }
-            }
+                // foreach ($products as $product) {
+                    calculateTotalQuantity($pdo, $products);  // Pass product to calculate for each product
+                // }
+            }       
         ?>
     </div>
 </div>

@@ -1,0 +1,48 @@
+[2024-12-25 12:52:46] API request received.
+[2024-12-25 12:52:46] Connected to MySQL server.
+[2024-12-25 12:52:46] Query parameters: company_name=t3, term=my, type=product
+[2024-12-25 12:52:46] Switched to database: t3
+[2024-12-25 12:52:46] Query executed successfully: SELECT DISTINCT `product_name` FROM `finished_products` WHERE `product_name` LIKE '%my%'
+[2024-12-25 12:52:46] Results found: 2
+[2024-12-25 12:54:02] API request received.
+[2024-12-25 12:54:02] Connected to MySQL server.
+[2024-12-25 12:54:02] Query parameters: company_name=t3, term=my, type=product
+[2024-12-25 12:54:02] Switched to database: t3
+[2024-12-25 12:54:02] Query executed successfully: SELECT DISTINCT `product_name` FROM `finished_products` WHERE `product_name` LIKE '%my%'
+[2024-12-25 12:54:02] Results found: 2
+[2024-12-25 12:56:33] API request received.
+[2024-12-25 12:56:33] Connected to MySQL server.
+[2024-12-25 12:56:33] Query parameters: company_name=t3, term=myprod2, type=product
+[2024-12-25 12:56:33] Switched to database: t3
+[2024-12-25 12:56:33] Query executed successfully: SELECT DISTINCT `product_name` FROM `finished_products` WHERE `product_name` LIKE '%myprod2%'
+[2024-12-25 12:56:33] Results found: 1
+[2024-12-25 12:56:36] API request received.
+[2024-12-25 12:56:36] Connected to MySQL server.
+[2024-12-25 12:56:36] Query parameters: company_name=t3, term=pe, type=customer
+[2024-12-25 12:56:36] Switched to database: t3
+[2024-12-25 12:56:36] Query executed successfully: SELECT DISTINCT `billing_name` FROM `customers` WHERE `billing_name` LIKE '%pe%'
+[2024-12-25 12:56:36] Results found: 2
+[2024-12-25 12:56:45] API request received.
+[2024-12-25 12:56:45] Connected to MySQL server.
+[2024-12-25 12:56:45] Query parameters: company_name=t3, term=per, type=customer
+[2024-12-25 12:56:45] Switched to database: t3
+[2024-12-25 12:56:45] Query executed successfully: SELECT DISTINCT `billing_name` FROM `customers` WHERE `billing_name` LIKE '%per%'
+[2024-12-25 12:56:45] Results found: 2
+[2024-12-25 12:56:50] API request received.
+[2024-12-25 12:56:50] Connected to MySQL server.
+[2024-12-25 12:56:50] Query parameters: company_name=t3, term=my, type=product
+[2024-12-25 12:56:50] Switched to database: t3
+[2024-12-25 12:56:50] Query executed successfully: SELECT DISTINCT `product_name` FROM `finished_products` WHERE `product_name` LIKE '%my%'
+[2024-12-25 12:56:50] Results found: 2
+[2024-12-25 12:57:02] API request received.
+[2024-12-25 12:57:02] Connected to MySQL server.
+[2024-12-25 12:57:02] Query parameters: company_name=t3, term=my, type=product
+[2024-12-25 12:57:02] Switched to database: t3
+[2024-12-25 12:57:02] Query executed successfully: SELECT DISTINCT `product_name` FROM `finished_products` WHERE `product_name` LIKE '%my%'
+[2024-12-25 12:57:02] Results found: 2
+[2024-12-25 12:57:07] API request received.
+[2024-12-25 12:57:07] Connected to MySQL server.
+[2024-12-25 12:57:07] Query parameters: company_name=t3, term=pe, type=customer
+[2024-12-25 12:57:07] Switched to database: t3
+[2024-12-25 12:57:07] Query executed successfully: SELECT DISTINCT `billing_name` FROM `customers` WHERE `billing_name` LIKE '%pe%'
+[2024-12-25 12:57:07] Results found: 2

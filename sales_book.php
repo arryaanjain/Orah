@@ -1,4 +1,4 @@
 <?php
 
     $heading = "Sales Book";
-    require 'views/sales/sales.view.php';
+    require 'views/sales_book/sales.view.php';

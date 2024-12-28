@@ -80,7 +80,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
             )
         ";
         //create finished product
-        $create_finished_products_table_query = "
+        $create_finished_products_table_query = "       
             CREATE TABLE IF NOT EXISTS `finished_products` (
                 id INT(11) AUTO_INCREMENT PRIMARY KEY, -- Unique identifier for the product
                 product_name VARCHAR(255) NOT NULL,    -- Name of the finished product
@@ -117,6 +117,31 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
                 `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for when the customer record was last updated
             );
         ";
+        //create sales book
+        $create_sales_book = "
+            CREATE TABLE sales_book (
+                id INT AUTO_INCREMENT PRIMARY KEY,        -- Primary key to uniquely identify each row
+                order_date DATE NOT NULL,                 -- Date of the order
+                product_name VARCHAR(255) NOT NULL,      -- Name of the product
+                qty INT NOT NULL,                         -- Quantity ordered
+                customer_id INT NOT NULL,                 -- ID of the customer
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp of when the entry was created
+            );
+        ";
+        //create order book history
+        $create_order_book_history = "
+            CREATE TABLE `order_book_history` (
+                `id` INT AUTO_INCREMENT PRIMARY KEY,
+                `original_order_id` INT NOT NULL,
+                `order_date` DATE NOT NULL,
+                `product_name` VARCHAR(255) NOT NULL,
+                `qty` DECIMAL(10, 2) NOT NULL,
+                `customer_id` INT NOT NULL,
+                `moved_to_history_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`),
+                FOREIGN KEY (`original_order_id`) REFERENCES `order_book`(`id`)
+            );
+        ";
 
     
         if (
@@ -126,7 +151,8 @@ if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['compa
             $company_con->query($create_rm_purchase_table_query) &&
             $company_con->query($create_finished_products_table_query) &&
             $company_con->query($create_customers) &&
-            $company_con->query($create_order_book)
+            $company_con->query($create_order_book) &&
+            $company_con->query($create_sales_book)
         ) {
             // Insert user details into the `users` table
             $insert_user_query = "

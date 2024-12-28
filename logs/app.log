@@ -10,3 +10,210 @@
 [2024-12-10 23:33:56] Database connection successful.
 [2024-12-10 23:33:56] Inserted material: m2
 [2024-12-10 23:33:56] Inserted unit: u2
+[2024-12-11 11:18:46] Database connection successful.
+[2024-12-11 11:18:46] Inserted material: my_material_1
+[2024-12-11 11:18:46] Inserted material: my_material_2
+[2024-12-11 11:18:46] Inserted unit: my_unit_1
+[2024-12-11 11:18:46] Inserted unit: my_unit_2
+[2024-12-11 11:18:46] Inserted customer: Arryaan Jain
+[2024-12-11 11:18:46] Inserted customer: Bhavesh Jain
+[2024-12-12 07:57:09] Database connection successful.
+[2024-12-12 07:57:09] Inserted material: jelly
+[2024-12-12 07:57:09] Inserted material: sticker
+[2024-12-12 07:57:09] Inserted material: stick
+[2024-12-12 07:57:09] Inserted unit: kilos
+[2024-12-12 07:57:09] Inserted unit: pieces
+[2024-12-12 07:57:09] Inserted customer: Tanish 
+[2024-12-12 07:57:09] Inserted customer: Aditya
+[2024-12-18 11:11:52] Processing product: temp
+[2024-12-18 11:11:52] Total quantity for product 'temp': 20.00
+[2024-12-18 11:11:52] Retrieved 2 rows from table 'temp'
+[2024-12-18 11:11:52] Total required quantities for product 'temp': {"m1":200,"m2":20}
+[2024-12-18 11:11:52] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:11:52] Inventory status for product 'temp': [{"material":"m1","requiredQty":200,"availableQty":"373","difference":173},{"material":"m2","requiredQty":20,"availableQty":"100","difference":80}]
+[2024-12-18 11:11:52] Processing product: myProd
+[2024-12-18 11:11:52] Total quantity for product 'myProd': 20.00
+[2024-12-18 11:11:52] Database Error with Product 'myProd': SQLSTATE[42S02]: Base table or view not found: 1146 Table 't1.myProd' doesn't exist
+[2024-12-18 11:16:42] Processing product: temp
+[2024-12-18 11:16:42] Total quantity for product 'temp': 20.00
+[2024-12-18 11:16:42] Retrieved 2 rows from table 'temp'
+[2024-12-18 11:16:42] Total required quantities for product 'temp': {"m1":200,"m2":20}
+[2024-12-18 11:16:42] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:16:42] Inventory status for product 'temp': [{"material":"m1","requiredQty":200,"availableQty":"373","difference":173},{"material":"m2","requiredQty":20,"availableQty":"100","difference":80}]
+[2024-12-18 11:16:42] Processing product: myprod
+[2024-12-18 11:16:42] Total quantity for product 'myprod': 20.00
+[2024-12-18 11:16:42] Retrieved 2 rows from table 'myprod'
+[2024-12-18 11:16:42] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2024-12-18 11:16:42] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:16:42] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2024-12-18 11:18:10] Processing product: temp
+[2024-12-18 11:18:10] Total quantity for product 'temp': 30.00
+[2024-12-18 11:18:10] Retrieved 2 rows from table 'temp'
+[2024-12-18 11:18:10] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2024-12-18 11:18:10] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:18:10] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2024-12-18 11:18:10] Processing product: myprod
+[2024-12-18 11:18:10] Total quantity for product 'myprod': 20.00
+[2024-12-18 11:18:10] Retrieved 2 rows from table 'myprod'
+[2024-12-18 11:18:10] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2024-12-18 11:18:10] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:18:10] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2024-12-18 11:22:25] Processing product: temp
+[2024-12-18 11:22:25] Total quantity for product 'temp': 30.00
+[2024-12-18 11:22:25] Retrieved 2 rows from table 'temp'
+[2024-12-18 11:22:25] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2024-12-18 11:22:25] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:22:25] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2024-12-18 11:22:25] Processing product: myprod
+[2024-12-18 11:22:25] Total quantity for product 'myprod': 20.00
+[2024-12-18 11:22:25] Retrieved 2 rows from table 'myprod'
+[2024-12-18 11:22:25] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2024-12-18 11:22:25] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:22:25] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2024-12-18 11:23:07] Processing product: temp
+[2024-12-18 11:23:07] Total quantity for product 'temp': 30.00
+[2024-12-18 11:23:07] Retrieved 2 rows from table 'temp'
+[2024-12-18 11:23:07] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2024-12-18 11:23:07] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:23:07] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2024-12-18 11:23:07] Processing product: myprod
+[2024-12-18 11:23:07] Total quantity for product 'myprod': 20.00
+[2024-12-18 11:23:07] Retrieved 2 rows from table 'myprod'
+[2024-12-18 11:23:07] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2024-12-18 11:23:07] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:23:07] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2024-12-18 11:23:26] Processing product: temp
+[2024-12-18 11:23:26] Total quantity for product 'temp': 30.00
+[2024-12-18 11:23:26] Retrieved 2 rows from table 'temp'
+[2024-12-18 11:23:26] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2024-12-18 11:23:26] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:23:26] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2024-12-18 11:23:26] Processing product: myprod
+[2024-12-18 11:23:26] Total quantity for product 'myprod': 20.00
+[2024-12-18 11:23:26] Retrieved 2 rows from table 'myprod'
+[2024-12-18 11:23:26] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2024-12-18 11:23:26] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:23:26] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2024-12-18 11:23:26] Processing product: newprod
+[2024-12-18 11:23:26] Total quantity for product 'newprod': 10.00
+[2024-12-18 11:23:26] Retrieved 2 rows from table 'newprod'
+[2024-12-18 11:23:26] Total required quantities for product 'newprod': {"m1":100,"m2":100}
+[2024-12-18 11:23:26] Retrieved 2 rows from 'rm_purchase'
+[2024-12-18 11:23:26] Inventory status for product 'newprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":100,"availableQty":"100","difference":0}]
+[2024-12-25 12:39:26] Database connection successful.
+[2024-12-25 12:39:26] Inserted material: mymat1
+[2024-12-25 12:39:26] Inserted material: mymat2
+[2024-12-25 12:39:26] Inserted material: mymat3
+[2024-12-25 12:39:26] Inserted unit: myuni1
+[2024-12-25 12:39:26] Inserted unit: myuni2
+[2024-12-25 12:39:26] Inserted unit: myuni2
+[2024-12-25 12:39:26] Inserted customer: person1
+[2024-12-25 12:39:26] Inserted customer: person2
+[2024-12-25 12:57:12] Processing product: myprod1
+[2024-12-25 12:57:12] Total quantity for product 'myprod1': 10.00
+[2024-12-25 12:57:12] Retrieved 3 rows from table 'myprod1'
+[2024-12-25 12:57:12] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-25 12:57:12] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 12:57:12] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"10","difference":-20},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"10","difference":-40}]
+[2024-12-25 12:57:12] Processing product: myprod2
+[2024-12-25 12:57:12] Total quantity for product 'myprod2': 10.00
+[2024-12-25 12:57:12] Retrieved 2 rows from table 'myprod2'
+[2024-12-25 12:57:12] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-25 12:57:12] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 12:57:12] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"10","difference":-100},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-25 13:24:45] Processing product: myprod1
+[2024-12-25 13:24:45] Total quantity for product 'myprod1': 10.00
+[2024-12-25 13:24:45] Retrieved 3 rows from table 'myprod1'
+[2024-12-25 13:24:45] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-25 13:24:45] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 13:24:45] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"10","difference":-20},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"10","difference":-40}]
+[2024-12-25 13:24:45] Processing product: myprod2
+[2024-12-25 13:24:45] Total quantity for product 'myprod2': 10.00
+[2024-12-25 13:24:45] Retrieved 2 rows from table 'myprod2'
+[2024-12-25 13:24:45] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-25 13:24:45] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 13:24:45] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"10","difference":-100},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-25 13:25:53] Processing product: myprod1
+[2024-12-25 13:25:53] Total quantity for product 'myprod1': 10.00
+[2024-12-25 13:25:53] Retrieved 3 rows from table 'myprod1'
+[2024-12-25 13:25:53] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-25 13:25:53] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 13:25:53] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-25 13:25:53] Processing product: myprod2
+[2024-12-25 13:25:53] Total quantity for product 'myprod2': 10.00
+[2024-12-25 13:25:53] Retrieved 2 rows from table 'myprod2'
+[2024-12-25 13:25:53] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-25 13:25:53] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 13:25:53] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-25 13:34:21] Processing product: myprod1
+[2024-12-25 13:34:21] Total quantity for product 'myprod1': 10.00
+[2024-12-25 13:34:21] Retrieved 3 rows from table 'myprod1'
+[2024-12-25 13:34:21] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-25 13:34:21] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 13:34:21] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-25 13:34:21] Processing product: myprod2
+[2024-12-25 13:34:21] Total quantity for product 'myprod2': 10.00
+[2024-12-25 13:34:21] Retrieved 2 rows from table 'myprod2'
+[2024-12-25 13:34:21] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-25 13:34:21] Retrieved 3 rows from 'rm_purchase'
+[2024-12-25 13:34:21] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-28 11:07:10] Processing product: myprod1
+[2024-12-28 11:07:10] Total quantity for product 'myprod1': 10.00
+[2024-12-28 11:07:10] Retrieved 3 rows from table 'myprod1'
+[2024-12-28 11:07:10] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-28 11:07:10] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:07:10] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-28 11:07:10] Processing product: myprod2
+[2024-12-28 11:07:10] Total quantity for product 'myprod2': 10.00
+[2024-12-28 11:07:10] Retrieved 2 rows from table 'myprod2'
+[2024-12-28 11:07:10] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-28 11:07:10] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:07:10] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-28 11:07:16] Processing product: myprod1
+[2024-12-28 11:07:16] Total quantity for product 'myprod1': 10.00
+[2024-12-28 11:07:16] Retrieved 3 rows from table 'myprod1'
+[2024-12-28 11:07:16] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-28 11:07:16] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:07:16] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-28 11:07:16] Processing product: myprod2
+[2024-12-28 11:07:16] Total quantity for product 'myprod2': 10.00
+[2024-12-28 11:07:16] Retrieved 2 rows from table 'myprod2'
+[2024-12-28 11:07:16] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-28 11:07:16] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:07:16] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-28 11:51:08] Processing product: myprod1
+[2024-12-28 11:51:08] Total quantity for product 'myprod1': 10.00
+[2024-12-28 11:51:08] Retrieved 3 rows from table 'myprod1'
+[2024-12-28 11:51:08] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-28 11:51:08] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:51:08] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-28 11:51:08] Processing product: myprod2
+[2024-12-28 11:51:08] Total quantity for product 'myprod2': 10.00
+[2024-12-28 11:51:08] Retrieved 2 rows from table 'myprod2'
+[2024-12-28 11:51:08] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-28 11:51:08] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:51:08] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-28 11:51:13] Processing product: myprod1
+[2024-12-28 11:51:13] Total quantity for product 'myprod1': 10.00
+[2024-12-28 11:51:13] Retrieved 3 rows from table 'myprod1'
+[2024-12-28 11:51:13] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-28 11:51:13] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:51:13] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-28 11:51:13] Processing product: myprod2
+[2024-12-28 11:51:13] Total quantity for product 'myprod2': 10.00
+[2024-12-28 11:51:13] Retrieved 2 rows from table 'myprod2'
+[2024-12-28 11:51:13] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-28 11:51:13] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:51:13] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2024-12-28 11:51:53] Processing product: myprod1
+[2024-12-28 11:51:53] Total quantity for product 'myprod1': 10.00
+[2024-12-28 11:51:53] Retrieved 3 rows from table 'myprod1'
+[2024-12-28 11:51:53] Total required quantities for product 'myprod1': {"mymat1":30,"mymat2":10,"mymat4":50}
+[2024-12-28 11:51:53] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:51:53] Inventory status for product 'myprod1': [{"material":"mymat1","requiredQty":30,"availableQty":"30","difference":0},{"material":"mymat2","requiredQty":10,"availableQty":"20","difference":10},{"material":"mymat4","requiredQty":50,"availableQty":"50","difference":0}]
+[2024-12-28 11:51:53] Processing product: myprod2
+[2024-12-28 11:51:53] Total quantity for product 'myprod2': 10.00
+[2024-12-28 11:51:53] Retrieved 2 rows from table 'myprod2'
+[2024-12-28 11:51:53] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
+[2024-12-28 11:51:53] Retrieved 3 rows from 'rm_purchase'
+[2024-12-28 11:51:53] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]

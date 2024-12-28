@@ -225,3 +225,47 @@ Connected to MySQL successfully
 product_name: test1
 Switched to database: t2
 Materials fetched: [{"id":1,"material":"m2","qty":"1110.00","unit":"u2"}]
+Connected to MySQL successfully
+product_name: myprod1
+Switched to database: t3
+Materials fetched: [{"id":1,"material":"mymat1","qty":"2.00","unit":"myuni1"},{"id":2,"material":"mymat2","qty":"1.00","unit":"myuni2"},{"id":3,"material":"mymat4","qty":"5.00","unit":"myuni4"}]
+Request started: 2024-12-25 12:43:43
+Received data: company_name: t3, product_name: myprod1, material_id: 1, material: mymat1, qty: 3, unit: myuni1
+Connected to database: t3
+Prepared statement for update query: UPDATE `myprod1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: 1
+Database connection closed
+Request ended: 2024-12-25 12:43:43
+
+Request started: 2024-12-25 12:43:44
+Received data: company_name: t3, product_name: myprod1, material_id: 1, material: mymat1, qty: 3, unit: myuni1
+Connected to database: t3
+Prepared statement for update query: UPDATE `myprod1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: 1
+Database connection closed
+Request ended: 2024-12-25 12:43:44
+
+Request started: 2024-12-25 12:43:46
+Received data: company_name: t3, product_name: myprod1, material_id: 1, material: mymat1, qty: 3, unit: myuni1
+Connected to database: t3
+Prepared statement for update query: UPDATE `myprod1` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: 1
+Database connection closed
+Request ended: 2024-12-25 12:43:46
+
+Connected to MySQL successfully
+product_name: myprod2
+Switched to database: t3
+Materials fetched: [{"id":1,"material":"mymat1","qty":"10.00","unit":"myuni1"},{"id":2,"material":"mymat2","qty":"5.00","unit":"myuni2"}]
+Request started: 2024-12-25 12:44:04
+Received data: company_name: t3, product_name: myprod2, material_id: 1, material: mymat1, qty: 11, unit: myuni1
+Connected to database: t3
+Prepared statement for update query: UPDATE `myprod2` SET material = ?, qty = ?, unit = ? WHERE id = ?
+Material updated successfully for material_id: 1
+Database connection closed
+Request ended: 2024-12-25 12:44:04
+
+Connected to MySQL successfully
+product_name: myprod1
+Switched to database: t3
+Materials fetched: [{"id":1,"material":"mymat1","qty":"3.00","unit":"myuni1"},{"id":2,"material":"mymat2","qty":"1.00","unit":"myuni2"},{"id":3,"material":"mymat4","qty":"5.00","unit":"myuni4"}]
