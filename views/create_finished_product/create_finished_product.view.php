@@ -1,7 +1,8 @@
 <?php
-require('views/partials/head.php');
-require('views/partials/navbar.php');
-require('views/partials/banner.php');
+require 'db.php';
+require 'views/partials/head.php';
+require 'views/partials/navbar.php';
+require 'views/partials/banner.php';
 ?>
 
 <link rel="stylesheet" href="views/create_finished_product/style.css">
@@ -10,15 +11,26 @@ require('views/partials/banner.php');
 <div class="container mt-4">
     <h3>Create Finished Product</h3>
 
-    <form action="/PIMS/views/create_finished_product/submit_finished_product.php" method="POST">
-     <input type="hidden" id="companyName" name="company_name" value=<?= htmlspecialchars($_SESSION['company_name'])?>> 
-        <!-- Finished Product Name -->
+    <!-- Display Success/Failure Message -->
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="alert alert-<?= $_SESSION['message_type'] ?>" role="alert">
+            <?= $_SESSION['message']; unset($_SESSION['message']); unset($_SESSION['message_type']); ?>
+        </div>
+    <?php endif; ?>
+
+    <form action="views/create_finished_product/submit_finished_product.php" method="POST">
+        <input type="hidden" id="companyName" name="company_name" value="<?= htmlspecialchars($_SESSION['company_name']) ?>">
+        
         <div class="form-group">
             <label for="productName">Product Name</label>
             <input type="text" id="productName" name="product_name" class="form-control" placeholder="Enter product name" required>
         </div>
 
-        <!-- Table for Material Requirements -->
+        <div class="form-group">
+            <label for="description">Product Description</label>
+            <textarea id="description" name="description" class="form-control" placeholder="Enter product description" required></textarea>
+        </div>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -29,7 +41,6 @@ require('views/partials/banner.php');
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <!-- Initial Row -->
                 <tr>
                     <td><input type="text" class="autocomplete material" name="material[]"></td>
                     <td><input type="number" class="quantity" name="qty[]"></td>
@@ -39,14 +50,11 @@ require('views/partials/banner.php');
             </tbody>
         </table>
 
-        <button type="submit" id="submit" class="btn btn-primary">Create Product</button>
+        <button type="submit" class="btn btn-primary">Create Product</button>
     </form>
 
-    <!-- Add Row Button -->
     <button type="button" id="addRowBtn" class="btn btn-secondary mt-3">Add Row</button>
     <a href="index.php" class="btn btn-info mt-3">Back</a>
 </div>
 
-<?php
-require('views/partials/footer.php');
-?>
+<?php require 'views/partials/footer.php'; ?>

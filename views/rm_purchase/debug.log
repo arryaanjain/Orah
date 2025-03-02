@@ -719,3 +719,48 @@ company_name: t3, term: my, type: unit
 Switched to database: t3
 SQL executed successfully: SELECT DISTINCT `unit` FROM `rm_master_units` WHERE `unit` LIKE '%my%'
 Results: ["myuni1","myuni2","myuni4"]
+Connected to MySQL successfully
+company_name: t1, term: ma, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%ma%'
+No results found for: ma
+Connected to MySQL successfully
+company_name: t1, term: mamy, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%mamy%'
+No results found for: mamy
+Connected to MySQL successfully
+company_name: t1, term: ma, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%ma%'
+No results found for: ma
+Connected to MySQL successfully
+company_name: t1, term: mmy, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%mmy%'
+No results found for: mmy
+Connected to MySQL successfully
+company_name: t1, term: mm, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%mm%'
+No results found for: mm
+Connected to MySQL successfully
+company_name: t1, term: m1, type: material
+Switched to database: t1
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%m1%'
+Results: ["m1"]
+Connected to MySQL successfully
+company_name: u120171692_first_db, term: my, type: material
+Switched to database: u120171692_first_db
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%my%'
+No results found for: my
+Connected to MySQL successfully
+company_name: u120171692_first_db, term: je, type: material
+Switched to database: u120171692_first_db
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%je%'
+Results: ["hard jelly "]
+Connected to MySQL successfully
+company_name: u120171692_first_db, term: ma, type: material
+Switched to database: u120171692_first_db
+SQL executed successfully: SELECT DISTINCT `material` FROM `rm_master` WHERE `material` LIKE '%ma%'
+No results found for: ma

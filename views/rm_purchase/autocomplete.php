@@ -4,67 +4,80 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Connect to the MySQL server
-$dsn = "mysql:host=localhost";
-$username = "root";
-$password = "";
+session_start();
+require '../../db.php';
+
+$log_file = '../../logs/app.log';
+
+function logMessage($message) {
+    global $log_file;
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
+}
+
+// ✅ Return JSON error if session values are missing
+if (!isset($_SESSION['company_id']) || !isset($_SESSION['user_id'])) {
+    logMessage("Unauthorized access attempt.");
+    echo json_encode(['error' => 'Unauthorized']);
+    exit;
+}
+
+$company_id = $_SESSION['company_id'];
+$user_id = $_SESSION['user_id'];
+$value = $_GET['term'] ?? ''; 
+$type = $_GET['type'] ?? ''; 
+
+logMessage("Request received - company_id: $company_id, user_id: $user_id, term: $value, type: $type");
+
+// ✅ Return JSON error if parameters are missing
+if (empty($value) || empty($type)) {
+    logMessage("Missing input parameters.");
+    echo json_encode([]);
+    exit;
+}
+
+$tableMap = [
+    'material' => ['table' => 'rm_master', 'column' => 'material'],
+    'unit' => ['table' => 'rm_master_units', 'column' => 'unit']
+];
+
+if (!array_key_exists($type, $tableMap)) {
+    logMessage("Invalid type: $type");
+    echo json_encode([]);
+    exit;
+}
+
+$table = $tableMap[$type]['table'];
+$column = $tableMap[$type]['column'];
 
 try {
-    $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    file_put_contents('debug.log', "Connected to MySQL successfully\n", FILE_APPEND);
-    
-    // Get query parameters
-    $company_name = $_GET['company_name'] ?? ''; 
-    $value = $_GET['term'] ?? ''; 
-    $type = $_GET['type'] ?? ''; 
-    
-    file_put_contents('debug.log', "company_name: $company_name, term: $value, type: $type\n", FILE_APPEND);
-    
-    if (empty($company_name) || empty($value) || empty($type)) {
-        file_put_contents('debug.log', "Missing input parameters\n", FILE_APPEND);
-        echo json_encode([]);
+    $query = "SELECT DISTINCT `$column` FROM `$table` WHERE `$column` LIKE ? AND company_id = ? AND user_id = ?";
+    $stmt = mysqli_prepare($con, $query);
+
+    if (!$stmt) {
+        logMessage("SQL Prepare Error: " . mysqli_error($con));
+        echo json_encode(['error' => 'SQL Prepare Error']);
         exit;
     }
 
-    // Dynamically switch to the correct company database
-    $pdo->exec("USE `$company_name`");
-    file_put_contents('debug.log', "Switched to database: $company_name\n", FILE_APPEND);
+    $searchTerm = "%$value%";
+    mysqli_stmt_bind_param($stmt, "sii", $searchTerm, $company_id, $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    $tableMap = [
-        'material' => ['table' => 'rm_master', 'column' => 'material'],
-        'unit' => ['table' => 'rm_master_units', 'column' => 'unit']
-    ];
-
-    if (!array_key_exists($type, $tableMap)) {
-        file_put_contents('debug.log', "Invalid type: $type\n", FILE_APPEND);
-        echo json_encode([]);
-        exit;
+    $results = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $results[] = $row[$column];
     }
 
-    $table = $tableMap[$type]['table'];
-    $column = $tableMap[$type]['column'];
+    mysqli_stmt_close($stmt);
 
-    // Prepare and execute the SQL statement
-    try {
-        $statement = $pdo->prepare("SELECT DISTINCT `$column` FROM `$table` WHERE `$column` LIKE ?");
-        $statement->execute(["%" . $value . "%"]);
-        file_put_contents('debug.log', "SQL executed successfully: SELECT DISTINCT `$column` FROM `$table` WHERE `$column` LIKE '%$value%'\n", FILE_APPEND);
-    } catch (PDOException $e) {
-        file_put_contents('debug.log', "SQL Execution failed: " . $e->getMessage() . "\n", FILE_APPEND);
-        echo json_encode(['error' => 'SQL query failed']);
-        exit;
-    }
+    // ✅ Ensure JSON output even if empty
+    logMessage("Results: " . json_encode($results));
+    echo json_encode($results ?: []);
 
-    $results = $statement->fetchAll(PDO::FETCH_COLUMN);
-    if (empty($results)) {
-        file_put_contents('debug.log', "No results found for: $value\n", FILE_APPEND);
-    } else {
-        file_put_contents('debug.log', "Results: " . json_encode($results) . "\n", FILE_APPEND);
-    }
-
-    echo json_encode($results);
-
-} catch (PDOException $e) {
-    file_put_contents('debug.log', "DB Connection failed: " . $e->getMessage() . "\n", FILE_APPEND);
-    echo json_encode(['error' => $e->getMessage()]);
+} catch (Exception $e) {
+    logMessage("DB Error: " . $e->getMessage());
+    echo json_encode(['error' => 'Database Error']);
 }
+?>

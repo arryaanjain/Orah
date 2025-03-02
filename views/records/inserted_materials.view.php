@@ -2,25 +2,31 @@
 require('views/partials/head.php');
 require('views/partials/navbar.php');
 require('views/partials/banner.php');
+require('db.php'); // Use the central database connection
 
-//the QUICKEST section created, edit function beautifully GPT'd
-$company_name = $_SESSION['company_name'];
+error_reporting(E_ALL); ini_set('display_errors', 1);
 
-// Create a connection to the company-specific database
-$conn = new mysqli("localhost", "root", "", $company_name);
+// Retrieve user and company details from session
+$user_id = $_SESSION['user_id'];
+$company_id = $_SESSION['company_id'];
 
-// Check the connection
-if ($conn->connect_error) {
-    die("<div class='alert alert-danger'>Connection failed: " . $conn->connect_error . "</div>");
-}
+// Query to fetch all materials and units specific to the company
+$materialQuery = "SELECT id, material FROM rm_master WHERE company_id = ?";
+$unitQuery = "SELECT id, unit FROM rm_master_units WHERE company_id = ?";
 
-// Query to fetch all materials and units
-$materialQuery = "SELECT id, material FROM rm_master";
-$unitQuery = "SELECT id, unit FROM rm_master_units";
+// Prepare and execute material query
+$stmt = $con->prepare($materialQuery);
+$stmt->bind_param("i", $company_id);
+$stmt->execute();
+$materialResult = $stmt->get_result();
+$stmt->close();
 
-// Execute the queries
-$materialResult = $conn->query($materialQuery);
-$unitResult = $conn->query($unitQuery);
+// Prepare and execute unit query
+$stmt = $con->prepare($unitQuery);
+$stmt->bind_param("i", $company_id);
+$stmt->execute();
+$unitResult = $stmt->get_result();
+$stmt->close();
 
 // Handle form submission for editing
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newMaterial = $_POST['material'];
         
         // Update query
-        $updateMaterialQuery = "UPDATE rm_master SET material = ? WHERE id = ?";
-        $stmt = $conn->prepare($updateMaterialQuery);
-        $stmt->bind_param("si", $newMaterial, $materialId);
+        $updateMaterialQuery = "UPDATE rm_master SET material = ? WHERE id = ? AND company_id = ?";
+        $stmt = $con->prepare($updateMaterialQuery);
+        $stmt->bind_param("sii", $newMaterial, $materialId, $company_id);
         $stmt->execute();
         $stmt->close();
         
@@ -45,17 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newUnit = $_POST['unit'];
         
         // Update query
-        $updateUnitQuery = "UPDATE rm_master_units SET unit = ? WHERE id = ?";
-        $stmt = $conn->prepare($updateUnitQuery);
-        $stmt->bind_param("si", $newUnit, $unitId);
+        $updateUnitQuery = "UPDATE rm_master_units SET unit = ? WHERE id = ? AND company_id = ?";
+        $stmt = $con->prepare($updateUnitQuery);
+        $stmt->bind_param("sii", $newUnit, $unitId, $company_id);
         $stmt->execute();
         $stmt->close();
         
         echo '<div class="alert alert-success" role="alert">Unit updated successfully!</div>';
     }
 }
-
 ?>
+
 
 <!-- Content Section -->
 <div class="container mt-4">
@@ -164,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php
 // Close the connection
-$conn->close();
+$con->close();
 
 require('views/partials/footer.php');
 ?>

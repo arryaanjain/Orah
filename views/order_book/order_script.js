@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    const companyName = $('#companyName').val();
-
     // Function to apply autocomplete for specific elements
     function enableAutocomplete(selector, type) {
         $(document).on('focus', selector, function () {
@@ -11,7 +9,6 @@ $(document).ready(function () {
                             url: '/PIMS/views/order_book/order_autocomplete.php',
                             data: {
                                 term: request.term,
-                                company_name: companyName,
                                 type: type
                             },
                             success: function (data) {

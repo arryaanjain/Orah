@@ -1,16 +1,29 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Include database connection
+require_once('../../db.php');
+
+// Ensure session variables exist
+if (!isset($_SESSION['company_id']) || !isset($_SESSION['user_id'])) {
+    echo json_encode(['error' => 'Unauthorized access.']);
+    exit;
+}
+
+$company_id = $_SESSION['company_id'];
+$user_id = $_SESSION['user_id'];
+
 // Logging setup
-$log_file = 'logs/api.log';
+$log_file = '../../logs/app.log';
 
 // Ensure the logs directory exists
-if (!file_exists('logs')) {
-    mkdir('logs', 0777, true);
-}
+// if (!file_exists('../../logs')) {
+//     mkdir('../../logs', 0777, true);
+// }
 
 function logMessage($message) {
     global $log_file;
@@ -20,59 +33,55 @@ function logMessage($message) {
 
 logMessage("API request received.");
 
-// Connect to the MySQL server
-$dsn = "mysql:host=localhost";
-$username = "root";
-$password = "";
+// Get query parameters
+$value = $_GET['term'] ?? ''; 
+$type = $_GET['type'] ?? ''; 
 
-try {
-    $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    logMessage("Connected to MySQL server.");
-
-    // Get query parameters
-    $company_name = $_GET['company_name'] ?? ''; 
-    $value = $_GET['term'] ?? ''; 
-    $type = $_GET['type'] ?? ''; 
-    
-    if (empty($company_name) || empty($value) || empty($type)) {
-        logMessage("Missing query parameters: company_name=$company_name, term=$value, type=$type");
-        echo json_encode([]);
-        exit;
-    }
-
-    logMessage("Query parameters: company_name=$company_name, term=$value, type=$type");
-
-    // Dynamically switch to the correct company database
-    $pdo->exec("USE `$company_name`");
-    logMessage("Switched to database: $company_name");
-
-    $tableMap = [
-        'product' => ['table' => 'finished_products', 'column' => 'product_name'],
-        'customer' => ['table' => 'customers', 'column' => 'billing_name']
-    ];
-
-    if (!array_key_exists($type, $tableMap)) {
-        logMessage("Invalid type: $type");
-        echo json_encode([]);
-        exit;
-    }
-
-    $table = $tableMap[$type]['table'];
-    $column = $tableMap[$type]['column'];
-
-    // Prepare and execute the SQL statement
-    $statement = $pdo->prepare("SELECT DISTINCT `$column` FROM `$table` WHERE `$column` LIKE ?");
-    $statement->execute(["%" . $value . "%"]);
-    $results = $statement->fetchAll(PDO::FETCH_COLUMN);
-
-    logMessage("Query executed successfully: SELECT DISTINCT `$column` FROM `$table` WHERE `$column` LIKE '%$value%'");
-    logMessage("Results found: " . count($results));
-
-    echo json_encode($results);
-
-} catch (PDOException $e) {
-    $errorMessage = "Database error: " . $e->getMessage();
-    logMessage($errorMessage);
-    echo json_encode(['error' => $errorMessage]);
+if (empty($value) || empty($type)) {
+    logMessage("Missing query parameters: term=$value, type=$type");
+    echo json_encode([]);
+    exit;
 }
+
+logMessage("Query parameters: term=$value, type=$type");
+
+$tableMap = [
+    'product' => ['table' => 'finished_products', 'column' => 'product_name'],
+    'customer' => ['table' => 'customers', 'column' => 'billing_name']
+];
+
+if (!array_key_exists($type, $tableMap)) {
+    logMessage("Invalid type: $type");
+    echo json_encode([]);
+    exit;
+}
+
+$table = $tableMap[$type]['table'];
+$column = $tableMap[$type]['column'];
+
+// Prepare SQL query with WHERE clause for company_id and user_id
+$query = "SELECT DISTINCT `$column` FROM `$table` WHERE `$column` LIKE ? AND company_id = ? AND user_id = ?";
+$stmt = mysqli_prepare($con, $query);
+
+if (!$stmt) {
+    logMessage("Query preparation failed: " . mysqli_error($con));
+    echo json_encode(['error' => 'Database query failed.']);
+    exit;
+}
+
+// Bind parameters and execute
+$searchValue = "%$value%";
+mysqli_stmt_bind_param($stmt, "sii", $searchValue, $company_id, $user_id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+// Fetch results into an array
+$results = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $results[] = $row[$column];
+}
+mysqli_stmt_close($stmt);
+
+logMessage("Query executed successfully. Results found: " . count($results));
+echo json_encode($results);
 ?>
