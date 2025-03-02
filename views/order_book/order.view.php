@@ -2,9 +2,33 @@
 require('views/partials/head.php');
 require('views/partials/navbar.php');
 require('views/partials/banner.php');
-
-// Include the calculate.php file for total material, quantity, and unit calculations
 require('views/order_book/calculate.php');
+
+require 'db.php';
+
+// Ensure required session variables are set
+if (!isset($_SESSION['company_id']) || !isset($_SESSION['user_id'])) {
+    die("Unauthorized access!");
+}
+
+if (isset($_SESSION['success'])) {
+    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']); 
+}
+
+if (isset($_SESSION['error'])) {
+    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
+    unset($_SESSION['error']);
+}
+
+
+$company_id = $_SESSION['company_id'];
+$user_id = $_SESSION['user_id'];
+
+header('Content-Type: application/json');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 <script src="views/order_book/order_script.js"></script>
 
@@ -14,7 +38,6 @@ require('views/order_book/calculate.php');
         <div class="col-md-12">
             <h3>Order Book Details</h3>
             <form action="/PIMS/views/order_book/order_submit.php" method="POST">
-                <input type="hidden" id="companyName" name="company_name" value="<?= htmlspecialchars($_SESSION['company_name']) ?>">
 
                 <!-- Table for order book details -->
                 <table class="table table-bordered">
@@ -30,8 +53,8 @@ require('views/order_book/calculate.php');
                     <tbody id="tableBody">
                         <tr>
                             <td><input type="date" class="orderDate" name="order_date[]" required></td>
-                            <td><input type="text" class="autocomplete product" name="column1[]" required></td>
-                            <td><input type="number" class="quantity" name="column2[]" required></td>
+                            <td><input type="text" class="autocomplete product" name="product_name[]" required></td>
+                            <td><input type="number" class="quantity" name="qty[]" required></td>
                             <td><input type="text" class="autocomplete billingName" name="billing_name[]" required></td>
                             <td><button type="button" class="deleteRowBtn">Delete</button></td>
                         </tr>
@@ -65,55 +88,61 @@ require('views/order_book/calculate.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $dsn = "mysql:host=localhost";
-                    $username = "root";
-                    $password = "";
-                    try {
-                        $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-                        $pdo->exec("USE {$_SESSION['company_name']}");
+                <?php
+                $query = "SELECT ob.order_date, fp.product_name, ob.qty, c.billing_name 
+                        FROM order_book ob
+                        JOIN finished_products fp ON ob.product_id = fp.id
+                        JOIN customers c ON ob.customer_id = c.id
+                        WHERE ob.company_id = ? AND ob.user_id = ?";
 
-                        // Fetch and display all order book entries
-                        $stmt = $pdo->query("SELECT order_date, product_name, qty, billing_name FROM order_book ob JOIN customers c ON ob.customer_id = c.id");
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['order_date']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['product_name']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['qty']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['billing_name']) . "</td>";
-                            echo "</tr>";
-                        }
+                $stmt = mysqli_prepare($con, $query);
+                mysqli_stmt_bind_param($stmt, "ii", $company_id, $user_id);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
 
-                    } catch (PDOException $e) {
-                        echo "<div class='alert alert-danger'>Database error occurred. Please try again later.</div>";
-                    }
-                    ?>
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['order_date']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['product_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['qty']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['billing_name']) . "</td>";
+                    echo "</tr>";
+                }
+                mysqli_stmt_close($stmt);
+                ?>
+
                 </tbody>
             </table>
         </div>
+
         <?php    
-            // Calculate and display total material, qty, and unit
-            $productStmt = $pdo->query("SELECT DISTINCT product_name FROM order_book");
-            $products = $productStmt->fetchAll(PDO::FETCH_COLUMN);
-            //debugging: check if all products returned 
-            // foreach ($products as $prod) {
-            //     echo $prod;
-            // }
-            
-            // Call the calculateTotalQuantity function if products are available
+            // Fetch unique products belonging to this company & user
+            $productQuery = "SELECT DISTINCT fp.product_name 
+                            FROM order_book ob
+                            JOIN finished_products fp ON ob.product_id = fp.id
+                            WHERE ob.company_id = ? AND ob.user_id = ?";
+            $stmtProduct = mysqli_prepare($con, $productQuery);
+            mysqli_stmt_bind_param($stmtProduct, "ii", $company_id, $user_id);
+            mysqli_stmt_execute($stmtProduct);
+            $resultProduct = mysqli_stmt_get_result($stmtProduct);
+
+            // Fetch product names into an array
+            $products = [];
+            while ($row = mysqli_fetch_assoc($resultProduct)) {
+                $products[] = $row['product_name'];
+            }
+            mysqli_stmt_close($stmtProduct);
+
+            // Call the function if products exist
             if (!empty($products)) {
-                // foreach ($products as $product) {
-                    calculateTotalQuantity($pdo, $products);  // Pass product to calculate for each product
-                // }
+                calculateTotalQuantity($con, $products);
             }       
-        ?>
+            ?>
+
     </div>
 </div>
 
 <?php
-// Close the connection
-if (isset($conn)) {
-    $conn->close();
-}
+mysqli_close($con);
 require('views/partials/footer.php');
 ?>

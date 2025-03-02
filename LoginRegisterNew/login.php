@@ -4,6 +4,56 @@ if (isset($_SESSION["username"])) {
     header("location: ../index.php");
     exit();
 }
+
+require '../db.php'; // Ensure connection to the database
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form input
+    $company_name = trim($_POST['company_name']);
+    $username = trim($_POST['username']);
+    $password = $_POST['password']; // Do not escape password
+
+    // Use prepared statements to prevent SQL injection
+    $check_company_query = "SELECT id FROM companies WHERE LOWER(name) = LOWER(?)";
+    $stmt = mysqli_prepare($con, $check_company_query);
+    mysqli_stmt_bind_param($stmt, "s", $company_name);
+    mysqli_stmt_execute($stmt);
+    $company_result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($company_result) > 0) {
+        $company_data = mysqli_fetch_assoc($company_result);
+        $company_id = $company_data['id'];
+
+        // Check if user exists
+        $query = "SELECT id, username, password FROM users WHERE username = ? AND company_id = ?";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "si", $username, $company_id);
+        mysqli_stmt_execute($stmt);
+        $user_result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($user_result) > 0) {
+            $user = mysqli_fetch_assoc($user_result);
+
+            if (password_verify($password, $user['password'])) {
+                // Secure session variables
+                session_regenerate_id(true);
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['company_id'] = $company_id;
+                $_SESSION['company_name'] = $company_name;
+
+                header('location: ../index.php');
+                exit();
+            } else {
+                $error_message = "Incorrect Username/Password.";
+            }
+        } else {
+            $error_message = "Incorrect Username/Password.";
+        }
+    } else {
+        $error_message = "Invalid Company Name.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,65 +64,20 @@ if (isset($_SESSION["username"])) {
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<?php
-require 'db.php'; // Ensure this connects to the central database containing company details.
-
-if (isset($_POST['username'], $_POST['password'], $_POST['company_name'])) {
-    $company_name = stripslashes($_REQUEST['company_name']);
-    $company_name = mysqli_real_escape_string($con, $company_name);
-
-    $username = stripslashes($_REQUEST['username']);
-    $username = mysqli_real_escape_string($con, $username);
-
-    $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($con, $password);
-
-    // Check if the company database exists
-    $check_db_query = "SHOW DATABASES LIKE '$company_name'";
-    $check_db_result = mysqli_query($con, $check_db_query);
-
-    if (mysqli_num_rows($check_db_result) > 0) {
-        // Connect to the company database
-        $company_con = new mysqli("localhost", "root", "", $company_name);
-
-        if ($company_con->connect_error) {
-            die("Connection failed: " . $company_con->connect_error);
-        }
-
-        // Check if the username and password exist in the company's `users` table
-        $query = "SELECT * FROM `users` WHERE username='$username' AND password='" . md5($password) . "'";
-        $result = mysqli_query($company_con, $query);
-
-        if (mysqli_num_rows($result) > 0) {
-            $_SESSION['username'] = $username;
-            $_SESSION['company_name'] = $company_name;
-            header('location: ../index.php');
-        } else {
-            echo "<div class='form'>
-                      <h3>Incorrect Username/Password.</h3><br/>
-                      <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-                  </div>";
-        }
-
-        $company_con->close();
-    } else {
-        echo "<div class='form'>
-                  <h3>Invalid Company Name.</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-              </div>";
-    }
-} else {
-?>
-    <form class="loginform" id="loginform" method="post" name="login">
-        <h1 class="login-title">Login</h1>
-        <input type="text" class="login-input" id="company_name" name="company_name" placeholder="Company Name" required/>
-        <input type="text" class="login-input" id="username" name="username" placeholder="Username" required/>
-        <input type="password" class="login-input" id="password" name="password" placeholder="Password" required/>
-        <input type="submit" value="Login" name="submit" class="login-button"/>
-        <p class="link"><a href="user_registration_new.php">New Registration</a></p>
-    </form>
-<?php
-}
-?>
+    <?php if (!empty($error_message)): ?>
+        <div class='form'>
+            <h3><?php echo $error_message; ?></h3><br/>
+            <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+        </div>
+    <?php else: ?>
+        <form class="loginform" id="loginform" method="post" name="login">
+            <h1 class="login-title">Login</h1>
+            <input type="text" class="login-input" id="company_name" name="company_name" placeholder="Company Name" required/>
+            <input type="text" class="login-input" id="username" name="username" placeholder="Username" required/>
+            <input type="password" class="login-input" id="password" name="password" placeholder="Password" required/>
+            <input type="submit" value="Login" name="submit" class="login-button"/>
+            <p class="link"><a href="user_registration_new.php">New Registration</a></p>
+        </form>
+    <?php endif; ?>
 </body>
 </html>

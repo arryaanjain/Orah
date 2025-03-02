@@ -1,88 +1,83 @@
 <?php
-// Connect to the MySQL server
-$dsn = "mysql:host=localhost";
-$username = "root";
-$password = "";
+session_start();
+require '../../db.php';
 
-try {
-    $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-    // Get form data
-    $company_name = $_POST['company_name'] ?? '';
-    $purchase_dates = $_POST['purchase_date'] ?? []; // Array of purchase dates
-    $materials = $_POST['column1'] ?? [];  // Array of material values
-    $quantities = $_POST['column2'] ?? [];  // Array of quantity values
-    $units = $_POST['column3'] ?? [];  // Array of unit values
-
-    // Validate required fields
-    if (empty($company_name) || empty($materials) || empty($quantities) || empty($units) || empty($purchase_dates)) {
-        echo "Missing required fields";
-        exit;
-    }
-
-    // Dynamically switch to the correct company database
-    $pdo->exec("USE `$company_name`");
-
-    // Prepare the insert query to include the date
-    $stmt = $pdo->prepare("INSERT INTO rm_purchase (purchase_date, material, qty, unit) VALUES (?, ?, ?, ?)");
-
-    // Insert each row into the rm_purchase table
-    for ($i = 0; $i < count($materials); $i++) {
-        $stmt->execute([$purchase_dates[$i], $materials[$i], $quantities[$i], $units[$i]]);
-    }
-
-    // Redirect back to the form with a success message
-    echo '<div class="alert alert-success" role="alert">
-            Materials and units have been successfully added to the database.
-          </div><br>
-          <a href="/PIMS/rm_purchase.php" class="btn btn-primary">Go to Purchase Form</a>';
-    exit;
-
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+if (!isset($_SESSION['company_id']) || !isset($_SESSION['user_id'])) {
+    $_SESSION['error'] = "Unauthorized access.";
+    header("Location: /PIMS/rm_purchase.php");
+    exit();
 }
-?><?php
-// Connect to the MySQL server
-$dsn = "mysql:host=localhost";
-$username = "root";
-$password = "";
 
-try {
-    $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+$company_id = $_SESSION['company_id'];
+$user_id = $_SESSION['user_id'];
 
-    // Get form data
-    $company_name = $_POST['company_name'] ?? '';
-    $purchase_dates = $_POST['purchase_date'] ?? []; // Array of purchase dates
-    $materials = $_POST['column1'] ?? [];  // Array of material values
-    $quantities = $_POST['column2'] ?? [];  // Array of quantity values
-    $units = $_POST['column3'] ?? [];  // Array of unit values
+$purchase_dates = $_POST['purchase_date'] ?? [];
+$materials = $_POST['column1'] ?? [];
+$quantities = $_POST['column2'] ?? [];
+$units = $_POST['column3'] ?? [];
 
-    // Validate required fields
-    if (empty($company_name) || empty($materials) || empty($quantities) || empty($units) || empty($purchase_dates)) {
-        echo "Missing required fields";
-        exit;
-    }
-
-    // Dynamically switch to the correct company database
-    $pdo->exec("USE `$company_name`");
-
-    // Prepare the insert query to include the date
-    $stmt = $pdo->prepare("INSERT INTO rm_purchase (purchase_date, material, qty, unit) VALUES (?, ?, ?, ?)");
-
-    // Insert each row into the rm_purchase table
-    for ($i = 0; $i < count($materials); $i++) {
-        $stmt->execute([$purchase_dates[$i], $materials[$i], $quantities[$i], $units[$i]]);
-    }
-
-    // Redirect back to the form with a success message
-    echo '<div class="alert alert-success" role="alert">
-            Materials and units have been successfully added to the database.
-          </div><br>
-          <a href="/PIMS/rm_purchase.php" class="btn btn-primary">Go to Purchase Form</a>';
-    exit;
-
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+if (empty($purchase_dates) || empty($materials) || empty($quantities) || empty($units)) {
+    $_SESSION['error'] = "All fields are required.";
+    header("Location: /PIMS/rm_purchase.php");
+    exit();
 }
-?>
 
+$query = "INSERT INTO rm_purchase (purchase_date, material_id, qty, unit_id, company_id, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+$stmt = mysqli_prepare($con, $query);
+
+if (!$stmt) {
+    $_SESSION['error'] = "Database error: " . mysqli_error($con);
+    header("Location: /PIMS/rm_purchase.php");
+    exit();
+}
+
+$allInserted = true;
+
+for ($i = 0; $i < count($materials); $i++) {
+    $material_name = trim($materials[$i]);
+    $unit_name = trim($units[$i]);
+    $material_id = null;
+    $unit_id = null;
+
+    $stmt_material = mysqli_prepare($con, "SELECT id FROM rm_master WHERE material = ? AND company_id = ? AND user_id = ?");
+    mysqli_stmt_bind_param($stmt_material, "sii", $material_name, $company_id, $user_id);
+    mysqli_stmt_execute($stmt_material);
+    mysqli_stmt_bind_result($stmt_material, $material_id);
+    mysqli_stmt_fetch($stmt_material);
+    mysqli_stmt_close($stmt_material);
+
+    if (!$material_id) {
+        $_SESSION['error'] = "Material '$material_name' not found.";
+        header("Location: /PIMS/rm_purchase.php");
+        exit();
+    }
+
+    $stmt_unit = mysqli_prepare($con, "SELECT id FROM rm_master_units WHERE unit = ? AND company_id = ? AND user_id = ?");
+    mysqli_stmt_bind_param($stmt_unit, "sii", $unit_name, $company_id, $user_id);
+    mysqli_stmt_execute($stmt_unit);
+    mysqli_stmt_bind_result($stmt_unit, $unit_id);
+    mysqli_stmt_fetch($stmt_unit);
+    mysqli_stmt_close($stmt_unit);
+
+    if (!$unit_id) {
+        $_SESSION['error'] = "Unit '$unit_name' not found.";
+        header("Location: /PIMS/rm_purchase.php");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sdisii", $purchase_dates[$i], $material_id, $quantities[$i], $unit_id, $company_id, $user_id);
+    if (!mysqli_stmt_execute($stmt)) {
+        $allInserted = false;
+    }
+}
+
+mysqli_stmt_close($stmt);
+
+if ($allInserted) {
+    $_SESSION['success'] = "✅ Purchase data saved successfully!";
+} else {
+    $_SESSION['error'] = "Some data could not be inserted.";
+}
+
+header("Location: /PIMS/rm_purchase.php");
+exit();

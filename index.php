@@ -1,11 +1,23 @@
 <?php
 require 'views/partials/head.php';
 require 'views/partials/navbar.php';
+require 'db.php'; // Use the MySQLi connection
+
+// Retrieve company ID from session
+$company_id = $_SESSION['company_id'] ?? null;
+if (!$company_id) {
+    die("<div class='alert alert-danger'>No company ID provided. Please ensure the session includes a valid company ID.</div>");
+}
+
+$sections = [
+    "Raw Material Master" => "rm_master",
+    "Raw Material Purchase" => "rm_purchase",
+    "Finished Products" => "finished_products",
+    "Order Book" => "order_book",
+    "Sales Book" => "sales_book"
+];
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management</title>
@@ -35,12 +47,6 @@ require 'views/partials/navbar.php';
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-        }
-        .section h2 {
-            margin-top: 0;
-        }
-        .section p {
-            font-size: 16px;
         }
         .totals {
             font-size: 24px;
@@ -75,82 +81,47 @@ require 'views/partials/navbar.php';
     <h1>Inventory Management System</h1>
 </header>
 <div class="container">
-
     <?php
-    // PDO Database Connection
-    $dsn = "mysql:host=localhost";
-    $username = "root";
-    $password = "";
+    foreach ($sections as $title => $table) {
+        $stmt = $con->prepare("SELECT * FROM $table WHERE company_id = ? LIMIT 1");
+        $stmt->bind_param("i", $company_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $sampleData = $result->fetch_assoc();
+        $stmt->close();
 
-    try {
-        $pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        $company_name = $_SESSION['company_name'] ?? '';
-
-        if (empty($company_name)) {
-            throw new Exception("No company name provided. Please ensure the form submission includes the company name.");
-        }
-
-        // Use the company database
-        $pdo->exec("USE `$company_name`");
-
-        // Queries to calculate totals and fetch data
-        $totals = [];
-        $data = [];
-
-        // Section details
-        $sections = [
-            "Raw Material Master" => "rm_master",
-            "Raw Material Purchase" => "rm_purchase",
-            "Finished Products" => "finished_products",
-            "Order Book" => "order_book",
-            "Sales Book" => "sales_book"
-        ];
-
-        foreach ($sections as $title => $table) {
-            $totals[$table] = $pdo->query("SELECT COUNT(*) AS total FROM `$table`")->fetch()['total'];
-            $data[$table] = $pdo->query("SELECT * FROM `$table`")->fetchAll(PDO::FETCH_ASSOC);
-        }
-
-        foreach ($sections as $title => $table) {
-            echo "<div class='section' onclick='toggleTable(\"table_$table\")'>";
-            echo "<h2>{$title}</h2>";
-            echo "<p>Total: <span class='totals'>" . ($totals[$table] ?? 0) . "</span></p>";
-
-            // Hidden table
-            echo "<table class='hidden-table' id='table_$table'>";
-            if (!empty($data[$table])) {
-                // Table headers
+        echo "<div class='section' onclick='toggleTable(\"table_$table\")'>";
+        echo "<h2>{$title}</h2>";
+        echo "<table class='hidden-table' id='table_$table'>";
+        
+        if ($sampleData) {
+            echo "<tr>";
+            foreach (array_keys($sampleData) as $header) {
+                echo "<th>" . htmlspecialchars($header) . "</th>";
+            }
+            echo "</tr>";
+            
+            $stmt = $con->prepare("SELECT * FROM $table WHERE company_id = ?");
+            $stmt->bind_param("i", $company_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                foreach (array_keys($data[$table][0]) as $header) {
-                    echo "<th>" . htmlspecialchars($header) . "</th>";
+                foreach ($row as $value) {
+                    echo "<td>" . htmlspecialchars($value) . "</td>";
                 }
                 echo "</tr>";
-
-                // Table rows
-                foreach ($data[$table] as $row) {
-                    echo "<tr>";
-                    foreach ($row as $value) {
-                        echo "<td>" . htmlspecialchars($value) . "</td>";
-                    }
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='100%'>No data available</td></tr>";
             }
-            echo "</table>";
-
-            echo "</div>";
+            $stmt->close();
+        } else {
+            echo "<tr><th>No data available</th></tr>";
         }
-
-    } catch (PDOException $e) {
-        echo "<div class='alert alert-danger'>Database error: " . htmlspecialchars($e->getMessage()) . "</div>";
-    } catch (Exception $e) {
-        echo "<div class='alert alert-danger'>" . htmlspecialchars($e->getMessage()) . "</div>";
+        echo "</table>";
+        echo "</div>";
     }
     ?>
-</div>
-</body>
-</html>
+
 
 <?php
 require 'views/partials/footer.php';

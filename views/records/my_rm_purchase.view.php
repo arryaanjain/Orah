@@ -1,92 +1,115 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require('views/partials/head.php');
 require('views/partials/navbar.php');
 require('views/partials/banner.php');
 
-// Initialize records array and variables for handling edits
+// Check if user is logged in and retrieve session variables
+if (!isset($_SESSION['company_id'], $_SESSION['user_id'])) {
+    die("<div class='alert alert-danger'>Unauthorized access. Please log in.</div>");
+}
+// Database Connection
+require_once('db.php');
+
+$company_id = $_SESSION['company_id'];
+$user_id = $_SESSION['user_id'];
+
 $records = [];
 $searchDate = '';
 $editMessage = '';
 
-// Handle search by date and query the database
+
+// Check connection
+if ($con->connect_error) {
+    die("<div class='alert alert-danger'>Connection failed: " . $con->connect_error . "</div>");
+}
+
+// Handle search by date
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_date'])) {
     $searchDate = $_POST['search_date'];
 
-    // Make sure a date is selected
     if ($searchDate) {
-        // Get the company name from the session
-        $company_name = $_SESSION['company_name'];
+        // Fetch records for the given date, filtered by company_id and user_id
+        $purchaseQuery = "SELECT p.id, p.purchase_date, p.qty, 
+                m.material, u.unit 
+        FROM rm_purchase p
+        JOIN rm_master m ON p.material_id = m.id
+        JOIN rm_master_units u ON p.unit_id = u.id
+        WHERE p.purchase_date = ? AND p.company_id = ? AND p.user_id = ?";
 
-        // Create a connection to the company-specific database
-        $conn = new mysqli("localhost", "root", "", $company_name);
-
-        // Check the connection
-        if ($conn->connect_error) {
-            die("<div class='alert alert-danger'>Connection failed: " . $conn->connect_error . "</div>");
-        }
-
-        // Query to fetch records for the given date
-        $purchaseQuery = "SELECT id, material, qty, unit, purchase_date FROM rm_purchase WHERE purchase_date = ?";
-        $stmt = $conn->prepare($purchaseQuery);
-        $stmt->bind_param("s", $searchDate);
+        $stmt = $con->prepare($purchaseQuery);
+        $stmt->bind_param("sii", $searchDate, $company_id, $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Fetch the records
         while ($row = $result->fetch_assoc()) {
             $records[] = $row;
         }
 
         $stmt->close();
-        $conn->close();
+
     }
 }
 
 // Handle editing of records
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_record_id'])) {
     $editRecordId = $_POST['edit_record_id'];
-    $material = $_POST['material'];
+    $material = $_POST['material']; // Submitted material name
     $qty = $_POST['qty'];
-    $unit = $_POST['unit'];
+    $unit = $_POST['unit']; // Submitted unit name
 
-    // Get the company name from the session
-    $company_name = $_SESSION['company_name'];
+    // Fetch material_id based on material
+    $materialQuery = "SELECT id FROM rm_master WHERE material = ? AND company_id = ? AND user_id = ?";
+    $stmtMaterial = $con->prepare($materialQuery);
+    $stmtMaterial->bind_param("sii", $material, $company_id, $user_id);
+    $stmtMaterial->execute();
+    $stmtMaterial->bind_result($material_id);
+    $stmtMaterial->fetch();
+    $stmtMaterial->close();
 
-    // Create a connection to the company-specific database
-    $conn = new mysqli("localhost", "root", "", $company_name);
+    // Fetch unit_id based on unit
+    $unitQuery = "SELECT id FROM rm_master_units WHERE unit = ? AND company_id = ? AND user_id = ?";
+    $stmtUnit = $con->prepare($unitQuery);
+    $stmtUnit->bind_param("sii", $unit, $company_id, $user_id);
+    $stmtUnit->execute();
+    $stmtUnit->bind_result($unit_id);
+    $stmtUnit->fetch();
+    $stmtUnit->close();
 
-    // Check the connection
-    if ($conn->connect_error) {
-        die("<div class='alert alert-danger'>Connection failed: " . $conn->connect_error . "</div>");
-    }
+    // Proceed with update only if IDs are found
+    if ($material_id && $unit_id) {
+        $updateQuery = "UPDATE rm_purchase 
+                        SET material_id = ?, qty = ?, unit_id = ? 
+                        WHERE id = ? AND company_id = ? AND user_id = ?";
+        $stmt = $con->prepare($updateQuery);
+        $stmt->bind_param("iiiiii", $material_id, $qty, $unit_id, $editRecordId, $company_id, $user_id);
 
-    // Query to update the record in the database
-    $updateQuery = "UPDATE rm_purchase SET material = ?, qty = ?, unit = ? WHERE id = ?";
-    $stmt = $conn->prepare($updateQuery);
-    $stmt->bind_param("sssi", $material, $qty, $unit, $editRecordId);
+        if ($stmt->execute()) {
+            $editMessage = "<div class='alert alert-success'>Record updated successfully.</div>";
+        } else {
+            $editMessage = "<div class='alert alert-danger'>Error updating record: " . $stmt->error . "</div>";
+        }
 
-    if ($stmt->execute()) {
-        $editMessage = "<div class='alert alert-success'>Record updated successfully.</div>";
+        $stmt->close();
     } else {
-        $editMessage = "<div class='alert alert-danger'>Error updating record: " . $stmt->error . "</div>";
+        $editMessage = "<div class='alert alert-danger'>Invalid Material or Unit selected.</div>";
     }
-
-    $stmt->close();
-    $conn->close();
 }
+
+// Close connection
+$con->close();
 ?>
 
-<!-- Content section starts here -->
+<!-- Content Section -->
 <div class="container mt-4">
     <div class="row">
-        <!-- Search and Edit Section -->
         <div class="col-md-12 mb-4">
             <h3>Search and Edit RM Purchase Records</h3>
-
-            <!-- Display success or error message for editing -->
             <?php echo $editMessage; ?>
 
-            <!-- Search by Date Form -->
+            <!-- Search Form -->
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label for="search_date" class="form-label">Search by Date</label>
@@ -95,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_record_id'])) {
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
 
-            <!-- Display Records for the given date -->
+            <!-- Display Records -->
             <?php if (!empty($records)): ?>
                 <h4>Records for Date: <?php echo htmlspecialchars($searchDate); ?></h4>
                 <table class="table table-bordered">
@@ -126,22 +149,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_record_id'])) {
                                     <div class='modal-dialog'>
                                         <div class='modal-content'>
                                             <div class='modal-header'>
-                                                <h5 class='modal-title' id='editModalLabel'>Edit Purchase Record</h5>
-                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                <h5 class='modal-title'>Edit Purchase Record</h5>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
                                             </div>
                                             <div class='modal-body'>
                                                 <form method='POST'>
                                                     <input type='hidden' name='edit_record_id' value='{$row['id']}'>
                                                     <div class='mb-3'>
-                                                        <label for='material' class='form-label'>Material Name</label>
+                                                        <label class='form-label'>Material Name</label>
                                                         <input type='text' class='form-control' name='material' value='{$row['material']}' required>
                                                     </div>
                                                     <div class='mb-3'>
-                                                        <label for='qty' class='form-label'>Quantity</label>
+                                                        <label class='form-label'>Quantity</label>
                                                         <input type='number' class='form-control' name='qty' value='{$row['qty']}' required>
                                                     </div>
                                                     <div class='mb-3'>
-                                                        <label for='unit' class='form-label'>Unit</label>
+                                                        <label class='form-label'>Unit</label>
                                                         <input type='text' class='form-control' name='unit' value='{$row['unit']}' required>
                                                     </div>
                                                     <button type='submit' class='btn btn-primary'>Save changes</button>
@@ -157,11 +180,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_record_id'])) {
             <?php else: ?>
                 <p>No records found for the given date.</p>
             <?php endif; ?>
-
         </div>
     </div>
 </div>
 
-<?php
-require('views/partials/footer.php');
-?>
+<?php require('views/partials/footer.php'); ?>

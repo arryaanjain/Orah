@@ -1,10 +1,13 @@
 <?php
-// Ensure the 'logs' directory exists
-if (!file_exists('logs')) {
-    mkdir('logs', 0777, true);
-}
+session_start();
+require_once '../../db.php'; // Include database conection
 
-$log_file = 'logs/app.log';
+// Ensure the 'logs' directory exists
+// if (!file_exists('logs')) {
+//     mkdir('logs', 0777, true);
+// }
+
+$log_file = '../../logs/app.log';
 
 /**
  * Function to log messages to a file with a timestamp.
@@ -15,21 +18,37 @@ function logMessage($message) {
     file_put_contents($log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
 }
 
-function calculateTotalQuantity($pdo, $products) {
+/**
+ * Function to calculate total quantity for given products.
+ */
+function calculateTotalQuantity($products, $customer_id, $user_id) {
     foreach ($products as $product) {
         $product = strtolower($product);  // Convert product name to lowercase
+        $product = str_replace(' ', '_', $product);
         try {
             logMessage("Processing product: $product");
 
             // Step 1: Get the total quantity for this product from the order_book
-            $stmt = $pdo->prepare("SELECT SUM(qty) FROM order_book WHERE product_name = ?");
-            $stmt->execute([$product]);
-            $allQuantity = $stmt->fetchColumn() ?: 0; // Fallback to 0 if no quantity is found
+            $query = "SELECT SUM(qty) FROM order_book WHERE product_name = ? AND customer_id = ? AND user_id = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("sii", $product, $customer_id, $user_id);
+            $stmt->execute();
+            $stmt->bind_result($allQuantity);
+            $stmt->fetch();
+            $stmt->close();
+            $allQuantity = $allQuantity ?: 0; // Fallback to 0 if no quantity is found
+
             logMessage("Total quantity for product '$product': $allQuantity");
 
-            // Step 2: Retrieve fields from the product table
-            $query = "SELECT material, qty, unit FROM `$product`";
-            $productData = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+            // Step 2: Retrieve fields from the `$product` table
+            $query = "SELECT material, qty, unit FROM `$product` WHERE customer_id = ? AND user_id = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ii", $customer_id, $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $productData = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
             logMessage("Retrieved " . count($productData) . " rows from table '$product'");
 
             // Extract columns from the product data
@@ -49,9 +68,17 @@ function calculateTotalQuantity($pdo, $products) {
             }
             logMessage("Total required quantities for product '$product': " . json_encode($totalRequiredQty));
 
-            // Step 4: Retrieve available quantities from the rm_purchase table
-            $rmQuery = "SELECT material, SUM(qty) AS total_qty, unit FROM rm_purchase GROUP BY material";
-            $rmData = $pdo->query($rmQuery)->fetchAll(PDO::FETCH_ASSOC);
+            // Step 4: Retrieve available quantities from the `rm_purchase` table
+            $query = "SELECT material, SUM(qty) AS total_qty, unit FROM rm_purchase 
+                      WHERE customer_id = ? AND user_id = ? 
+                      GROUP BY material";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ii", $customer_id, $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $rmData = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
             logMessage("Retrieved " . count($rmData) . " rows from 'rm_purchase'");
 
             $myMaterial = array_column($rmData, 'material');
@@ -78,8 +105,6 @@ function calculateTotalQuantity($pdo, $products) {
             // Step 6: Display the inventory status for this specific product
             displayInventoryStatus($product, $inventoryStatus);
 
-        } catch (PDOException $e) {
-            logMessage("Database Error with Product '$product': " . $e->getMessage());
         } catch (Exception $e) {
             logMessage("Unexpected Error with Product '$product': " . $e->getMessage());
         }

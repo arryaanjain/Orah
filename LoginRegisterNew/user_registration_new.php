@@ -22,172 +22,123 @@
 </head>
 <body>
 <?php
+require('../db.php'); // Assumes `db.php` connects to the database
 
-require('db.php');
+// Function to log errors
+function logError($message) {
+    $logFile = 'logs/app.log'; // Change path if needed
+    $formattedMessage = "[" . date("Y-m-d H:i:s") . "] " . $message . "\n";
+    error_log($formattedMessage, 3, $logFile);
+}
 
-if (isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['company_name'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['company_name'])) {
+    // Sanitize inputs
     $username = mysqli_real_escape_string($con, stripslashes($_POST['username']));
     $email = mysqli_real_escape_string($con, stripslashes($_POST['email']));
     $password = mysqli_real_escape_string($con, stripslashes($_POST['password']));
     $company_name = mysqli_real_escape_string($con, stripslashes($_POST['company_name']));
-    $hashed_password = md5($password);
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $create_datetime = date("Y-m-d H:i:s");
+    logError("Debug: Function reached this point.");
 
-    // Create a new database for the company
-    $create_db_query = "CREATE DATABASE `$company_name`";
-    if (mysqli_query($con, $create_db_query)) {
-        // Connect to the new database
-        $company_con = new mysqli("localhost", "root", "", $company_name);
 
-        if ($company_con->connect_error) {
-            die("Connection failed: " . $company_con->connect_error);
+    // Check if the company exists
+    $stmt = $con->prepare("SELECT id FROM companies WHERE LOWER(name) = LOWER(?)");    
+    if (!$stmt) {
+        logError("Prepare failed: " . mysqli_error($con));
+    } else {
+        logError("Debug: passed company check.");
+        $stmt->bind_param("s", $company_name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
+
+
+    if ($result && $result->num_rows > 0) {
+        // Company exists, get the company ID
+        $company_data = $result->fetch_assoc();
+        $company_id = $company_data['id'];
+
+        // Check if username already exists within the company
+        $stmt = $con->prepare("SELECT id FROM users WHERE company_id = ? AND username = ?");
+        if (!$stmt) {
+            logError("Prepare failed (username check): " . mysqli_error($con));
+        } else {
+            logError("Passed username check.");
+            $stmt->bind_param("is", $company_id, $username);
+            $stmt->execute();
+            $user_check_result = $stmt->get_result();
         }
 
-        // Create `users` table in the new database
-        $create_users_table_query = "
-            CREATE TABLE IF NOT EXISTS `users` (
-                id INT(11) AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(50) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                date_time DATETIME NOT NULL
-            )
-        ";
+        if ($user_check_result && $user_check_result->num_rows > 0) {
+            // Username already exists within the same company
+            echo "<div class='form'>
+                      <h3>Username already exists for this company. Please choose a different username.</h3>
+                      <p class='link'>Click here to <a href='user_registration_new.php'>register</a> again.</p>
+                  </div>";
+        } else {
+            // Register the new user
+            $stmt = $con->prepare("
+                INSERT INTO `users` (company_id, username, email, password, role, date_time) 
+                VALUES (?, ?, ?, ?, 'admin', ?)
+            ");
+            if (!$stmt) {
+                logError("Prepare failed (user insertion): " . mysqli_error($con));
+            }
+            $stmt->bind_param("issss", $company_id, $username, $email, $hashed_password, $create_datetime);
 
-        // Create `rm_master` table in the new database
-        $create_rm_master_table_query = "
-            CREATE TABLE IF NOT EXISTS `rm_master` (
-                id INT(11) AUTO_INCREMENT PRIMARY KEY,
-                material VARCHAR(255) NOT NULL
-            )
-        ";
-
-        // Create `rm_master_units` table in the new database
-        $create_rm_master_units_table_query = "
-            CREATE TABLE IF NOT EXISTS `rm_master_units` (
-                id INT(11) AUTO_INCREMENT PRIMARY KEY,
-                unit VARCHAR(255) NOT NULL
-            )
-        ";
-        // Create rm_purchase
-        $create_rm_purchase_table_query = "
-            CREATE TABLE IF NOT EXISTS `rm_purchase` (
-                id INT(11) AUTO_INCREMENT PRIMARY KEY,
-                purchase_date DATE NOT NULL,
-                material VARCHAR(255) NOT NULL,
-                qty BIGINT NOT NULL,
-                unit VARCHAR(255) NOT NULL
-            )
-        ";
-        //create finished product
-        $create_finished_products_table_query = "       
-            CREATE TABLE IF NOT EXISTS `finished_products` (
-                id INT(11) AUTO_INCREMENT PRIMARY KEY, -- Unique identifier for the product
-                product_name VARCHAR(255) NOT NULL,    -- Name of the finished product
-                creation_date DATE DEFAULT CURRENT_DATE, -- Date the product was created
-                status ENUM('active', 'inactive') DEFAULT 'active', -- Status of the product
-                description TEXT,                      -- Optional description of the finished product
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp for when the row was created
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for the last update
-            )
-        ";
-        //create order_book
-        $create_order_book = "
-            CREATE TABLE `order_book` (
-                `id` INT AUTO_INCREMENT PRIMARY KEY,
-                `order_date` DATE NOT NULL,
-                `product_name` VARCHAR(255) NOT NULL,
-                `qty` DECIMAL(10, 2) NOT NULL,
-                `customer_id` INT NOT NULL,
-                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`)
-            );
-        ";
-        //create billing_name, place
-        $create_customers = "
-            CREATE TABLE `customers` (
-                `id` INT AUTO_INCREMENT PRIMARY KEY,           -- Unique identifier for each customer
-                `billing_name` VARCHAR(255) NOT NULL,         -- Name of the person or company being billed
-                `place` VARCHAR(255) NOT NULL,                -- Location of the customer (city, town, etc.)
-                `gst_number` VARCHAR(20) DEFAULT NULL,       -- Optional GST number for the customer
-                `email` VARCHAR(255) DEFAULT NULL,            -- Optional email of the customer
-                `phone` VARCHAR(15) DEFAULT NULL,             -- Optional phone number of the customer
-                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp when the customer was created
-                `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for when the customer record was last updated
-            );
-        ";
-        //create sales book
-        $create_sales_book = "
-            CREATE TABLE sales_book (
-                id INT AUTO_INCREMENT PRIMARY KEY,        -- Primary key to uniquely identify each row
-                order_date DATE NOT NULL,                 -- Date of the order
-                product_name VARCHAR(255) NOT NULL,      -- Name of the product
-                qty INT NOT NULL,                         -- Quantity ordered
-                customer_id INT NOT NULL,                 -- ID of the customer
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp of when the entry was created
-            );
-        ";
-        //create order book history
-        $create_order_book_history = "
-            CREATE TABLE `order_book_history` (
-                `id` INT AUTO_INCREMENT PRIMARY KEY,
-                `original_order_id` INT NOT NULL,
-                `order_date` DATE NOT NULL,
-                `product_name` VARCHAR(255) NOT NULL,
-                `qty` DECIMAL(10, 2) NOT NULL,
-                `customer_id` INT NOT NULL,
-                `moved_to_history_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`),
-                FOREIGN KEY (`original_order_id`) REFERENCES `order_book`(`id`)
-            );
-        ";
-
-    
-        if (
-            $company_con->query($create_users_table_query) &&
-            $company_con->query($create_rm_master_table_query) &&
-            $company_con->query($create_rm_master_units_table_query) &&
-            $company_con->query($create_rm_purchase_table_query) &&
-            $company_con->query($create_finished_products_table_query) &&
-            $company_con->query($create_customers) &&
-            $company_con->query($create_order_book) &&
-            $company_con->query($create_sales_book)
-        ) {
-            // Insert user details into the `users` table
-            $insert_user_query = "
-                INSERT INTO `users` (username, email, password, date_time)
-                VALUES ('$username', '$email', '$hashed_password', '$create_datetime')
-            ";
-            if ($company_con->query($insert_user_query)) {
+            if ($stmt->execute()) {
                 echo "<div class='form'>
-                          <h3>Company database, tables, and user registration completed successfully.</h3>
+                          <h3>User registered successfully under existing company.</h3>
                           <p class='link'>Click here to <a href='login.php'>Login</a></p>
                       </div>";
             } else {
+                logError("Execution failed (user insertion): " . mysqli_error($con));
                 echo "<div class='form'>
-                          <h3>Error inserting user data.</h3>
+                          <h3>Error registering the user. Please try again.</h3>
+                          <p class='link'>Click here to <a href='user_registration_new.php'>register</a> again.</p>
+                      </div>";
+            }
+        }
+    } else {
+        // Company doesn't exist, create a new company
+        $stmt = $con->prepare("INSERT INTO companies (name) VALUES (?)");
+        if (!$stmt) {
+            logError("Prepare failed (company insertion): " . mysqli_error($con));
+        } else {
+            logError("Passed company check.");
+            $stmt->bind_param("s", $company_name);
+        }
+
+        if ($stmt->execute()) {
+            $company_id = $con->insert_id;
+
+            // Register the new user
+            $stmt = $con->prepare("
+                INSERT INTO `users` (company_id, username, email, password, role, date_time) 
+                VALUES (?, ?, ?, ?, 'admin', ?)
+            ");
+            if (!$stmt) {
+                logError("Prepare failed (user insertion after company creation): " . mysqli_error($con));
+            }
+            $stmt->bind_param("issss", $company_id, $username, $email, $hashed_password, $create_datetime);
+
+            if ($stmt->execute()) {
+                echo "<div class='form'>
+                          <h3>New company created and user registered successfully.</h3>
+                          <p class='link'>Click here to <a href='login.php'>Login</a></p>
+                      </div>";
+            } else {
+                logError("Execution failed (user insertion after company creation): " . mysqli_error($con));
+                echo "<div class='form'>
+                          <h3>Error registering the user. Please try again.</h3>
                           <p class='link'>Click here to <a href='user_registration_new.php'>register</a> again.</p>
                       </div>";
             }
         } else {
+            logError("Execution failed (company insertion): " . mysqli_error($con));
             echo "<div class='form'>
-                      <h3>Error creating tables in the company database.</h3>
-                      <p class='link'>Click here to <a href='user_registration_new.php'>register</a> again.</p>
-                  </div>";
-        }
-
-        $company_con->close();
-    } else {
-        // Check if the database already exists
-        if (mysqli_errno($con) == 1007) { // Error code 1007: Database already exists
-            echo "<div class='form'>
-                      <h3>A company database with this name already exists. Please choose a different name.</h3>
-                      <p class='link'>Click here to <a href='user_registration_new.php'>register</a> again.</p>
-                  </div>";
-        } else {
-            echo "<div class='form'>
-                      <h3>Error creating database for the company.</h3>
+                      <h3>Error creating the company. Please try again.</h3>
                       <p class='link'>Click here to <a href='user_registration_new.php'>register</a> again.</p>
                   </div>";
         }

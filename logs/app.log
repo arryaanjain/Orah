@@ -217,3 +217,364 @@
 [2024-12-28 11:51:53] Total required quantities for product 'myprod2': {"mymat1":110,"mymat2":50}
 [2024-12-28 11:51:53] Retrieved 3 rows from 'rm_purchase'
 [2024-12-28 11:51:53] Inventory status for product 'myprod2': [{"material":"mymat1","requiredQty":110,"availableQty":"30","difference":-80},{"material":"mymat2","requiredQty":50,"availableQty":"20","difference":-30}]
+[2025-01-07 10:28:09] Processing product: temp
+[2025-01-07 10:28:09] Total quantity for product 'temp': 30.00
+[2025-01-07 10:28:09] Retrieved 2 rows from table 'temp'
+[2025-01-07 10:28:09] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2025-01-07 10:28:09] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:28:09] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2025-01-07 10:28:09] Processing product: myprod
+[2025-01-07 10:28:09] Total quantity for product 'myprod': 20.00
+[2025-01-07 10:28:09] Retrieved 2 rows from table 'myprod'
+[2025-01-07 10:28:09] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2025-01-07 10:28:09] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:28:09] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2025-01-07 10:28:09] Processing product: newprod
+[2025-01-07 10:28:09] Total quantity for product 'newprod': 10.00
+[2025-01-07 10:28:09] Retrieved 2 rows from table 'newprod'
+[2025-01-07 10:28:09] Total required quantities for product 'newprod': {"m1":100,"m2":100}
+[2025-01-07 10:28:09] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:28:09] Inventory status for product 'newprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":100,"availableQty":"100","difference":0}]
+[2025-01-07 10:28:52] Processing product: kresco heart stick stand mrp 400
+[2025-01-07 10:28:52] Total quantity for product 'kresco heart stick stand mrp 400': 800.00
+[2025-01-07 10:28:52] Database Error with Product 'kresco heart stick stand mrp 400': SQLSTATE[42S02]: Base table or view not found: 1146 Table 'u120171692_first_db.kresco heart stick stand mrp 400' doesn't exist
+[2025-01-07 10:29:21] Processing product: kresco heart stick stand mrp 400
+[2025-01-07 10:29:21] Total quantity for product 'kresco heart stick stand mrp 400': 1000.00
+[2025-01-07 10:29:21] Database Error with Product 'kresco heart stick stand mrp 400': SQLSTATE[42S02]: Base table or view not found: 1146 Table 'u120171692_first_db.kresco heart stick stand mrp 400' doesn't exist
+[2025-01-07 10:29:31] Processing product: temp
+[2025-01-07 10:29:31] Total quantity for product 'temp': 30.00
+[2025-01-07 10:29:31] Retrieved 2 rows from table 'temp'
+[2025-01-07 10:29:31] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2025-01-07 10:29:31] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:29:31] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2025-01-07 10:29:31] Processing product: myprod
+[2025-01-07 10:29:31] Total quantity for product 'myprod': 20.00
+[2025-01-07 10:29:31] Retrieved 2 rows from table 'myprod'
+[2025-01-07 10:29:31] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2025-01-07 10:29:31] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:29:31] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2025-01-07 10:29:31] Processing product: newprod
+[2025-01-07 10:29:31] Total quantity for product 'newprod': 10.00
+[2025-01-07 10:29:31] Retrieved 2 rows from table 'newprod'
+[2025-01-07 10:29:31] Total required quantities for product 'newprod': {"m1":100,"m2":100}
+[2025-01-07 10:29:31] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:29:31] Inventory status for product 'newprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":100,"availableQty":"100","difference":0}]
+[2025-01-07 10:30:06] Processing product: temp
+[2025-01-07 10:30:06] Total quantity for product 'temp': 30.00
+[2025-01-07 10:30:06] Retrieved 2 rows from table 'temp'
+[2025-01-07 10:30:06] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2025-01-07 10:30:06] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:30:06] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2025-01-07 10:30:06] Processing product: myprod
+[2025-01-07 10:30:06] Total quantity for product 'myprod': 20.00
+[2025-01-07 10:30:06] Retrieved 2 rows from table 'myprod'
+[2025-01-07 10:30:06] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2025-01-07 10:30:06] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:30:06] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2025-01-07 10:30:06] Processing product: newprod
+[2025-01-07 10:30:06] Total quantity for product 'newprod': 20.00
+[2025-01-07 10:30:06] Retrieved 2 rows from table 'newprod'
+[2025-01-07 10:30:06] Total required quantities for product 'newprod': {"m1":200,"m2":200}
+[2025-01-07 10:30:06] Retrieved 2 rows from 'rm_purchase'
+[2025-01-07 10:30:06] Inventory status for product 'newprod': [{"material":"m1","requiredQty":200,"availableQty":"373","difference":173},{"material":"m2","requiredQty":200,"availableQty":"100","difference":-100}]
+[2025-01-10 11:06:12] Processing product: temp
+[2025-01-10 11:06:12] Total quantity for product 'temp': 30.00
+[2025-01-10 11:06:12] Retrieved 2 rows from table 'temp'
+[2025-01-10 11:06:12] Total required quantities for product 'temp': {"m1":300,"m2":30}
+[2025-01-10 11:06:12] Retrieved 2 rows from 'rm_purchase'
+[2025-01-10 11:06:12] Inventory status for product 'temp': [{"material":"m1","requiredQty":300,"availableQty":"373","difference":73},{"material":"m2","requiredQty":30,"availableQty":"100","difference":70}]
+[2025-01-10 11:06:12] Processing product: myprod
+[2025-01-10 11:06:12] Total quantity for product 'myprod': 20.00
+[2025-01-10 11:06:12] Retrieved 2 rows from table 'myprod'
+[2025-01-10 11:06:12] Total required quantities for product 'myprod': {"m1":100,"m2":40}
+[2025-01-10 11:06:12] Retrieved 2 rows from 'rm_purchase'
+[2025-01-10 11:06:12] Inventory status for product 'myprod': [{"material":"m1","requiredQty":100,"availableQty":"373","difference":273},{"material":"m2","requiredQty":40,"availableQty":"100","difference":60}]
+[2025-01-10 11:06:12] Processing product: newprod
+[2025-01-10 11:06:12] Total quantity for product 'newprod': 20.00
+[2025-01-10 11:06:12] Retrieved 2 rows from table 'newprod'
+[2025-01-10 11:06:12] Total required quantities for product 'newprod': {"m1":200,"m2":200}
+[2025-01-10 11:06:12] Retrieved 2 rows from 'rm_purchase'
+[2025-01-10 11:06:12] Inventory status for product 'newprod': [{"material":"m1","requiredQty":200,"availableQty":"373","difference":173},{"material":"m2","requiredQty":200,"availableQty":"100","difference":-100}]
+[2025-01-10 11:15:53] Processing product: kresco heart stick stand mrp 400
+[2025-01-10 11:15:53] Total quantity for product 'kresco heart stick stand mrp 400': 1000.00
+[2025-01-10 11:15:53] Database Error with Product 'kresco heart stick stand mrp 400': SQLSTATE[42S02]: Base table or view not found: 1146 Table 'u120171692_first_db.kresco heart stick stand mrp 400' doesn't exist
+[2025-01-10 11:16:26] Processing product: kresco heart stick stand mrp 400
+[2025-01-10 11:16:26] Total quantity for product 'kresco heart stick stand mrp 400': 1000.00
+[2025-01-10 11:16:26] Database Error with Product 'kresco heart stick stand mrp 400': SQLSTATE[42S02]: Base table or view not found: 1146 Table 'u120171692_first_db.kresco heart stick stand mrp 400' doesn't exist
+[2025-01-10 11:18:12] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:18:12] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 0
+[2025-01-10 11:18:12] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:18:12] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":0,"pouch":0,"8 inch stick":0,"tag":0,"inner box":0,"inner box label":0,"stand":0,"stand label":0,"pouch 9x11":0}
+[2025-01-10 11:18:12] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:18:12] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":0,"availableQty":"1200","difference":1200},{"material":"pouch","requiredQty":0,"availableQty":"100","difference":100},{"material":"8 inch stick","requiredQty":0,"availableQty":"30","difference":30},{"material":"tag","requiredQty":0,"availableQty":"30","difference":30},{"material":"inner box","requiredQty":0,"availableQty":"2","difference":2},{"material":"inner box label","requiredQty":0,"availableQty":"2","difference":2},{"material":"stand","requiredQty":0,"availableQty":"1","difference":1},{"material":"stand label","requiredQty":0,"availableQty":"2","difference":2},{"material":"pouch 9x11","requiredQty":0,"availableQty":"10","difference":10}]
+[2025-01-10 11:34:39] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:34:39] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 0
+[2025-01-10 11:34:39] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:34:39] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":0,"pouch":0,"8 inch stick":0,"tag":0,"inner box":0,"inner box label":0,"stand":0,"stand label":0,"pouch 9x11":0}
+[2025-01-10 11:34:39] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:34:39] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":0,"availableQty":"1200","difference":1200},{"material":"pouch","requiredQty":0,"availableQty":"100","difference":100},{"material":"8 inch stick","requiredQty":0,"availableQty":"30","difference":30},{"material":"tag","requiredQty":0,"availableQty":"30","difference":30},{"material":"inner box","requiredQty":0,"availableQty":"2","difference":2},{"material":"inner box label","requiredQty":0,"availableQty":"2","difference":2},{"material":"stand","requiredQty":0,"availableQty":"1","difference":1},{"material":"stand label","requiredQty":0,"availableQty":"2","difference":2},{"material":"pouch 9x11","requiredQty":0,"availableQty":"10","difference":10}]
+[2025-01-10 11:35:01] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:35:01] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:35:01] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:35:01] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:35:01] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:35:01] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-10 11:35:01] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:35:01] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:35:01] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:35:01] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:35:01] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:35:01] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-10 11:38:26] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:38:26] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:38:26] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:38:26] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:38:26] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:38:26] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-10 11:38:26] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:38:26] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:38:26] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:38:26] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:38:26] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:38:26] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-10 11:38:39] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:38:39] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:38:39] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:38:39] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:38:39] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:38:39] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-10 11:39:21] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:39:21] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:39:21] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:39:21] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:39:21] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:39:21] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-10 11:39:23] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-10 11:39:23] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-10 11:39:23] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-10 11:39:23] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-10 11:39:23] Retrieved 9 rows from 'rm_purchase'
+[2025-01-10 11:39:23] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-21 05:40:50] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-21 05:40:50] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-21 05:40:50] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-21 05:40:50] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-21 05:40:50] Retrieved 9 rows from 'rm_purchase'
+[2025-01-21 05:40:50] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-01-21 05:41:04] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-01-21 05:41:04] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-01-21 05:41:04] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-01-21 05:41:04] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-01-21 05:41:04] Retrieved 9 rows from 'rm_purchase'
+[2025-01-21 05:41:04] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-02-12 07:29:38] Database connection successful.
+[2025-02-12 07:29:38] Inserted material: gtw
+[2025-02-12 07:29:38] Inserted unit: weyj
+[2025-02-12 07:33:15] Database connection successful.
+[2025-02-12 07:33:15] Inserted material: materi1
+[2025-02-12 07:33:15] Inserted unit: unittt1
+[2025-02-12 07:33:15] Inserted customer: man1
+[2025-02-12 10:55:07] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-02-12 10:55:07] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-02-12 10:55:07] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-02-12 10:55:07] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-02-12 10:55:07] Retrieved 9 rows from 'rm_purchase'
+[2025-02-12 10:55:07] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-02-12 10:55:15] Processing product: kresco_heart_stick_stand_mrp_400
+[2025-02-12 10:55:15] Total quantity for product 'kresco_heart_stick_stand_mrp_400': 100.00
+[2025-02-12 10:55:15] Retrieved 9 rows from table 'kresco_heart_stick_stand_mrp_400'
+[2025-02-12 10:55:15] Total required quantities for product 'kresco_heart_stick_stand_mrp_400': {"hard jelly ":132,"pouch":4000,"8 inch stick":4000,"tag":4000,"inner box":100,"inner box label":100,"stand":100,"stand label":100,"pouch 9x11":200}
+[2025-02-12 10:55:15] Retrieved 9 rows from 'rm_purchase'
+[2025-02-12 10:55:15] Inventory status for product 'kresco_heart_stick_stand_mrp_400': [{"material":"hard jelly ","requiredQty":132,"availableQty":"1200","difference":1068},{"material":"pouch","requiredQty":4000,"availableQty":"100","difference":-3900},{"material":"8 inch stick","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"tag","requiredQty":4000,"availableQty":"30","difference":-3970},{"material":"inner box","requiredQty":100,"availableQty":"2","difference":-98},{"material":"inner box label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"stand","requiredQty":100,"availableQty":"1","difference":-99},{"material":"stand label","requiredQty":100,"availableQty":"2","difference":-98},{"material":"pouch 9x11","requiredQty":200,"availableQty":"10","difference":-190}]
+[2025-02-12 11:31:19] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:31:19] Results: ["materi2"]
+[2025-02-12 11:34:43] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:34:43] Results: ["materi2"]
+[2025-02-12 11:34:48] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-12 11:34:48] Results: ["unittt1"]
+[2025-02-12 11:35:31] Request received - company_id: 6, user_id: 6, term: mat, type: material
+[2025-02-12 11:35:31] Results: ["materi2"]
+[2025-02-12 11:35:35] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:35:35] Results: ["unittt1"]
+[2025-02-12 11:36:44] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:36:44] Results: ["materi2"]
+[2025-02-12 11:36:54] Request received - company_id: 6, user_id: 6, term: magt, type: material
+[2025-02-12 11:36:54] Results: []
+[2025-02-12 11:36:55] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:36:55] Results: ["materi2"]
+[2025-02-12 11:36:55] Request received - company_id: 6, user_id: 6, term: mat, type: material
+[2025-02-12 11:36:55] Results: ["materi2"]
+[2025-02-12 11:36:59] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:36:59] Results: ["unittt1"]
+[2025-02-12 11:37:33] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:37:33] Results: ["materi2"]
+[2025-02-12 11:37:35] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:37:35] Results: ["unittt1"]
+[2025-02-12 11:40:04] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:40:04] Results: ["materi2"]
+[2025-02-12 11:40:11] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:40:11] Results: ["unittt1"]
+[2025-02-12 11:40:54] Request received - company_id: 6, user_id: 6, term: mat, type: material
+[2025-02-12 11:40:54] Results: ["materi2"]
+[2025-02-12 11:40:57] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:40:57] Results: ["unittt1"]
+[2025-02-12 11:41:25] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:41:25] Results: ["materi2"]
+[2025-02-12 11:41:28] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:41:28] Results: ["unittt1"]
+[2025-02-12 11:45:36] Request received - company_id: 6, user_id: 6, term: un, type: material
+[2025-02-12 11:45:36] Results: []
+[2025-02-12 11:45:38] Request received - company_id: 6, user_id: 6, term: ms, type: material
+[2025-02-12 11:45:38] Results: []
+[2025-02-12 11:45:39] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:45:39] Results: ["materi2"]
+[2025-02-12 11:45:43] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:45:43] Results: ["unittt1"]
+[2025-02-12 11:46:26] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:46:26] Results: ["materi2"]
+[2025-02-12 11:46:29] Request received - company_id: 6, user_id: 6, term: uin, type: unit
+[2025-02-12 11:46:29] Results: []
+[2025-02-12 11:46:31] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-12 11:46:31] Results: ["unittt1"]
+[2025-02-12 11:48:17] Request received - company_id: 6, user_id: 6
+[2025-02-12 11:48:17] Missing required fields.
+[2025-02-12 11:48:26] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-12 11:48:26] Results: ["materi2"]
+[2025-02-12 11:48:30] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-12 11:48:30] Results: ["unittt1"]
+[2025-02-12 11:48:32] Request received - company_id: 6, user_id: 6
+[2025-02-26 12:58:38] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 12:58:38] Results: ["materi3"]
+[2025-02-26 12:58:46] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 12:58:46] Results: ["unittt1"]
+[2025-02-26 12:58:53] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:09:13] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:13:50] Database connection successful.
+[2025-02-26 13:13:50] Inserted material: materi4
+[2025-02-26 13:17:02] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:17:02] Results: ["materi3","materi4"]
+[2025-02-26 13:17:08] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-26 13:17:08] Results: ["unittt1"]
+[2025-02-26 13:17:10] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:18:24] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:18:32] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:19:59] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:19:59] Inserted row: purchase_date=2025-02-26, material_id=6, qty=30, unit_id=5, company_id=6, user_id=6
+[2025-02-26 13:19:59] All data inserted successfully.
+[2025-02-26 13:23:49] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:23:49] All data inserted successfully.
+[2025-02-26 13:25:36] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:25:36] All data inserted successfully.
+[2025-02-26 13:28:36] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:28:36] Results: ["materi3","materi4"]
+[2025-02-26 13:28:39] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:28:39] Results: ["unittt1"]
+[2025-02-26 13:28:41] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:28:41] All data inserted successfully.
+[2025-02-26 13:35:40] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:35:40] Results: ["materi3","materi4"]
+[2025-02-26 13:35:44] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:35:44] Results: ["unittt1"]
+[2025-02-26 13:35:46] Request received - company_id: 6, user_id: 6
+[2025-02-26 13:35:46] All data inserted successfully.
+[2025-02-26 13:40:11] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:40:11] Results: ["materi3","materi4"]
+[2025-02-26 13:40:14] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:40:14] Results: ["unittt1"]
+[2025-02-26 13:40:36] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:40:36] Results: ["materi3","materi4"]
+[2025-02-26 13:40:40] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:40:40] Results: ["unittt1"]
+[2025-02-26 13:41:26] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:41:26] Results: ["materi3","materi4"]
+[2025-02-26 13:41:30] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:41:30] Results: ["unittt1"]
+[2025-02-26 13:43:23] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:43:23] Results: ["materi3","materi4"]
+[2025-02-26 13:43:28] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:43:28] Results: ["unittt1"]
+[2025-02-26 13:48:31] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:48:31] Results: ["materi3","materi4"]
+[2025-02-26 13:48:36] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:48:36] Results: ["unittt1"]
+[2025-02-26 13:48:46] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:48:46] Results: ["materi3","materi4"]
+[2025-02-26 13:48:50] Request received - company_id: 6, user_id: 6, term: uni, type: unit
+[2025-02-26 13:48:50] Results: ["unittt1"]
+[2025-02-26 13:51:54] Unauthorized access attempt.
+[2025-02-26 13:52:46] Unauthorized access attempt.
+[2025-02-26 13:53:57] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:53:57] Results: ["materi3","materi4"]
+[2025-02-26 13:54:01] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:54:01] Results: ["unittt1"]
+[2025-02-26 13:58:45] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:58:45] Results: ["materi3","materi4"]
+[2025-02-26 13:58:48] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 13:58:48] Results: ["unittt1"]
+[2025-02-26 13:59:59] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 13:59:59] Results: ["materi3","materi4"]
+[2025-02-26 14:00:03] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 14:00:03] Results: ["unittt1"]
+[2025-02-26 14:35:13] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 14:35:13] Results: ["materi3","materi4"]
+[2025-02-26 14:35:18] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 14:35:18] Results: ["unittt1"]
+[2025-02-26 14:39:24] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 14:39:24] Results: ["materi3","materi4"]
+[2025-02-26 14:39:28] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 14:39:28] Results: ["unittt1"]
+[2025-02-26 14:52:49] Request received - company_id: 6, user_id: 6, term: test, type: material
+[2025-02-26 14:52:49] Results: []
+[2025-02-26 14:52:58] Request received - company_id: 6, user_id: 6, term: m, type: material
+[2025-02-26 14:52:58] Results: ["materi3","materi4"]
+[2025-02-26 15:02:37] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 15:02:37] Results: ["materi3","materi4"]
+[2025-02-26 15:02:43] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 15:02:43] Results: ["unittt1"]
+[2025-02-26 15:05:31] Request received - company_id: 6, user_id: 6, term: ma, type: material
+[2025-02-26 15:05:31] Results: ["materi3","materi4"]
+[2025-02-26 15:05:34] Request received - company_id: 6, user_id: 6, term: un, type: unit
+[2025-02-26 15:05:34] Results: ["unittt1","unitt2"]
+[2025-02-28 10:25:45] API request received.
+[2025-02-28 10:25:45] Query parameters: term=te, type=product
+[2025-02-28 10:25:45] Query executed successfully. Results found: 1
+[2025-02-28 10:25:51] API request received.
+[2025-02-28 10:25:51] Query parameters: term=te, type=product
+[2025-02-28 10:25:51] Query executed successfully. Results found: 1
+[2025-02-28 10:25:55] API request received.
+[2025-02-28 10:25:55] Query parameters: term=cu, type=customer
+[2025-02-28 10:25:55] Query executed successfully. Results found: 0
+[2025-02-28 10:26:08] API request received.
+[2025-02-28 10:26:08] Query parameters: term=man, type=customer
+[2025-02-28 10:26:08] Query executed successfully. Results found: 1
+[2025-02-28 10:28:14] API request received.
+[2025-02-28 10:28:14] Query parameters: term=man, type=customer
+[2025-02-28 10:28:14] Query executed successfully. Results found: 1
+[2025-02-28 10:29:16] Processing product: test
+[2025-02-28 10:29:16] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:32:37] Processing product: test
+[2025-02-28 10:32:37] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:32:43] API request received.
+[2025-02-28 10:32:43] Query parameters: term=ne, type=product
+[2025-02-28 10:32:43] Query executed successfully. Results found: 1
+[2025-02-28 10:32:46] API request received.
+[2025-02-28 10:32:46] Query parameters: term=ma, type=customer
+[2025-02-28 10:32:46] Query executed successfully. Results found: 1
+[2025-02-28 10:32:52] Processing product: test
+[2025-02-28 10:32:52] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:32:52] Processing product: new_prod
+[2025-02-28 10:32:52] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:32:55] Processing product: test
+[2025-02-28 10:32:55] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:32:55] Processing product: new_prod
+[2025-02-28 10:32:55] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:33:26] API request received.
+[2025-02-28 10:33:26] Query parameters: term=new, type=product
+[2025-02-28 10:33:26] Query executed successfully. Results found: 1
+[2025-02-28 10:33:35] API request received.
+[2025-02-28 10:33:35] Query parameters: term=man, type=customer
+[2025-02-28 10:33:35] Query executed successfully. Results found: 1
+[2025-02-28 10:33:56] Processing product: test
+[2025-02-28 10:33:56] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-02-28 10:33:56] Processing product: new_prod
+[2025-02-28 10:33:56] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
