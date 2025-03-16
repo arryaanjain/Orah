@@ -67,7 +67,7 @@ function calculateTotalQuantity($products) {
             } else {
                 // Step 3: Modify query to sum `qty` where product_id is in the $product_ids array
                 $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
-                $query = "SELECT SUM(qty) FROM order_book WHERE id IN ($placeholders) AND company_id = ? AND user_id = ?";
+                $query = "SELECT SUM(qty) FROM order_book WHERE product_id IN ($placeholders) AND company_id = ? AND user_id = ?";
                 $stmt = $con->prepare($query);
                 if (!$stmt) {
                     logMessage("Query preparation failed (summing qty): " . $con->error);
