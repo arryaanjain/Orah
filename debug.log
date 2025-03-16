@@ -48,3 +48,35 @@
 [2024-12-11 05:07:20] Fetched and displayed order book entries
 [2024-12-11 05:07:20] Fetched distinct product names: temp, temp2
 [2024-12-11 05:07:20] Calculated total quantities for products
+[2025-03-11 10:32:43] Processing product: test
+[2025-03-11 10:32:43] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:32:43] Processing product: new_prod
+[2025-03-11 10:32:43] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:32:47] Processing product: test
+[2025-03-11 10:32:47] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:32:47] Processing product: new_prod
+[2025-03-11 10:32:47] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:32:51] Processing product: test
+[2025-03-11 10:32:51] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:32:51] Processing product: new_prod
+[2025-03-11 10:32:51] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:35:24] Processing product: test
+[2025-03-11 10:35:24] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:35:24] Processing product: new_prod
+[2025-03-11 10:35:24] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:36:05] Processing product: test
+[2025-03-11 10:36:05] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:36:05] Processing product: new_prod
+[2025-03-11 10:36:05] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:36:23] Processing product: test
+[2025-03-11 10:36:23] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:36:23] Processing product: new_prod
+[2025-03-11 10:36:23] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:36:43] Processing product: test
+[2025-03-11 10:36:43] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:36:43] Processing product: new_prod
+[2025-03-11 10:36:43] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:42:26] Processing product: test
+[2025-03-11 10:42:26] Unexpected Error with Product 'test': Unknown column 'product_name' in 'where clause'
+[2025-03-11 10:42:26] Processing product: new_prod
+[2025-03-11 10:42:26] Unexpected Error with Product 'new_prod': Unknown column 'product_name' in 'where clause'

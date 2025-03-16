@@ -51,3 +51,51 @@ $(document).ready(function () {
         $(this).closest('tr').remove();
     });
 });
+
+function displayInventoryStatus(responseData) {
+    let calculationResults = document.getElementById("calculationResults");
+    calculationResults.innerHTML = ""; // Clear previous results
+
+    // Loop through each product in the JSON response
+    for (let product in responseData.products) {
+        let inventoryStatus = responseData.products[product];
+
+        // Create HTML structure for each product
+        let tableHtml = `
+            <hr>
+            <h3>Inventory Status for Product: <strong>${product}</strong></h3>
+            <table border="1" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Material</th>
+                        <th>Required Quantity</th>
+                        <th>Available Quantity</th>
+                        <th>Difference</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        // Populate table rows
+        inventoryStatus.forEach(status => {
+            let statusHtml = (status.difference < 0)
+                ? `<td style="color: red;">You need ${Math.abs(status.difference)} more</td>`
+                : `<td style="color: green;">Inventory Competent</td>`;
+
+            tableHtml += `
+                <tr>
+                    <td>${status.material}</td>
+                    <td>${status.requiredQty}</td>
+                    <td>${status.availableQty}</td>
+                    <td>${status.difference}</td>
+                    ${statusHtml}
+                </tr>`;
+        });
+
+        tableHtml += `</tbody></table><br/>`;
+
+        // Append the table to the div
+        calculationResults.innerHTML += tableHtml;
+    }
+}
+

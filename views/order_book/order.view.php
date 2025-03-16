@@ -2,7 +2,6 @@
 require('views/partials/head.php');
 require('views/partials/navbar.php');
 require('views/partials/banner.php');
-require('views/order_book/calculate.php');
 
 require 'db.php';
 
@@ -21,15 +20,10 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-
 $company_id = $_SESSION['company_id'];
 $user_id = $_SESSION['user_id'];
-
-header('Content-Type: application/json');
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 ?>
+
 <script src="views/order_book/order_script.js"></script>
 
 <div class="container mt-4">
@@ -110,37 +104,67 @@ error_reporting(E_ALL);
                 }
                 mysqli_stmt_close($stmt);
                 ?>
-
                 </tbody>
             </table>
         </div>
 
         <?php    
-            // Fetch unique products belonging to this company & user
-            $productQuery = "SELECT DISTINCT fp.product_name 
-                            FROM order_book ob
-                            JOIN finished_products fp ON ob.product_id = fp.id
-                            WHERE ob.company_id = ? AND ob.user_id = ?";
-            $stmtProduct = mysqli_prepare($con, $productQuery);
-            mysqli_stmt_bind_param($stmtProduct, "ii", $company_id, $user_id);
-            mysqli_stmt_execute($stmtProduct);
-            $resultProduct = mysqli_stmt_get_result($stmtProduct);
+        // Fetch unique products belonging to this company & user
+        $productQuery = "SELECT DISTINCT fp.product_name 
+                        FROM order_book ob
+                        JOIN finished_products fp ON ob.product_id = fp.id
+                        WHERE ob.company_id = ? AND ob.user_id = ?";
+        $stmtProduct = mysqli_prepare($con, $productQuery);
+        mysqli_stmt_bind_param($stmtProduct, "ii", $company_id, $user_id);
+        mysqli_stmt_execute($stmtProduct);
+        $resultProduct = mysqli_stmt_get_result($stmtProduct);
 
-            // Fetch product names into an array
-            $products = [];
-            while ($row = mysqli_fetch_assoc($resultProduct)) {
-                $products[] = $row['product_name'];
-            }
-            mysqli_stmt_close($stmtProduct);
+        // Fetch product names into an array
+        $products = [];
+        while ($row = mysqli_fetch_assoc($resultProduct)) {
+            $products[] = $row['product_name'];
+        }
+        mysqli_stmt_close($stmtProduct);
+        //Debugging products
+        // foreach ($products as $product) {
+        //     echo "$product ";
+        // }
+        ?>
 
-            // Call the function if products exist
-            if (!empty($products)) {
-                calculateTotalQuantity($con, $products);
-            }       
-            ?>
+
+        <!-- Show Calculation Button -->
+        <div class="col-md-12 mt-4">
+            <button type="button" id="showCalculationBtn" class="btn btn-success">Show Calculation</button>
+        </div>
+
+        <!-- Display Calculation Results -->
+        <div class="col-md-12 mt-3" id="calculationResults"></div>
 
     </div>
 </div>
+
+<script>
+document.getElementById("showCalculationBtn").addEventListener("click", function() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "views/order_book/calculate.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            try {
+                let jsonResponse = JSON.parse(xhr.responseText); // Parse JSON response
+                displayInventoryStatus(jsonResponse); // Call function to display data
+            } catch (error) {
+                console.error("Error parsing JSON response:", error);
+                document.getElementById("calculationResults").innerHTML = "<p style='color: red;'>Invalid JSON response from server</p>";
+            }
+        }
+    };
+
+    // Send the PHP-encoded JSON products data
+    xhr.send(JSON.stringify({ products: <?php echo json_encode($products); ?> }));
+});
+</script>
 
 <?php
 mysqli_close($con);
