@@ -914,3 +914,346 @@ Test Log
 [2025-03-16 22:46:47] Retrieved 2 rows from 'rm_purchase'
 [2025-03-16 22:46:47] totalRequiredQty is: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
 [2025-03-16 22:46:47] Inventory status for product 'new_prod': [{"material":"materi3","requiredQty":212,"availableQty":"94","difference":-118},{"material":"materi4","requiredQty":265,"availableQty":"270","difference":5}]
+[2025-03-17 07:35:54] Processing product: test
+[2025-03-17 07:35:54] Product IDs for 'test': [1]
+[2025-03-17 07:35:54] Total quantity for 'test': 23.00
+[2025-03-17 07:35:54] Retrieved 1 rows from table 'test'
+[2025-03-17 07:35:54] Material IDs: {"materi3":[6]}
+[2025-03-17 07:35:54] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 07:35:54] Retrieved 1 rows from 'rm_purchase'
+[2025-03-17 07:35:54] totalRequiredQty is: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 07:35:54] Inventory status for product 'test': [{"material":"materi3","requiredQty":92,"availableQty":"94","difference":2}]
+[2025-03-17 07:35:54] Processing product: new_prod
+[2025-03-17 07:35:54] Product IDs for 'new_prod': [2]
+[2025-03-17 07:35:54] Total quantity for 'new_prod': 53.00
+[2025-03-17 07:35:54] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 07:35:54] Material IDs: {"materi3":[6],"materi4":[7]}
+[2025-03-17 07:35:54] Final Inventory Data: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 07:35:54] Retrieved 2 rows from 'rm_purchase'
+[2025-03-17 07:35:54] totalRequiredQty is: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 07:35:54] Inventory status for product 'new_prod': [{"material":"materi3","requiredQty":212,"availableQty":"94","difference":-118},{"material":"materi4","requiredQty":265,"availableQty":"270","difference":5}]
+[2025-03-17 07:49:30] ===== Sales Processing Started =====
+[2025-03-17 07:49:30] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 07:49:30] Processing sale: Date: Array, Product: Array, Qty: 1, Customer: Array
+[2025-03-17 07:49:30] Error: Product not found in finished_products.
+[2025-03-17 07:52:37] ===== Sales Processing Started =====
+[2025-03-17 07:52:37] Received POST data: {"order_ticket":"{\"id\":2,\"billing_name\":\"man1\",\"product_name\":\"new_prod\",\"qty\":\"20.00\"}","sales_date":["2025-03-17","2025-03-17"],"product_name":["test","new_prod"],"qty":["20.00","20.00"],"billing_name":["man1","man1"]}
+[2025-03-17 07:52:37] Processing sale: Date: Array, Product: Array, Qty: 1, Customer: Array
+[2025-03-17 07:52:37] Error: Product not found in finished_products.
+[2025-03-17 07:56:46] ===== Sales Processing Started =====
+[2025-03-17 07:56:46] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 07:56:46] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 07:56:46] Fetched Product ID: 1
+[2025-03-17 08:32:02] ===== Sales Processing Started =====
+[2025-03-17 08:32:02] Error: Invalid request method.
+[2025-03-17 08:33:15] ===== Sales Processing Started =====
+[2025-03-17 08:33:15] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 08:33:15] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 08:33:15] Fetched Product ID: 1
+[2025-03-17 08:34:22] ===== Sales Processing Started =====
+[2025-03-17 08:34:22] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 08:34:22] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 08:34:22] Fetched Product ID: 1
+[2025-03-17 08:34:22] Fetched Customer ID: 2
+[2025-03-17 08:34:22] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 08:34:22] Calling Inventory API: http://localhost/PIMS/views/order_book/calculate.php with data: {"products":["test"]}
+[2025-03-17 08:34:22] Processing product: test
+[2025-03-17 08:34:22] Product IDs for 'test': [1]
+[2025-03-17 08:34:22] Total quantity for 'test': 23.00
+[2025-03-17 08:34:22] Retrieved 1 rows from table 'test'
+[2025-03-17 08:34:22] Material IDs: {"materi3":[6]}
+[2025-03-17 08:34:22] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 08:34:22] Retrieved 1 rows from 'rm_purchase'
+[2025-03-17 08:34:22] totalRequiredQty is: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 08:34:22] Inventory status for product 'test': [{"material":"materi3","requiredQty":92,"availableQty":"94","difference":2}]
+[2025-03-17 08:34:22] Inventory API Response: {"products":{"test":[{"material":"materi3","requiredQty":92,"availableQty":"94","difference":2}]}}
+[2025-03-17 08:34:22] Total Required Qty for inventory: 92
+[2025-03-17 08:50:44] Invalid request: Either method is not POST or order_id is missing.
+[2025-03-17 08:53:25] API requested with order_id: 1
+[2025-03-17 08:53:25] Processing order ID: 1
+[2025-03-17 08:53:25] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 08:53:25] Product name: test
+[2025-03-17 08:53:25] Retrieved 1 rows from table 'test'
+[2025-03-17 08:53:25] Required material quantities: {"materi3":80}
+[2025-03-17 08:53:25] Material IDs: {"materi3":6}
+[2025-03-17 08:53:25] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 08:53:25] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 08:53:41] API requested with order_id: 2
+[2025-03-17 08:53:41] Processing order ID: 2
+[2025-03-17 08:53:41] Order contains product_id: 2, quantity: 20.00
+[2025-03-17 08:53:41] Product name: new_prod
+[2025-03-17 08:53:41] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 08:53:41] Required material quantities: {"materi3":80,"materi4":100}
+[2025-03-17 08:53:41] Material IDs: {"materi3":6,"materi4":7}
+[2025-03-17 08:53:41] Final Inventory Data: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 08:53:41] Inventory status for order '2': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14},{"material":"materi4","requiredQty":100,"availableQty":"270","difference":170}]
+[2025-03-17 08:54:21] API requested with order_id: 3
+[2025-03-17 08:54:21] Processing order ID: 3
+[2025-03-17 08:54:21] Order contains product_id: 2, quantity: 33.00
+[2025-03-17 08:54:21] Product name: new_prod
+[2025-03-17 08:54:21] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 08:54:21] Required material quantities: {"materi3":132,"materi4":165}
+[2025-03-17 08:54:21] Material IDs: {"materi3":6,"materi4":7}
+[2025-03-17 08:54:21] Final Inventory Data: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 08:54:21] Inventory status for order '3': [{"material":"materi3","requiredQty":132,"availableQty":"94","difference":-38},{"material":"materi4","requiredQty":165,"availableQty":"270","difference":105}]
+[2025-03-17 08:55:13] API requested with order_id: 3
+[2025-03-17 08:55:13] Processing order ID: 3
+[2025-03-17 08:55:13] Order contains product_id: 2, quantity: 33.00
+[2025-03-17 08:55:13] Product name: new_prod
+[2025-03-17 08:55:13] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 08:55:13] Required material quantities: {"materi3":132,"materi4":165}
+[2025-03-17 08:55:13] Material IDs: {"materi3":6,"materi4":7}
+[2025-03-17 08:55:13] Final Inventory Data: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 08:55:13] Inventory status for order '3': [{"material":"materi3","requiredQty":132,"availableQty":"94","difference":-38},{"material":"materi4","requiredQty":165,"availableQty":"270","difference":105}]
+[2025-03-17 08:55:56] Processing product: test
+[2025-03-17 08:55:56] Product IDs for 'test': [1]
+[2025-03-17 08:55:56] Total quantity for 'test': 23.00
+[2025-03-17 08:55:56] Retrieved 1 rows from table 'test'
+[2025-03-17 08:55:56] Material IDs: {"materi3":[6]}
+[2025-03-17 08:55:56] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 08:55:56] Retrieved 1 rows from 'rm_purchase'
+[2025-03-17 08:55:56] totalRequiredQty is: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 08:55:56] Inventory status for product 'test': [{"material":"materi3","requiredQty":92,"availableQty":"94","difference":2}]
+[2025-03-17 08:55:56] Processing product: new_prod
+[2025-03-17 08:55:56] Product IDs for 'new_prod': [2]
+[2025-03-17 08:55:56] Total quantity for 'new_prod': 53.00
+[2025-03-17 08:55:56] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 08:55:56] Material IDs: {"materi3":[6],"materi4":[7]}
+[2025-03-17 08:55:56] Final Inventory Data: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 08:55:56] Retrieved 2 rows from 'rm_purchase'
+[2025-03-17 08:55:56] totalRequiredQty is: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 08:55:56] Inventory status for product 'new_prod': [{"material":"materi3","requiredQty":212,"availableQty":"94","difference":-118},{"material":"materi4","requiredQty":265,"availableQty":"270","difference":5}]
+[2025-03-17 08:57:39] API requested with order_id: 4
+[2025-03-17 08:57:39] Processing order ID: 4
+[2025-03-17 08:57:39] No order found for order_id '4'.
+[2025-03-17 08:58:09] API requested with order_id: 4
+[2025-03-17 08:58:09] Processing order ID: 4
+[2025-03-17 08:58:09] Order contains product_id: 1, quantity: 3.00
+[2025-03-17 08:58:09] Product name: test
+[2025-03-17 08:58:09] Retrieved 1 rows from table 'test'
+[2025-03-17 08:58:09] Required material quantities: {"materi3":12}
+[2025-03-17 08:58:09] Material IDs: {"materi3":6}
+[2025-03-17 08:58:09] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 08:58:09] Inventory status for order '4': [{"material":"materi3","requiredQty":12,"availableQty":"94","difference":82}]
+[2025-03-17 09:05:02] ===== Sales Processing Started =====
+[2025-03-17 09:05:02] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 09:05:02] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 09:05:02] Fetched Product ID: 1
+[2025-03-17 09:05:02] Fetched Customer ID: 2
+[2025-03-17 09:05:02] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 09:05:02] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 09:05:02] API requested with order_id: 1
+[2025-03-17 09:05:02] Processing order ID: 1
+[2025-03-17 09:05:02] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 09:05:02] Product name: test
+[2025-03-17 09:05:02] Retrieved 1 rows from table 'test'
+[2025-03-17 09:05:02] Required material quantities: {"materi3":80}
+[2025-03-17 09:05:02] Material IDs: {"materi3":6}
+[2025-03-17 09:05:02] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 09:05:02] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 09:05:02] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]}
+[2025-03-17 09:05:02] Error: Inventory check failed for order_id: 1.
+[2025-03-17 09:11:05] ===== Sales Processing Started =====
+[2025-03-17 09:11:05] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 09:11:05] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 09:11:05] Fetched Product ID: 1
+[2025-03-17 09:11:05] Fetched Customer ID: 2
+[2025-03-17 09:11:05] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 09:11:05] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 09:11:05] API requested with order_id: 1
+[2025-03-17 09:11:05] Processing order ID: 1
+[2025-03-17 09:11:05] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 09:11:05] Product name: test
+[2025-03-17 09:11:05] Retrieved 1 rows from table 'test'
+[2025-03-17 09:11:05] Required material quantities: {"materi3":80}
+[2025-03-17 09:11:05] Material IDs: {"materi3":6}
+[2025-03-17 09:11:05] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 09:11:05] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 09:11:05] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]}
+[2025-03-17 09:11:05] Total Required Qty for inventory: 80
+[2025-03-17 09:15:46] ===== Sales Processing Started =====
+[2025-03-17 09:15:46] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 09:15:46] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 09:15:46] Fetched Product ID: 1
+[2025-03-17 09:15:46] Fetched Customer ID: 2
+[2025-03-17 09:15:46] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 09:15:46] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 09:15:46] API requested with order_id: 1
+[2025-03-17 09:15:46] Processing order ID: 1
+[2025-03-17 09:15:46] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 09:15:46] Product name: test
+[2025-03-17 09:15:46] Retrieved 1 rows from table 'test'
+[2025-03-17 09:15:46] Required material quantities: {"materi3":80}
+[2025-03-17 09:15:46] Material IDs: {"materi3":6}
+[2025-03-17 09:15:46] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 09:15:46] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 09:15:46] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]}
+[2025-03-17 09:15:46] Total Required Qty for inventory: 80
+[2025-03-17 09:18:08] ===== Sales Processing Started =====
+[2025-03-17 09:18:08] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 09:18:08] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 09:18:08] Fetched Product ID: 1
+[2025-03-17 09:18:08] Fetched Customer ID: 2
+[2025-03-17 09:18:08] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 09:18:08] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 09:18:08] API requested with order_id: 1
+[2025-03-17 09:18:08] Processing order ID: 1
+[2025-03-17 09:18:08] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 09:18:08] Product name: test
+[2025-03-17 09:18:08] Retrieved 1 rows from table 'test'
+[2025-03-17 09:18:08] Required material quantities: {"materi3":80}
+[2025-03-17 09:18:08] Material IDs: {"materi3":6}
+[2025-03-17 09:18:08] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 09:18:08] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 09:18:08] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]}
+[2025-03-17 09:18:08] Total Required Qty for inventory: 80
+[2025-03-17 09:21:20] ===== Sales Processing Started =====
+[2025-03-17 09:21:20] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 09:21:20] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 09:21:20] Fetched Product ID: 1
+[2025-03-17 09:21:20] Fetched Customer ID: 2
+[2025-03-17 09:21:20] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 09:21:20] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 09:21:20] API requested with order_id: 1
+[2025-03-17 09:21:20] Processing order ID: 1
+[2025-03-17 09:21:20] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 09:21:20] Product name: test
+[2025-03-17 09:21:20] Retrieved 1 rows from table 'test'
+[2025-03-17 09:21:20] Required material quantities: {"materi3":80}
+[2025-03-17 09:21:20] Material IDs: {"materi3":6}
+[2025-03-17 09:21:20] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 09:21:20] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 09:21:20] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]}
+[2025-03-17 09:21:20] Total Required Qty for inventory: 80
+[2025-03-17 09:21:20] Sale recorded in sales_book with order_id: 1.
+[2025-03-17 09:25:51] ===== Sales Processing Started =====
+[2025-03-17 09:25:51] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 09:25:51] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 09:25:51] Fetched Product ID: 1
+[2025-03-17 09:25:51] Fetched Customer ID: 2
+[2025-03-17 09:25:51] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 09:25:51] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 09:25:51] API requested with order_id: 1
+[2025-03-17 09:25:51] Processing order ID: 1
+[2025-03-17 09:25:51] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 09:25:51] Product name: test
+[2025-03-17 09:25:51] Retrieved 1 rows from table 'test'
+[2025-03-17 09:25:51] Required material quantities: {"materi3":80}
+[2025-03-17 09:25:51] Material IDs: {"materi3":6}
+[2025-03-17 09:25:51] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 09:25:51] Inventory status for order '1': [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]
+[2025-03-17 09:25:51] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14}]}
+[2025-03-17 09:25:51] Total Required Qty for inventory: 80
+[2025-03-17 09:25:51] Sale recorded in sales_book with order_id: 1.
+[2025-03-17 11:08:27] API requested with order_id: 4
+[2025-03-17 11:08:27] Processing order ID: 4
+[2025-03-17 11:08:27] Order contains product_id: 1, quantity: 3.00
+[2025-03-17 11:08:27] Product name: test
+[2025-03-17 11:08:27] Retrieved 1 rows from table 'test'
+[2025-03-17 11:08:27] Required material quantities with units: {"materi3":{"requiredQty":12,"unit":"unittt1"}}
+[2025-03-17 11:08:27] Material IDs: {"materi3":6}
+[2025-03-17 11:08:27] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 11:08:27] Inventory status for order '4' with units: [{"material":"materi3","requiredQty":12,"availableQty":"94","difference":82,"unit":"unittt1"}]
+[2025-03-17 11:08:38] API requested with order_id: 3
+[2025-03-17 11:08:38] Processing order ID: 3
+[2025-03-17 11:08:38] Order contains product_id: 2, quantity: 33.00
+[2025-03-17 11:08:38] Product name: new_prod
+[2025-03-17 11:08:38] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 11:08:38] Required material quantities with units: {"materi3":{"requiredQty":132,"unit":"unittt1"},"materi4":{"requiredQty":165,"unit":"unitt2"}}
+[2025-03-17 11:08:38] Material IDs: {"materi3":6,"materi4":7}
+[2025-03-17 11:08:38] Final Inventory Data: [{"material_id":6,"total_qty":"94"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:08:38] Inventory status for order '3' with units: [{"material":"materi3","requiredQty":132,"availableQty":"94","difference":-38,"unit":"unittt1"},{"material":"materi4","requiredQty":165,"availableQty":"270","difference":105,"unit":"unitt2"}]
+[2025-03-17 11:12:04] ===== Sales Processing Started =====
+[2025-03-17 11:12:04] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 11:12:04] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 11:12:04] Fetched Product ID: 1
+[2025-03-17 11:12:04] Fetched Customer ID: 2
+[2025-03-17 11:12:04] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 11:12:04] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 11:12:04] API requested with order_id: 1
+[2025-03-17 11:12:04] Processing order ID: 1
+[2025-03-17 11:12:04] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 11:12:04] Product name: test
+[2025-03-17 11:12:04] Retrieved 1 rows from table 'test'
+[2025-03-17 11:12:04] Required material quantities with units: {"materi3":{"requiredQty":80,"unit":"unittt1"}}
+[2025-03-17 11:12:04] Material IDs: {"materi3":6}
+[2025-03-17 11:12:04] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 11:12:04] Inventory status for order '1' with units: [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14,"unit":"unittt1"}]
+[2025-03-17 11:12:04] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14,"unit":"unittt1"}]}
+[2025-03-17 11:12:04] Total Required Qty for inventory: 80
+[2025-03-17 11:12:04] Sale recorded in sales_book with order_id: 1.
+[2025-03-17 11:14:11] ===== Sales Processing Started =====
+[2025-03-17 11:14:11] Received POST data: {"order_ticket":"{\"id\":1,\"billing_name\":\"man1\",\"product_name\":\"test\",\"qty\":\"20.00\"}","sales_date":["2025-03-17"],"product_name":["test"],"qty":["20.00"],"billing_name":["man1"]}
+[2025-03-17 11:14:11] Processing sale: Date: 2025-03-17, Product: test, Qty: 20, Customer: man1
+[2025-03-17 11:14:11] Fetched Product ID: 1
+[2025-03-17 11:14:11] Fetched Customer ID: 2
+[2025-03-17 11:14:11] Fetched Order ID: 1, Original Order Qty: 20
+[2025-03-17 11:14:11] Calling Inventory API: http://localhost/PIMS/views/sales_book/calculate-order-material.php with data: {"order_id":1,"products":["test"]}
+[2025-03-17 11:14:11] API requested with order_id: 1
+[2025-03-17 11:14:11] Processing order ID: 1
+[2025-03-17 11:14:11] Order contains product_id: 1, quantity: 20.00
+[2025-03-17 11:14:11] Product name: test
+[2025-03-17 11:14:11] Retrieved 1 rows from table 'test'
+[2025-03-17 11:14:11] Required material quantities with units: {"materi3":{"requiredQty":80,"unit":"unittt1"}}
+[2025-03-17 11:14:11] Material IDs: {"materi3":6}
+[2025-03-17 11:14:11] Final Inventory Data: [{"material_id":6,"total_qty":"94"}]
+[2025-03-17 11:14:11] Inventory status for order '1' with units: [{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14,"unit":"unittt1"}]
+[2025-03-17 11:14:11] Inventory API Response: {"order_id":1,"product":"test","inventory_status":[{"material":"materi3","requiredQty":80,"availableQty":"94","difference":14,"unit":"unittt1"}]}
+[2025-03-17 11:14:11] Total Required Qty for inventory: 80
+[2025-03-17 11:14:11] Sale recorded in sales_book with order_id: 1.
+[2025-03-17 11:14:11] Material deducted in rm_purchase for Material ID: 6, Qty: -80, Unit ID: 5
+[2025-03-17 11:14:11] ===== Sales Processing Completed Successfully for order_id: 1 =====
+[2025-03-17 11:15:28] Processing product: test
+[2025-03-17 11:15:28] Product IDs for 'test': [1]
+[2025-03-17 11:15:28] Total quantity for 'test': 23.00
+[2025-03-17 11:15:28] Retrieved 1 rows from table 'test'
+[2025-03-17 11:15:28] Material IDs: {"materi3":[6]}
+[2025-03-17 11:15:28] Final Inventory Data: [{"material_id":6,"total_qty":"14"}]
+[2025-03-17 11:15:28] Retrieved 1 rows from 'rm_purchase'
+[2025-03-17 11:15:28] totalRequiredQty is: [{"material_id":6,"total_qty":"14"}]
+[2025-03-17 11:15:28] Inventory status for product 'test': [{"material":"materi3","requiredQty":92,"availableQty":"14","difference":-78}]
+[2025-03-17 11:15:28] Processing product: new_prod
+[2025-03-17 11:15:28] Product IDs for 'new_prod': [2]
+[2025-03-17 11:15:28] Total quantity for 'new_prod': 53.00
+[2025-03-17 11:15:28] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 11:15:28] Material IDs: {"materi3":[6],"materi4":[7]}
+[2025-03-17 11:15:28] Final Inventory Data: [{"material_id":6,"total_qty":"14"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:15:28] Retrieved 2 rows from 'rm_purchase'
+[2025-03-17 11:15:28] totalRequiredQty is: [{"material_id":6,"total_qty":"14"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:15:28] Inventory status for product 'new_prod': [{"material":"materi3","requiredQty":212,"availableQty":"14","difference":-198},{"material":"materi4","requiredQty":265,"availableQty":"270","difference":5}]
+[2025-03-17 11:16:08] Processing product: test
+[2025-03-17 11:16:08] Product IDs for 'test': [1]
+[2025-03-17 11:16:08] Total quantity for 'test': 23.00
+[2025-03-17 11:16:08] Retrieved 1 rows from table 'test'
+[2025-03-17 11:16:08] Material IDs: {"materi3":[6]}
+[2025-03-17 11:16:08] Final Inventory Data: [{"material_id":6,"total_qty":"14"}]
+[2025-03-17 11:16:08] Retrieved 1 rows from 'rm_purchase'
+[2025-03-17 11:16:08] totalRequiredQty is: [{"material_id":6,"total_qty":"14"}]
+[2025-03-17 11:16:08] Inventory status for product 'test': [{"material":"materi3","requiredQty":92,"availableQty":"14","difference":-78}]
+[2025-03-17 11:16:08] Processing product: new_prod
+[2025-03-17 11:16:08] Product IDs for 'new_prod': [2]
+[2025-03-17 11:16:08] Total quantity for 'new_prod': 53.00
+[2025-03-17 11:16:08] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 11:16:08] Material IDs: {"materi3":[6],"materi4":[7]}
+[2025-03-17 11:16:08] Final Inventory Data: [{"material_id":6,"total_qty":"14"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:16:08] Retrieved 2 rows from 'rm_purchase'
+[2025-03-17 11:16:08] totalRequiredQty is: [{"material_id":6,"total_qty":"14"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:16:08] Inventory status for product 'new_prod': [{"material":"materi3","requiredQty":212,"availableQty":"14","difference":-198},{"material":"materi4","requiredQty":265,"availableQty":"270","difference":5}]
+[2025-03-17 11:18:02] Processing product: test
+[2025-03-17 11:18:02] Product IDs for 'test': [1]
+[2025-03-17 11:18:02] Total quantity for 'test': 23.00
+[2025-03-17 11:18:02] Retrieved 1 rows from table 'test'
+[2025-03-17 11:18:02] Material IDs: {"materi3":[6]}
+[2025-03-17 11:18:02] Final Inventory Data: [{"material_id":6,"total_qty":"14"}]
+[2025-03-17 11:18:02] Retrieved 1 rows from 'rm_purchase'
+[2025-03-17 11:18:02] totalRequiredQty is: [{"material_id":6,"total_qty":"14"}]
+[2025-03-17 11:18:02] Inventory status for product 'test': [{"material":"materi3","requiredQty":92,"availableQty":"14","difference":-78}]
+[2025-03-17 11:18:02] Processing product: new_prod
+[2025-03-17 11:18:02] Product IDs for 'new_prod': [2]
+[2025-03-17 11:18:02] Total quantity for 'new_prod': 53.00
+[2025-03-17 11:18:02] Retrieved 2 rows from table 'new_prod'
+[2025-03-17 11:18:02] Material IDs: {"materi3":[6],"materi4":[7]}
+[2025-03-17 11:18:02] Final Inventory Data: [{"material_id":6,"total_qty":"14"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:18:02] Retrieved 2 rows from 'rm_purchase'
+[2025-03-17 11:18:02] totalRequiredQty is: [{"material_id":6,"total_qty":"14"},{"material_id":7,"total_qty":"270"}]
+[2025-03-17 11:18:02] Inventory status for product 'new_prod': [{"material":"materi3","requiredQty":212,"availableQty":"14","difference":-198},{"material":"materi4","requiredQty":265,"availableQty":"270","difference":5}]

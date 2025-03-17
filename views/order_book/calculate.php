@@ -17,11 +17,11 @@ function logMessage($message) {
     file_put_contents($log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
 }
 
-// $company_id = $_SESSION['company_id'];
-// $user_id = $_SESSION['user_id'];
+$company_id = $_SESSION['company_id'];
+$user_id = $_SESSION['user_id'];
 
-$company_id = 6;
-$user_id = 6;
+// $company_id = 6;
+// $user_id = 6;
 /**
  * Function to calculate total quantity for given products.
  */
