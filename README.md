@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=y9v81D6gyWI" target="_blank">
-    <img src="https://img.shields.io/badge/Watch%20Demo-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white" alt="Watch Demo">
+    <img src="https://img.youtube.com/vi/y9v81D6gyWI/maxresdefault.jpg" alt="Watch Demo" width="600">
   </a>
 </p>
 
@@ -117,7 +117,7 @@ $db_name = 'orah_db';</code></pre>
 <h2 id="contact">Contact</h2>
 <p>For any inquiries or feedback, please contact:</p>
 <ul>
-  <li><strong>Aryan Jain</strong></li>
+  <li><strong>Arryaan Jain</strong></li>
   <li><strong>GitHub</strong>: <a href="https://github.com/arryaanjain">arryaanjain</a></li>
   <li><strong>Email</strong>: <a href="mailto:jainarryaan@example.com">jainarryaan@example.com</a></li>
 </ul>
