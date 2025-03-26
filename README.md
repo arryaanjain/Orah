@@ -119,5 +119,5 @@ $db_name = 'orah_db';</code></pre>
 <ul>
   <li><strong>Arryaan Jain</strong></li>
   <li><strong>GitHub</strong>: <a href="https://github.com/arryaanjain">arryaanjain</a></li>
-  <li><strong>Email</strong>: <a href="mailto:jainarryaan@example.com">jainarryaan@example.com</a></li>
+  <li><strong>Email</strong>: <a href="mailto:jainarryaan@gmail.com">jainarryaan@gmail.com</a></li>
 </ul>
