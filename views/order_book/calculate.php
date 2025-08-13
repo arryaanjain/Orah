@@ -261,7 +261,7 @@ function displayInventoryStatus($product, $inventoryStatus) {
 
     echo "</tbody></table><br/>";
 }
-
+ 
 // Example usage:
 // if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['products'])) {
 //     $products = json_decode($_POST['products'], true);

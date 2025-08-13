@@ -79,15 +79,19 @@ $user_id = $_SESSION['user_id'];
                         <th>Product Name</th>
                         <th>Quantity</th>
                         <th>Billing Name</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
-                $query = "SELECT ob.order_date, fp.product_name, ob.qty, c.billing_name 
-                        FROM order_book ob
-                        JOIN finished_products fp ON ob.product_id = fp.id
-                        JOIN customers c ON ob.customer_id = c.id
-                        WHERE ob.company_id = ? AND ob.user_id = ?";
+                $query = "SELECT ob.order_date, fp.product_name, ob.qty, c.billing_name, ob.status 
+                FROM order_book ob
+                JOIN finished_products fp ON ob.product_id = fp.id
+                JOIN customers c ON ob.customer_id = c.id
+                WHERE ob.company_id = ? 
+                AND ob.user_id = ? 
+                AND ob.status IN ('pending', 'partial')";
+
 
                 $stmt = mysqli_prepare($con, $query);
                 mysqli_stmt_bind_param($stmt, "ii", $company_id, $user_id);
@@ -100,6 +104,7 @@ $user_id = $_SESSION['user_id'];
                     echo "<td>" . htmlspecialchars($row['product_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['qty']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['billing_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                     echo "</tr>";
                 }
                 mysqli_stmt_close($stmt);
@@ -111,9 +116,12 @@ $user_id = $_SESSION['user_id'];
         <?php    
         // Fetch unique products belonging to this company & user
         $productQuery = "SELECT DISTINCT fp.product_name 
-                        FROM order_book ob
-                        JOIN finished_products fp ON ob.product_id = fp.id
-                        WHERE ob.company_id = ? AND ob.user_id = ?";
+                    FROM order_book ob
+                    JOIN finished_products fp ON ob.product_id = fp.id
+                    WHERE ob.company_id = ? 
+                    AND ob.user_id = ?
+                    AND ob.status IN ('pending', 'partial')";
+
         $stmtProduct = mysqli_prepare($con, $productQuery);
         mysqli_stmt_bind_param($stmtProduct, "ii", $company_id, $user_id);
         mysqli_stmt_execute($stmtProduct);

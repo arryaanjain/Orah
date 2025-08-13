@@ -77,13 +77,13 @@ if (isset($_SESSION['error'])) {
                         </tr>
                     </thead>
                     <tbody id="salesTableBody">
-                        <tr>
+                        <!-- <tr>
                             <td><input type="date" class="salesDate" name="sales_date[]" required></td>
                             <td><input type="text" class="product_name" name="product_name[]" required readonly></td>
                             <td><input type="number" class="quantity" name="qty[]" required readonly></td>
                             <td><input type="text" class="billingName" name="billing_name[]" required readonly></td>
                             <td><button type="button" class="deleteRowBtn">Delete</button></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
 
