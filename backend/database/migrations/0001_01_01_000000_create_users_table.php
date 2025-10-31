@@ -13,16 +13,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
+            $table->string('google_id')->nullable()->unique();
+            $table->foreignId('company_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('avatar')->nullable();
+            $table->boolean('profile_completed')->default(false);
             $table->rememberToken();
             $table->timestamps();
             
-            // Unique constraint on company_id + email combination
-            $table->unique(['company_id', 'email'], 'unique_user_email');
+            // Unique constraint on company_id + email combination (when company_id is not null)
+            $table->index(['company_id', 'email']);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
