@@ -1,9 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Layout } from './components/layout';
-import { Dashboard } from './pages/Dashboard';
+import { Dashboard, Login, AuthCallback, CompleteProfile } from './pages';
+
+// Protected Route Component
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+  
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user) {
+    const userData = JSON.parse(user);
+    if (!userData.profile_completed) {
+      return <Navigate to="/complete-profile" replace />;
+    }
+  }
+
+  return <>{children}</>;
+}
 
 // Simple placeholder components - we'll replace these with proper pages
 function RawMaterialMaster() {
@@ -732,7 +751,13 @@ function App() {
     <Router>
       <div className="h-screen overflow-hidden">
         <Routes>
-          <Route path="/" element={<Layout />}>
+          {/* Public Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/complete-profile" element={<CompleteProfile />} />
+
+          {/* Protected Routes */}
+          <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />
             <Route path="raw-materials" element={<RawMaterialMaster />} />
             <Route path="purchases" element={<RawMaterialPurchase />} />
