@@ -126,6 +126,7 @@ export function RawMaterialPurchase() {
   };
 
   const getUnitsForMaterial = (materialId: string): Unit[] => {
+    if (!materialId || !materials || materials.length === 0) return [];
     const material = materials.find((m) => m.id === parseInt(materialId));
     return material?.units || [];
   };
@@ -284,7 +285,7 @@ export function RawMaterialPurchase() {
                           required
                         >
                           <option value="">Select Material</option>
-                          {materials.map((material) => (
+                          {materials && materials.map((material) => (
                             <option key={material.id} value={material.id}>
                               {material.material_name}
                             </option>
@@ -300,7 +301,7 @@ export function RawMaterialPurchase() {
                           disabled={!row.raw_material_id}
                         >
                           <option value="">Select Unit</option>
-                          {units.map((unit) => (
+                          {units && units.map((unit) => (
                             <option key={unit.id} value={unit.id}>
                               {unit.unit_name}
                             </option>
@@ -409,7 +410,7 @@ export function RawMaterialPurchase() {
                       required
                     >
                       <option value="">Select Material</option>
-                      {materials.map((material) => (
+                      {materials && materials.map((material) => (
                         <option key={material.id} value={material.id}>
                           {material.material_name}
                         </option>
@@ -427,7 +428,7 @@ export function RawMaterialPurchase() {
                       disabled={!row.raw_material_id}
                     >
                       <option value="">Select Unit</option>
-                      {units.map((unit) => (
+                      {units && units.map((unit) => (
                         <option key={unit.id} value={unit.id}>
                           {unit.unit_name}
                         </option>
@@ -555,7 +556,7 @@ export function RawMaterialPurchase() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {purchases.map((purchase) => (
+                {purchases && purchases.map((purchase) => (
                   <tr key={purchase.id} className="hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm text-gray-900">
                       {new Date(purchase.purchase_date).toLocaleDateString()}
