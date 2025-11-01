@@ -22,3 +22,7 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+#company data files
+orders.csv
+warehouse_inventory.csv
