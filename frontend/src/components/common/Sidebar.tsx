@@ -7,6 +7,7 @@ import {
   ClipboardList, 
   BarChart3,
   Archive,
+  Users,
   X
 } from 'lucide-react';
 
@@ -15,6 +16,7 @@ const navigation = [
   { name: 'Add New Product', href: '/products', icon: Package },
   { name: 'Order Book', href: '/orders', icon: ClipboardList },
   { name: 'Sales Book', href: '/sales', icon: Truck },
+  { name: 'Customers', href: '/customers', icon: Users },
   { name: 'Raw Material Purchase', href: '/purchases', icon: ShoppingCart },
   { name: 'Raw Material Master', href: '/raw-materials', icon: Archive },
   { name: 'Records', href: '/reports', icon: BarChart3 },
