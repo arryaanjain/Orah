@@ -12,14 +12,15 @@ import type {
   Sale,
   StockMovement,
   InventoryStatus,
+  CalculationResponse,
+  EscalationResponse,
   DashboardStats,
-  ApiResponse 
 } from '../types';
 
 // Authentication Services
 export const authService = {
   login: async (credentials: { company_name: string; email: string; password: string }) => {
-    const response = await apiService.post<ApiResponse<{ user: User; token: string; company: Company }>>('/auth/login', credentials);
+    const response = await apiService.post<{ user: User; token: string; company: Company }>('/auth/login', credentials);
     return response.data;
   },
 
@@ -30,17 +31,17 @@ export const authService = {
     password: string; 
     password_confirmation: string;
   }) => {
-    const response = await apiService.post<ApiResponse<{ user: User; token: string; company: Company }>>('/auth/register', data);
+    const response = await apiService.post<{ user: User; token: string; company: Company }>('/auth/register', data);
     return response.data;
   },
 
   logout: async () => {
-    const response = await apiService.post<ApiResponse<null>>('/auth/logout');
+    const response = await apiService.post('/auth/logout');
     return response.data;
   },
 
   me: async () => {
-    const response = await apiService.get<ApiResponse<{ user: User; company: Company }>>('/auth/me');
+    const response = await apiService.get<{ user: User; company: Company }>('/auth/me');
     return response.data;
   },
 };
@@ -48,7 +49,7 @@ export const authService = {
 // Dashboard Services
 export const dashboardService = {
   getStats: async () => {
-    const response = await apiService.get<ApiResponse<DashboardStats>>('/dashboard/stats');
+    const response = await apiService.get<DashboardStats>('/dashboard/stats');
     return response.data;
   },
 };
@@ -56,22 +57,22 @@ export const dashboardService = {
 // Raw Material Services
 export const rawMaterialService = {
   getAll: async () => {
-    const response = await apiService.get<ApiResponse<RawMaterial[]>>('/raw-materials');
+    const response = await apiService.get<{ materials: RawMaterial[] }>('/raw-materials');
     return response.data;
   },
 
-  create: async (data: Omit<RawMaterial, 'id' | 'company_id' | 'user_id' | 'created_at' | 'updated_at'>) => {
-    const response = await apiService.post<ApiResponse<RawMaterial>>('/raw-materials', data);
+  create: async (data: { material: string; description?: string; base_unit: string; minimum_stock?: number }) => {
+    const response = await apiService.post<{ message: string; material: RawMaterial }>('/raw-materials', data);
     return response.data;
   },
 
   update: async (id: number, data: Partial<RawMaterial>) => {
-    const response = await apiService.put<ApiResponse<RawMaterial>>(`/raw-materials/${id}`, data);
+    const response = await apiService.put<{ message: string; material: RawMaterial }>(`/raw-materials/${id}`, data);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/raw-materials/${id}`);
+    const response = await apiService.delete<{ message: string }>(`/raw-materials/${id}`);
     return response.data;
   },
 };
@@ -79,22 +80,17 @@ export const rawMaterialService = {
 // Unit Services
 export const unitService = {
   getByMaterial: async (materialId: number) => {
-    const response = await apiService.get<ApiResponse<Unit[]>>(`/raw-materials/${materialId}/units`);
+    const response = await apiService.get<{ units: Unit[] }>(`/raw-materials/${materialId}/units`);
     return response.data;
   },
 
-  create: async (materialId: number, data: Omit<Unit, 'id' | 'company_id' | 'user_id' | 'material_id' | 'created_at'>) => {
-    const response = await apiService.post<ApiResponse<Unit>>(`/raw-materials/${materialId}/units`, data);
+  create: async (materialId: number, data: { unit_name: string; conversion_factor: number }) => {
+    const response = await apiService.post<{ message: string; unit: Unit }>(`/raw-materials/${materialId}/units`, data);
     return response.data;
   },
 
-  update: async (id: number, data: Partial<Unit>) => {
-    const response = await apiService.put<ApiResponse<Unit>>(`/units/${id}`, data);
-    return response.data;
-  },
-
-  delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/units/${id}`);
+  delete: async (materialId: number, unitId: number) => {
+    const response = await apiService.delete<{ message: string }>(`/raw-materials/${materialId}/units/${unitId}`);
     return response.data;
   },
 };
@@ -102,22 +98,31 @@ export const unitService = {
 // Purchase Services
 export const purchaseService = {
   getAll: async () => {
-    const response = await apiService.get<ApiResponse<RawMaterialPurchase[]>>('/purchases');
+    const response = await apiService.get<{ purchases: RawMaterialPurchase[] }>('/rm-purchases');
     return response.data;
   },
 
-  create: async (data: Omit<RawMaterialPurchase, 'id' | 'company_id' | 'user_id' | 'created_at' | 'updated_at'>) => {
-    const response = await apiService.post<ApiResponse<RawMaterialPurchase>>('/purchases', data);
+  create: async (data: {
+    material_id: number;
+    supplier_name?: string;
+    purchase_date: string;
+    qty: number;
+    unit_id: number;
+    rate?: number;
+    batch_number?: string;
+    expiry_date?: string;
+  }) => {
+    const response = await apiService.post<{ message: string; purchase: RawMaterialPurchase }>('/rm-purchases', data);
     return response.data;
   },
 
   update: async (id: number, data: Partial<RawMaterialPurchase>) => {
-    const response = await apiService.put<ApiResponse<RawMaterialPurchase>>(`/purchases/${id}`, data);
+    const response = await apiService.put<{ message: string; purchase: RawMaterialPurchase }>(`/rm-purchases/${id}`, data);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/purchases/${id}`);
+    const response = await apiService.delete<{ message: string }>(`/rm-purchases/${id}`);
     return response.data;
   },
 };
@@ -125,35 +130,44 @@ export const purchaseService = {
 // Product Services
 export const productService = {
   getAll: async () => {
-    const response = await apiService.get<ApiResponse<FinishedProduct[]>>('/products');
+    const response = await apiService.get<{ products: FinishedProduct[] }>('/products');
     return response.data;
   },
 
   create: async (data: {
-    product: Omit<FinishedProduct, 'id' | 'company_id' | 'user_id' | 'created_at' | 'updated_at'>;
-    bom: Array<Omit<ProductBOM, 'id' | 'company_id' | 'user_id' | 'product_id' | 'created_at' | 'updated_at'>>;
+    product_name: string;
+    description?: string;
+    base_unit: string;
+    selling_price?: number;
+    minimum_stock?: number;
+    bom?: Array<{ material_id: number; qty_required: number; unit_id: number }>;
   }) => {
-    const response = await apiService.post<ApiResponse<FinishedProduct>>('/products', data);
+    const response = await apiService.post<{ message: string; product: FinishedProduct }>('/products', data);
+    return response.data;
+  },
+
+  show: async (id: number) => {
+    const response = await apiService.get<{ product: FinishedProduct }>(`/products/${id}`);
     return response.data;
   },
 
   update: async (id: number, data: Partial<FinishedProduct>) => {
-    const response = await apiService.put<ApiResponse<FinishedProduct>>(`/products/${id}`, data);
+    const response = await apiService.put<{ message: string; product: FinishedProduct }>(`/products/${id}`, data);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/products/${id}`);
+    const response = await apiService.delete<{ message: string }>(`/products/${id}`);
     return response.data;
   },
 
-  getBOM: async (productId: number) => {
-    const response = await apiService.get<ApiResponse<ProductBOM[]>>(`/products/${productId}/bom`);
+  getBom: async (productId: number) => {
+    const response = await apiService.get<{ product_id: number; product_name: string; bom: ProductBOM[] }>(`/products/${productId}/bom`);
     return response.data;
   },
 
-  updateBOM: async (productId: number, bom: Array<Omit<ProductBOM, 'id' | 'company_id' | 'user_id' | 'product_id' | 'created_at' | 'updated_at'>>) => {
-    const response = await apiService.put<ApiResponse<ProductBOM[]>>(`/products/${productId}/bom`, { bom });
+  updateBom: async (productId: number, bom: Array<{ material_id: number; qty_required: number; unit_id: number }>) => {
+    const response = await apiService.put<{ message: string; bom: ProductBOM[] }>(`/products/${productId}/bom`, { bom });
     return response.data;
   },
 };
@@ -161,54 +175,86 @@ export const productService = {
 // Customer Services
 export const customerService = {
   getAll: async () => {
-    const response = await apiService.get<ApiResponse<Customer[]>>('/customers');
+    const response = await apiService.get<{ customers: Customer[] }>('/customers');
     return response.data;
   },
 
-  create: async (data: Omit<Customer, 'id' | 'company_id' | 'user_id' | 'created_at' | 'updated_at'>) => {
-    const response = await apiService.post<ApiResponse<Customer>>('/customers', data);
+  create: async (data: Partial<Customer>) => {
+    const response = await apiService.post<{ message: string; customer: Customer }>('/customers', data);
     return response.data;
   },
 
   update: async (id: number, data: Partial<Customer>) => {
-    const response = await apiService.put<ApiResponse<Customer>>(`/customers/${id}`, data);
+    const response = await apiService.put<{ message: string; customer: Customer }>(`/customers/${id}`, data);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/customers/${id}`);
+    const response = await apiService.delete<{ message: string }>(`/customers/${id}`);
     return response.data;
   },
 };
 
 // Order Services
 export const orderService = {
-  getAll: async () => {
-    const response = await apiService.get<ApiResponse<Order[]>>('/orders');
+  getAll: async (status?: string) => {
+    const params = status ? `?status=${status}` : '';
+    const response = await apiService.get<{ orders: Order[] }>(`/orders${params}`);
     return response.data;
   },
 
-  create: async (data: Omit<Order, 'id' | 'company_id' | 'user_id' | 'created_at' | 'updated_at'>) => {
-    const response = await apiService.post<ApiResponse<Order>>('/orders', data);
+  create: async (data: {
+    product_id: number;
+    customer_id?: number;
+    qty: number;
+    unit_price?: number;
+    order_date: string;
+    expected_delivery_date?: string;
+    notes?: string;
+  }) => {
+    const response = await apiService.post<{ message: string; order: Order }>('/orders', data);
+    return response.data;
+  },
+
+  batchCreate: async (orders: Array<{
+    product_id: number;
+    customer_id?: number;
+    qty: number;
+    order_date: string;
+  }>) => {
+    const response = await apiService.post<{ message: string; orders: Order[] }>('/orders/batch', { orders });
     return response.data;
   },
 
   update: async (id: number, data: Partial<Order>) => {
-    const response = await apiService.put<ApiResponse<Order>>(`/orders/${id}`, data);
+    const response = await apiService.put<{ message: string; order: Order }>(`/orders/${id}`, data);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/orders/${id}`);
+    const response = await apiService.delete<{ message: string }>(`/orders/${id}`);
     return response.data;
   },
 
-  calculateMaterialRequirement: async (orderId: number) => {
-    const response = await apiService.post<ApiResponse<{
+  updateStatus: async (id: number, status: string) => {
+    const response = await apiService.post<{ message: string; order: Order }>(`/orders/${id}/status`, { status });
+    return response.data;
+  },
+
+  /** Calculate material requirements across all pending orders */
+  calculateMaterialRequirement: async () => {
+    const response = await apiService.post<CalculationResponse>('/orders/calculate');
+    return response.data;
+  },
+
+  /** Calculate material requirement for a single order */
+  calculateOrderMaterial: async (orderId: number) => {
+    const response = await apiService.get<{
       order_id: number;
       product: string;
+      order_qty: number;
       inventory_status: InventoryStatus[];
-    }>>('/orders/calculate-material-requirement', { order_id: orderId });
+    }>(`/orders/${orderId}/material-check`);
     return response.data;
   },
 };
@@ -216,22 +262,46 @@ export const orderService = {
 // Sales Services
 export const salesService = {
   getAll: async () => {
-    const response = await apiService.get<ApiResponse<Sale[]>>('/sales');
+    const response = await apiService.get<{ sales: Sale[] }>('/sales');
     return response.data;
   },
 
-  create: async (data: Omit<Sale, 'id' | 'company_id' | 'user_id' | 'created_at' | 'updated_at'>) => {
-    const response = await apiService.post<ApiResponse<Sale>>('/sales', data);
+  create: async (data: {
+    order_id?: number;
+    customer_id?: number;
+    product_id: number;
+    qty: number;
+    unit_price: number;
+    sale_date: string;
+    payment_status?: string;
+    notes?: string;
+  }) => {
+    const response = await apiService.post<{ message: string; sale: Sale }>('/sales', data);
     return response.data;
   },
 
   update: async (id: number, data: Partial<Sale>) => {
-    const response = await apiService.put<ApiResponse<Sale>>(`/sales/${id}`, data);
+    const response = await apiService.put<{ message: string; sale: Sale }>(`/sales/${id}`, data);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await apiService.delete<ApiResponse<null>>(`/sales/${id}`);
+    const response = await apiService.delete<{ message: string }>(`/sales/${id}`);
+    return response.data;
+  },
+
+  /** Escalate an order to sales book with inventory deduction */
+  escalateOrder: async (data: {
+    order_id: number;
+    sales_date: string;
+    dispatched_qty: number;
+  }) => {
+    const response = await apiService.post<EscalationResponse>('/sales/escalate', data);
+    return response.data;
+  },
+
+  updatePaymentStatus: async (id: number, paymentStatus: string) => {
+    const response = await apiService.post<{ message: string; sale: Sale }>(`/sales/${id}/payment-status`, { payment_status: paymentStatus });
     return response.data;
   },
 };
@@ -239,17 +309,12 @@ export const salesService = {
 // Stock Movement Services
 export const stockMovementService = {
   getAll: async () => {
-    const response = await apiService.get<ApiResponse<StockMovement[]>>('/stock-movements');
+    const response = await apiService.get<{ movements: StockMovement[] }>('/stock-movements');
     return response.data;
   },
 
   getByMaterial: async (materialId: number) => {
-    const response = await apiService.get<ApiResponse<StockMovement[]>>(`/raw-materials/${materialId}/movements`);
-    return response.data;
-  },
-
-  create: async (data: Omit<StockMovement, 'id' | 'company_id' | 'user_id' | 'movement_date'>) => {
-    const response = await apiService.post<ApiResponse<StockMovement>>('/stock-movements', data);
+    const response = await apiService.get<{ movements: StockMovement[] }>(`/raw-materials/${materialId}/movements`);
     return response.data;
   },
 };
