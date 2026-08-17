@@ -4,6 +4,7 @@ export interface User {
   company_id: number;
   name: string;
   email: string;
+  profile_completed?: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -24,6 +25,7 @@ export interface RawMaterial {
   description?: string;
   base_unit: string;
   minimum_stock: number;
+  units?: Unit[];
   created_at: string;
   updated_at: string;
 }
@@ -51,6 +53,8 @@ export interface RawMaterialPurchase {
   total_amount: number;
   batch_number?: string;
   expiry_date?: string;
+  material?: RawMaterial;
+  unit?: Unit;
   created_at: string;
   updated_at: string;
 }
@@ -65,6 +69,7 @@ export interface FinishedProduct {
   selling_price: number;
   minimum_stock: number;
   is_active: boolean;
+  bom_items?: ProductBOM[];
   created_at: string;
   updated_at: string;
 }
@@ -77,20 +82,22 @@ export interface ProductBOM {
   material_id: number;
   qty_required: number;
   unit_id: number;
+  material?: RawMaterial;
+  unit?: Unit;
   created_at: string;
   updated_at: string;
-  // Joined fields
-  material_name?: string;
-  unit_name?: string;
 }
 
 export interface Customer {
   id: number;
   company_id: number;
   user_id: number;
-  name: string;
+  billing_name?: string;
+  name?: string;
   email?: string;
   phone?: string;
+  place?: string;
+  gst_number?: string;
   address?: string;
   created_at: string;
   updated_at: string;
@@ -111,11 +118,10 @@ export interface Order {
   expected_delivery_date?: string;
   status: OrderStatus;
   notes?: string;
+  customer?: Customer;
+  product?: FinishedProduct;
   created_at: string;
   updated_at: string;
-  // Joined fields
-  customer_name?: string;
-  product_name?: string;
 }
 
 export type PaymentStatus = 'pending' | 'partial' | 'paid';
@@ -133,11 +139,11 @@ export interface Sale {
   sale_date: string;
   payment_status: PaymentStatus;
   notes?: string;
+  customer?: Customer;
+  product?: FinishedProduct;
+  order?: Order;
   created_at: string;
   updated_at: string;
-  // Joined fields
-  customer_name?: string;
-  product_name?: string;
 }
 
 export type MovementType = 'purchase' | 'consumption' | 'adjustment' | 'return';
@@ -155,21 +161,41 @@ export interface StockMovement {
   unit_id: number;
   notes?: string;
   movement_date: string;
-  // Joined fields
   material_name?: string;
   unit_name?: string;
 }
 
 export interface InventoryStatus {
   material: string;
+  material_id: number;
   requiredQty: number;
   availableQty: number;
   difference: number;
   unit: string;
+  unit_id: number;
+}
+
+export interface ProductCalculation {
+  product_id: number;
+  total_ordered_qty: number;
+  order_count: number;
+  inventory_status: InventoryStatus[];
+}
+
+export interface CalculationResponse {
+  products: Record<string, ProductCalculation>;
+}
+
+export interface EscalationResponse {
+  message: string;
+  sale: Sale;
+  inventory_deductions: InventoryStatus[];
+  original_order_status: string;
+  residual_order?: Order;
 }
 
 export interface ApiResponse<T> {
-  success: boolean;
+  success?: boolean;
   data?: T;
   message?: string;
   errors?: string[];

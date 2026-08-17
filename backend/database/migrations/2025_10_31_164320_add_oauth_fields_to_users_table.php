@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('google_id')->nullable()->after('id');
-            $table->string('avatar')->nullable()->after('email');
-            $table->boolean('profile_completed')->default(false)->after('avatar');
+            if (!Schema::hasColumn('users', 'google_id')) {
+                $table->string('google_id')->nullable()->after('id');
+            }
+            if (!Schema::hasColumn('users', 'avatar')) {
+                $table->string('avatar')->nullable()->after('email');
+            }
+            if (!Schema::hasColumn('users', 'profile_completed')) {
+                $table->boolean('profile_completed')->default(false)->after('avatar');
+            }
         });
     }
 
@@ -24,7 +30,19 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['google_id', 'avatar', 'profile_completed']);
+            $columnsToDrop = [];
+            if (Schema::hasColumn('users', 'google_id')) {
+                $columnsToDrop[] = 'google_id';
+            }
+            if (Schema::hasColumn('users', 'avatar')) {
+                $columnsToDrop[] = 'avatar';
+            }
+            if (Schema::hasColumn('users', 'profile_completed')) {
+                $columnsToDrop[] = 'profile_completed';
+            }
+            if (!empty($columnsToDrop)) {
+                $table->dropColumn($columnsToDrop);
+            }
         });
     }
 };

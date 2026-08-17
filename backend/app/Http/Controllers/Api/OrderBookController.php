@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\OrderBook;
 use App\Models\FinishedProduct;
 use App\Models\Customer;
+use App\Models\ProductBom;
+use App\Models\RawMaterial;
+use App\Models\RawMaterialPurchase;
+use App\Models\StockMovement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,10 +23,18 @@ class OrderBookController extends Controller
         $user = $request->user();
         $companyId = $user->company_id;
         
-        $orders = OrderBook::where('company_id', $companyId)
+        $status = $request->query('status'); // optional filter
+        
+        $query = OrderBook::where('company_id', $companyId)
             ->with(['product', 'customer'])
-            ->orderBy('order_date', 'desc')
-            ->get();
+            ->orderBy('order_date', 'desc');
+        
+        if ($status) {
+            $statuses = explode(',', $status);
+            $query->whereIn('status', $statuses);
+        }
+        
+        $orders = $query->get();
         
         return response()->json([
             'orders' => $orders
@@ -234,5 +246,146 @@ class OrderBookController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+    
+    /**
+     * Calculate material requirements for pending/partial orders.
+     * 
+     * High-precision unit conversion:
+     * Converts purchased stock and BOM requirements through base units using conversion factors.
+     */
+    public function calculateMaterialRequirement(Request $request)
+    {
+        $user = $request->user();
+        $companyId = $user->company_id;
+        
+        $response = [];
+        
+        // Get all pending/confirmed/ready orders grouped by product
+        $orders = OrderBook::where('company_id', $companyId)
+            ->whereIn('status', ['pending', 'confirmed', 'in_production', 'ready'])
+            ->with('product')
+            ->get();
+        
+        // Group orders by product_id
+        $ordersByProduct = $orders->groupBy('product_id');
+        
+        foreach ($ordersByProduct as $productId => $productOrders) {
+            $product = $productOrders->first()->product;
+            $totalOrderedQty = (float) $productOrders->sum('qty');
+            
+            // Fetch BOM for this product
+            $bomItems = ProductBom::where('product_id', $productId)
+                ->where('company_id', $companyId)
+                ->with(['material', 'unit'])
+                ->get();
+            
+            if ($bomItems->isEmpty()) {
+                continue;
+            }
+            
+            $inventoryStatus = [];
+            
+            foreach ($bomItems as $bom) {
+                $bomFactor = ($bom->unit && (float) $bom->unit->conversion_factor > 0)
+                    ? (float) $bom->unit->conversion_factor
+                    : 1.0;
+
+                // Total required in raw material's base unit
+                $requiredBase = ((float) $bom->qty_required * $bomFactor) * $totalOrderedQty;
+                
+                // Available stock in raw material's base unit (purchases * unit factor - consumption * unit factor)
+                $availableBase = RawMaterial::getAvailableStockInBaseUnit($bom->material_id, $companyId);
+                
+                $differenceBase = $availableBase - $requiredBase;
+
+                // Convert quantities back to the BOM display unit for user readability
+                $requiredDisplay = $requiredBase / $bomFactor;
+                $availableDisplay = $availableBase / $bomFactor;
+                $differenceDisplay = $differenceBase / $bomFactor;
+
+                $unitName = $bom->unit->unit_name ?? $bom->material->base_unit;
+                
+                $inventoryStatus[] = [
+                    'material' => $bom->material->material,
+                    'material_id' => $bom->material_id,
+                    'requiredQty' => round($requiredDisplay, 4),
+                    'availableQty' => round($availableDisplay, 4),
+                    'difference' => round($differenceDisplay, 4),
+                    'unit' => $unitName,
+                    'unit_id' => $bom->unit_id,
+                ];
+            }
+            
+            $productKey = $product->product_name;
+            $response[$productKey] = [
+                'product_id' => $productId,
+                'total_ordered_qty' => $totalOrderedQty,
+                'order_count' => $productOrders->count(),
+                'inventory_status' => $inventoryStatus,
+            ];
+        }
+        
+        return response()->json([
+            'products' => $response
+        ]);
+    }
+    
+    /**
+     * Calculate material requirement for a single specific order.
+     */
+    public function calculateOrderMaterial(Request $request, $id)
+    {
+        $user = $request->user();
+        $companyId = $user->company_id;
+        
+        $order = OrderBook::where('company_id', $companyId)
+            ->with('product')
+            ->findOrFail($id);
+        
+        $bomItems = ProductBom::where('product_id', $order->product_id)
+            ->where('company_id', $companyId)
+            ->with(['material', 'unit'])
+            ->get();
+        
+        $inventoryStatus = [];
+        
+        foreach ($bomItems as $bom) {
+            $bomFactor = ($bom->unit && (float) $bom->unit->conversion_factor > 0)
+                ? (float) $bom->unit->conversion_factor
+                : 1.0;
+
+            // Total required for this order in base unit
+            $requiredBase = ((float) $bom->qty_required * $bomFactor) * (float) $order->qty;
+            
+            // Total available stock in base unit
+            $availableBase = RawMaterial::getAvailableStockInBaseUnit($bom->material_id, $companyId);
+            
+            $differenceBase = $availableBase - $requiredBase;
+
+            // Convert base unit quantities back to BOM display unit
+            $requiredDisplay = $requiredBase / $bomFactor;
+            $availableDisplay = $availableBase / $bomFactor;
+            $differenceDisplay = $differenceBase / $bomFactor;
+
+            $unitName = $bom->unit->unit_name ?? $bom->material->base_unit;
+            
+            $inventoryStatus[] = [
+                'material' => $bom->material->material,
+                'material_id' => $bom->material_id,
+                'requiredQty' => round($requiredDisplay, 4),
+                'availableQty' => round($availableDisplay, 4),
+                'difference' => round($differenceDisplay, 4),
+                'unit' => $unitName,
+                'unit_id' => $bom->unit_id,
+            ];
+        }
+        
+        return response()->json([
+            'order_id' => $order->id,
+            'product' => $order->product->product_name,
+            'order_qty' => $order->qty,
+            'inventory_status' => $inventoryStatus,
+        ]);
     }
 }

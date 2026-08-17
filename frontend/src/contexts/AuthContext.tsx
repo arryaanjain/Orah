@@ -37,9 +37,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) {
       try {
         const response = await authService.me();
-        if (response.success && response.data) {
-          setUser(response.data.user);
-          setCompany(response.data.company);
+        if (response && response.user) {
+          setUser(response.user);
+          setCompany(response.company);
         } else {
           clearAuth();
         }
@@ -54,8 +54,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (credentials: { company_name: string; email: string; password: string }): Promise<boolean> => {
     try {
       const response = await authService.login(credentials);
-      if (response.success && response.data) {
-        const { user, token, company } = response.data;
+      if (response && response.user && response.token) {
+        const { user, token, company } = response;
         setUser(user);
         setCompany(company);
         setToken(token);
@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         toast.success('Welcome back!');
         return true;
       } else {
-        toast.error(response.message || 'Login failed');
+        toast.error('Login failed');
         return false;
       }
     } catch (error: any) {
@@ -84,8 +84,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }): Promise<boolean> => {
     try {
       const response = await authService.register(data);
-      if (response.success && response.data) {
-        const { user, token, company } = response.data;
+      if (response && response.user && response.token) {
+        const { user, token, company } = response;
         setUser(user);
         setCompany(company);
         setToken(token);
@@ -95,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         toast.success('Account created successfully!');
         return true;
       } else {
-        toast.error(response.message || 'Registration failed');
+        toast.error('Registration failed');
         return false;
       }
     } catch (error: any) {

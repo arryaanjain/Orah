@@ -77,7 +77,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/batch', [RawMaterialPurchaseController::class, 'batchStore']);
     });
     
-    // Finished Products endpoints
+    // Finished Products endpoints (with BOM management)
     Route::prefix('products')->group(function () {
         Route::get('/', [FinishedProductController::class, 'index']);
         Route::post('/', [FinishedProductController::class, 'store']);
@@ -85,27 +85,36 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', [FinishedProductController::class, 'update']);
         Route::delete('/{id}', [FinishedProductController::class, 'destroy']);
         Route::post('/{id}/toggle-active', [FinishedProductController::class, 'toggleActive']);
+        Route::get('/{id}/bom', [FinishedProductController::class, 'getBom']);
+        Route::put('/{id}/bom', [FinishedProductController::class, 'updateBom']);
     });
     
-    // Orders endpoints
+    // Orders endpoints (with inventory calculation)
     Route::prefix('orders')->group(function () {
+        // Place non-parameterized routes BEFORE parameterized ones
+        Route::post('/calculate', [OrderBookController::class, 'calculateMaterialRequirement']);
+        Route::post('/batch', [OrderBookController::class, 'batchStore']);
+        
         Route::get('/', [OrderBookController::class, 'index']);
         Route::post('/', [OrderBookController::class, 'store']);
         Route::get('/{id}', [OrderBookController::class, 'show']);
         Route::put('/{id}', [OrderBookController::class, 'update']);
         Route::delete('/{id}', [OrderBookController::class, 'destroy']);
         Route::post('/{id}/status', [OrderBookController::class, 'updateStatus']);
-        Route::post('/batch', [OrderBookController::class, 'batchStore']);
+        Route::get('/{id}/material-check', [OrderBookController::class, 'calculateOrderMaterial']);
     });
     
-    // Sales endpoints
+    // Sales endpoints (with order escalation)
     Route::prefix('sales')->group(function () {
+        // Place non-parameterized routes BEFORE parameterized ones
+        Route::post('/escalate', [SalesBookController::class, 'escalateOrder']);
+        Route::post('/batch', [SalesBookController::class, 'batchStore']);
+        
         Route::get('/', [SalesBookController::class, 'index']);
         Route::post('/', [SalesBookController::class, 'store']);
         Route::get('/{id}', [SalesBookController::class, 'show']);
         Route::put('/{id}', [SalesBookController::class, 'update']);
         Route::delete('/{id}', [SalesBookController::class, 'destroy']);
         Route::post('/{id}/payment-status', [SalesBookController::class, 'updatePaymentStatus']);
-        Route::post('/batch', [SalesBookController::class, 'batchStore']);
     });
 });

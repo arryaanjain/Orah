@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\FinishedProduct;
+use App\Models\ProductBom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class FinishedProductController extends Controller
 {
     /**
-     * Get all finished products
+     * Get all finished products with BOM items
      */
     public function index(Request $request)
     {
@@ -18,6 +20,7 @@ class FinishedProductController extends Controller
         $companyId = $user->company_id;
         
         $products = FinishedProduct::where('company_id', $companyId)
+            ->with(['bomItems.material', 'bomItems.unit'])
             ->orderBy('created_at', 'desc')
             ->get();
         
@@ -27,7 +30,7 @@ class FinishedProductController extends Controller
     }
     
     /**
-     * Create a new product
+     * Create a new product with optional BOM
      */
     public function store(Request $request)
     {
@@ -48,27 +51,58 @@ class FinishedProductController extends Controller
             'base_unit' => 'required|string|max:50',
             'selling_price' => 'nullable|numeric|min:0',
             'minimum_stock' => 'nullable|numeric|min:0',
+            'bom' => 'nullable|array',
+            'bom.*.material_id' => 'required_with:bom|exists:rm_master,id',
+            'bom.*.qty_required' => 'required_with:bom|numeric|min:0.0001',
+            'bom.*.unit_id' => 'required_with:bom|exists:rm_master_units,id',
         ]);
         
-        $product = FinishedProduct::create([
-            'company_id' => $companyId,
-            'user_id' => $user->id,
-            'product_name' => $validated['product_name'],
-            'description' => $validated['description'] ?? null,
-            'base_unit' => $validated['base_unit'],
-            'selling_price' => $validated['selling_price'] ?? 0,
-            'minimum_stock' => $validated['minimum_stock'] ?? 0,
-            'is_active' => true,
-        ]);
+        DB::beginTransaction();
         
-        return response()->json([
-            'message' => 'Product created successfully',
-            'product' => $product
-        ], 201);
+        try {
+            $product = FinishedProduct::create([
+                'company_id' => $companyId,
+                'user_id' => $user->id,
+                'product_name' => $validated['product_name'],
+                'description' => $validated['description'] ?? null,
+                'base_unit' => $validated['base_unit'],
+                'selling_price' => $validated['selling_price'] ?? 0,
+                'minimum_stock' => $validated['minimum_stock'] ?? 0,
+                'is_active' => true,
+            ]);
+            
+            // Create BOM entries if provided
+            if (!empty($validated['bom'])) {
+                foreach ($validated['bom'] as $bomItem) {
+                    ProductBom::create([
+                        'company_id' => $companyId,
+                        'user_id' => $user->id,
+                        'product_id' => $product->id,
+                        'material_id' => $bomItem['material_id'],
+                        'qty_required' => $bomItem['qty_required'],
+                        'unit_id' => $bomItem['unit_id'],
+                    ]);
+                }
+            }
+            
+            DB::commit();
+            
+            return response()->json([
+                'message' => 'Product created successfully',
+                'product' => $product->load(['bomItems.material', 'bomItems.unit'])
+            ], 201);
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error creating product',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     
     /**
-     * Get a single product
+     * Get a single product with BOM
      */
     public function show(Request $request, $id)
     {
@@ -76,6 +110,7 @@ class FinishedProductController extends Controller
         $companyId = $user->company_id;
         
         $product = FinishedProduct::where('company_id', $companyId)
+            ->with(['bomItems.material', 'bomItems.unit'])
             ->findOrFail($id);
         
         return response()->json([
@@ -115,7 +150,7 @@ class FinishedProductController extends Controller
         
         return response()->json([
             'message' => 'Product updated successfully',
-            'product' => $product
+            'product' => $product->load(['bomItems.material', 'bomItems.unit'])
         ]);
     }
     
@@ -156,5 +191,86 @@ class FinishedProductController extends Controller
             'message' => 'Product status updated successfully',
             'product' => $product
         ]);
+    }
+    
+    /**
+     * Get BOM for a specific product
+     */
+    public function getBom(Request $request, $id)
+    {
+        $user = $request->user();
+        $companyId = $user->company_id;
+        
+        $product = FinishedProduct::where('company_id', $companyId)
+            ->findOrFail($id);
+        
+        $bom = ProductBom::where('product_id', $id)
+            ->where('company_id', $companyId)
+            ->with(['material', 'unit'])
+            ->get();
+        
+        return response()->json([
+            'product_id' => $product->id,
+            'product_name' => $product->product_name,
+            'bom' => $bom
+        ]);
+    }
+    
+    /**
+     * Replace BOM for a specific product (sync)
+     */
+    public function updateBom(Request $request, $id)
+    {
+        $user = $request->user();
+        $companyId = $user->company_id;
+        
+        $product = FinishedProduct::where('company_id', $companyId)
+            ->findOrFail($id);
+        
+        $validated = $request->validate([
+            'bom' => 'required|array',
+            'bom.*.material_id' => 'required|exists:rm_master,id',
+            'bom.*.qty_required' => 'required|numeric|min:0.0001',
+            'bom.*.unit_id' => 'required|exists:rm_master_units,id',
+        ]);
+        
+        DB::beginTransaction();
+        
+        try {
+            // Delete existing BOM entries
+            ProductBom::where('product_id', $id)
+                ->where('company_id', $companyId)
+                ->delete();
+            
+            // Create new BOM entries
+            $bomItems = [];
+            foreach ($validated['bom'] as $bomItem) {
+                $bomItems[] = ProductBom::create([
+                    'company_id' => $companyId,
+                    'user_id' => $user->id,
+                    'product_id' => $id,
+                    'material_id' => $bomItem['material_id'],
+                    'qty_required' => $bomItem['qty_required'],
+                    'unit_id' => $bomItem['unit_id'],
+                ]);
+            }
+            
+            DB::commit();
+            
+            return response()->json([
+                'message' => 'BOM updated successfully',
+                'bom' => ProductBom::where('product_id', $id)
+                    ->where('company_id', $companyId)
+                    ->with(['material', 'unit'])
+                    ->get()
+            ]);
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error updating BOM',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
