@@ -23,7 +23,7 @@ return new class extends Migration
             
             // Unique constraint and indexes
             $table->unique(['company_id', 'user_id', 'material'], 'unique_material');
-            $table->index(['company_id', 'user_id'], 'idx_company_user');
+            $table->index(['company_id', 'user_id']);
         });
     }
 
