@@ -26,6 +26,9 @@ jobs:
           cache-dependency-path: 'frontend/package-lock.json'
 
       - name: Install Dependencies & Build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'https://api-erp.krescoindia.com/api' }}
+          VITE_APP_URL: ${{ secrets.VITE_APP_URL || 'https://api-erp.krescoindia.com' }}
         run: |
           cd frontend
           npm ci
@@ -37,7 +40,6 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
           source: 'frontend/dist/*'
           target: '/var/www/krescoindia.com/production/Orah/frontend/dist'
           strip_components: 2
@@ -49,7 +51,6 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
             sudo chown -R www-data:www-data /var/www/krescoindia.com/production/Orah/frontend/dist
             sudo chmod -R 755 /var/www/krescoindia.com/production/Orah/frontend/dist
