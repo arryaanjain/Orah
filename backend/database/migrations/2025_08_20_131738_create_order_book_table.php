@@ -27,9 +27,9 @@ return new class extends Migration
             $table->timestamps();
             
             // Indexes
-            $table->index(['company_id', 'user_id'], 'idx_company_user');
-            $table->index(['order_date'], 'idx_order_date');
-            $table->index(['status'], 'idx_status');
+            $table->index(['company_id', 'user_id']);
+            $table->index(['order_date']);
+            $table->index(['status']);
         });
     }
 
