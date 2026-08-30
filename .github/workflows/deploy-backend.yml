@@ -44,10 +44,6 @@ jobs:
           script: |
             cd /var/www/krescoindia.com/production/Orah/backend
             
-            # Ensure storage & bootstrap permissions
-            sudo chown -R www-data:www-data storage bootstrap/cache
-            sudo chmod -R 775 storage bootstrap/cache
-            
             # Run Composer & Laravel optimization commands
             composer install --no-dev --optimize-autoloader --no-interaction
             php artisan migrate --force
