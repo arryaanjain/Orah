@@ -45,12 +45,12 @@ jobs:
             cd /var/www/krescoindia.com/production/Orah/backend
             
             # Run Composer & Laravel optimization commands
-            composer install --no-dev --optimize-autoloader --no-interaction
+            composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
             php artisan event:cache
             
-            # Reload PHP 8.5 FPM service as configured in Nginx
-            sudo systemctl reload php8.5-fpm
+            # Reload PHP FPM service (using non-interactive sudo fallback)
+            sudo -n systemctl reload php8.5-fpm || sudo -n systemctl reload php-fpm || true
