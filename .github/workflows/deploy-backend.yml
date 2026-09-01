@@ -46,6 +46,8 @@ jobs:
             
             # Run Composer & Laravel optimization commands
             composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
+            php artisan config:clear
+            php artisan package:discover
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
