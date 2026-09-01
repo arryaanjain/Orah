@@ -69,12 +69,12 @@ class AuthController extends Controller
             $encodedData = base64_encode(json_encode($userData));
             
             // Redirect to frontend callback with data
-            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
+            $frontendUrl = rtrim(config('app.frontend_url', 'http://localhost:5173'), '/');
             return redirect()->to($frontendUrl . '/auth/callback?data=' . $encodedData);
             
         } catch (\Exception $e) {
             // Redirect to frontend with error
-            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
+            $frontendUrl = rtrim(config('app.frontend_url', 'http://localhost:5173'), '/');
             return redirect()->to($frontendUrl . '/login?error=' . urlencode($e->getMessage()));
         }
     }

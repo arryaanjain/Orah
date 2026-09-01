@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = import.meta.env.VITE_APP_URL || 'http://127.0.0.1:8000';
-const GOOGLE_AUTH_URL = `${API_URL}/api/auth/google`;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL 
+  ? import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')
+  : (import.meta.env.VITE_APP_URL ? `${import.meta.env.VITE_APP_URL.replace(/\/$/, '')}/api` : 'http://127.0.0.1:8000/api');
+
+const GOOGLE_AUTH_URL = `${API_BASE_URL}/auth/google`;
 
 export function Login() {
   const navigate = useNavigate();
