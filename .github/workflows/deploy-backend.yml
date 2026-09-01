@@ -44,6 +44,9 @@ jobs:
           script: |
             cd /var/www/krescoindia.com/production/Orah/backend
             
+            # Remove stale bootstrap cache files from dev
+            rm -f bootstrap/cache/packages.php bootstrap/cache/services.php bootstrap/cache/config.php bootstrap/cache/routes-v7.php
+            
             # Run Composer & Laravel optimization commands
             composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
             php artisan config:clear
